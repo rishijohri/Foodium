@@ -3,6 +3,7 @@ import { Form, Typography, Input, Button, Radio, Slider, Layout, DatePicker } fr
 import { InfoCircleOutlined } from '@ant-design/icons';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
+import '../assets/main.css'
 const { Header, Footer, Sider, Content } = Layout;
 const { TextArea } = Input;
 const { Title } = Typography;
