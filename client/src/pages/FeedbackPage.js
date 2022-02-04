@@ -21,6 +21,7 @@ const FeedbackPage = () => {
             setHiddenField('none')
         }
     }
+    
     const config = {
         rules: [
             {

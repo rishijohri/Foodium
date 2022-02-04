@@ -12,9 +12,13 @@ import {
     Select,
     Checkbox,
     Button,
+    Typography,
+    Layout
 } from 'antd';
-
+import NavBar from '../components/NavBar'
+const { Title } = Typography;
 const { Option } = Select;
+const { Header, Footer, Sider, Content } = Layout;
 const position = [
     {
         value: 'Student',
@@ -108,8 +112,12 @@ const SignUpPage = () => {
     );
 
     return (
-        <div className="completePage">
-            <img src={foodiumLogo} alt='logo.png' className='logo' />
+        <Layout>
+            <Header style={{padding:'0'}}>
+                <NavBar/>
+            </Header>
+            <Content style={{ padding: '0 15%', margin:' 2%'}}>
+            <Title level={2}>Sign Up</Title>
             <Form
                 // {...formItemLayout}
                 className="registerationForm"
@@ -117,12 +125,10 @@ const SignUpPage = () => {
                 name="register"
                 onFinish={onFinish}
                 initialValues={{
-                    // position: ['zhejiang', 'hangzhou', 'xihu'],
                     prefix: '91',
                 }}
                 scrollToFirstError
             >
-
                 <Form.Item
                     name="username"
                     label="Username"
@@ -243,7 +249,7 @@ const SignUpPage = () => {
                 <Form.Item 
                 // {...tailFormItemLayout}
                 >
-                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    <Button type="primary" htmlType="submit">
                         Register
                     </Button>
                     <center>
@@ -251,20 +257,10 @@ const SignUpPage = () => {
                     </center>
                 </Form.Item>
             </Form>
-        </div>
+            </Content>
+        </Layout>
     );
 };
-
-// ReactDOM.render(<RegistrationForm />, mountNode);
-
-
-
-
-
-// const SignUpPage = () => {
-
-//     return;
-// }
 
 
 export default SignUpPage
