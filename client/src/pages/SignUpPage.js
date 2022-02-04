@@ -116,7 +116,7 @@ const SignUpPage = () => {
             <Header style={{padding:'0'}}>
                 <NavBar/>
             </Header>
-            <Content style={{ padding: '0 15%', margin:' 2%'}}>
+            <Content style={{ padding: '0 15%', margin:' 2%', height:"83vh"}}>
             <Title level={2}>Sign Up</Title>
             <Form
                 // {...formItemLayout}
