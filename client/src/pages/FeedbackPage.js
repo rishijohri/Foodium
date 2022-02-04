@@ -50,7 +50,7 @@ const FeedbackPage = () => {
                             <Radio.Button value="Other">Other Vendor</Radio.Button>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item label="Enter name" required="optional" tooltip="This is a required field" name="name">
+                    <Form.Item label="Enter name" required="optional" tooltip="This is an optional field" name="name">
                         <Input placeholder="Enter Name (Optional)" />
                     </Form.Item>
                     <Form.Item name="date" label="Date of Feedback" {...config}>
