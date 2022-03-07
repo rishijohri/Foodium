@@ -11,8 +11,6 @@ const { Title } = Typography;
 
 const SignInPage = () => {
     const onFinish = async (values) => {
-        console.log('Received values of form: ', values);
-
         const { username, password } = values;
 
         const res = await fetch("/signin", {
@@ -65,7 +63,6 @@ const SignInPage = () => {
                         remember: true,
                     }}
                     onFinish={onFinish}
-                // method="POST"
                 >
                     <Form.Item
                         name="username"
@@ -119,18 +116,4 @@ const SignInPage = () => {
     );
 };
 
-// ReactDOM.render(<NormalLoginForm />, mountNode);
 export default SignInPage
-
-
-
-
-// const SignInPage = () => {
-
-//     return (
-//         <></>
-//     );
-// }
-
-
-// export default SignInPage

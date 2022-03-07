@@ -16,6 +16,7 @@ const corsOptions = {
     credentials: true,
     optionSuccessStatus: 200
 }
+const { uuid } = require('uuidv4')
 
 mongoose.connect(localmongo, {useUnifiedTopology:true ,useNewUrlParser: true})
 var db = mongoose.connection
@@ -35,20 +36,16 @@ app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new customStrategy(
     function(req, done) {
-        console.log(req.body)
         User.findOne({
             username: req.body.username
         }, function(err, user) {
             if (err || user==null) {
-                console.log("failed number 1")
                 return done(err, false)
             }
             user.authenticate(req.body.password, (error)=> {
                 if (error==null) {
-                    console.log("success")
                     done(err, user)
                 } else {
-                    console.log("failed number 2")
                     done(error, false)
                 }
             })
@@ -71,9 +68,8 @@ app.post('/signin', passport.authenticate('custom'), async (req, res) => {
 })
 
 app.post("/signup", function(req, res) {
-    console.log("entered "+"/signup")
-    // console.log(req._passport.instance)
-    User.register(new User({username: req.body.username,prefix: req.body.prefix,phone: req.body.phone,email: req.body.email,confirm: req.body.confirm,agreement:req.body.agreement,position:req.body.position}), req.body.password, function (err, newUser) { 
+    qr_id=uuid();
+    User.register(new User({username: req.body.username,prefix: req.body.prefix,phone: req.body.phone,email: req.body.email,confirm: req.body.confirm,agreement:req.body.agreement,position:req.body.position,qr_id:qr_id}), req.body.password, function (err, newUser) { 
         if (err) {
             console.log(err)
             res.json({
@@ -84,10 +80,8 @@ app.post("/signup", function(req, res) {
             })
         }
         else {
-            console.log("before authentication chk")
             passport.authenticate("custom")
             (req, res, ()=> {
-                console.log("i m here")
                 res.json({
                     result: "success",
                     nav: "/secret",
@@ -95,7 +89,6 @@ app.post("/signup", function(req, res) {
                 })
             })
     }
-    console.log("exited "+"/sign-up")
 });
 })
     

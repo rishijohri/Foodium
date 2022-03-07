@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import foodiumLogo from '../images/foodiumLogo.png';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-// import '../assets/signUpPage.css';
 import '../assets/signIn.css';
 import {
     Form,
@@ -64,36 +63,6 @@ const position = [
         label: 'Guest',
     },
 ];
-// const formItemLayout = {
-//     labelCol: {
-//         xs: {
-//             span: 24,
-//         },
-//         sm: {
-//             span: 8,
-//         },
-//     },
-//     wrapperCol: {
-//         xs: {
-//             span: 24,
-//         },
-//         sm: {
-//             span: 16,
-//         },
-//     },
-// };
-// const tailFormItemLayout = {
-//     wrapperCol: {
-//         xs: {
-//             span: 24,
-//             offset: 0,
-//         },
-//         sm: {
-//             span: 16,
-//             offset: 8,
-//         },
-//     },
-// };
 
 const SignUpPage = () => {
     const [form] = Form.useForm();
@@ -101,9 +70,8 @@ const SignUpPage = () => {
     var phoneno = /^\d{10}$/;
 
     const onFinish = async (values) => {
-        console.log('Received values of form: ', values);
-
-        const { username, prefix, phone, password, email, confirm, agreement, position } = values;
+        const { username, prefix, phone, password, email, confirm, agreement } = values;
+        const position = values.position[0];
 
         const res = await fetch("/signup", {
             method: 'POST',
@@ -111,7 +79,7 @@ const SignUpPage = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username, prefix, phone, password, email, confirm, agreement, position
+                username, prefix, phone, password, email, confirm, agreement, position,
             })
         })
 
