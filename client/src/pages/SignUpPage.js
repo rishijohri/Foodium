@@ -96,6 +96,8 @@ const position = [
 const SignUpPage = () => {
     const [form] = Form.useForm();
 
+    var phoneno = /^\d{10}$/;
+
     const onFinish = async (values) => {
         console.log('Received values of form: ', values);
 
@@ -260,6 +262,8 @@ const SignUpPage = () => {
                             {
                                 required: true,
                                 message: 'Please input your phone number!',
+                                validator: (_, value) => 
+                                    value.match(phoneno) ? Promise.resolve() : Promise.reject(new Error('Invalid phone number')),
                             },
                         ]}
                     >
@@ -298,7 +302,7 @@ const SignUpPage = () => {
                     </Form.Item>
                 </Form>
             </Content>
-        </Layout>
+        </Layout >
     );
 };
 
