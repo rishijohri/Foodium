@@ -3,8 +3,8 @@ import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import foodiumLogo from '../images/foodiumLogo.png';
 // import 'antd/dist/antd.min.css';
-import '../assets/main.css';
-import '../assets/signIn.css';
+// import '../assets/main.css';
+// import '../assets/signIn.css';
 import NavBar from '../components/NavBar'
 const { Header, Footer, Sider, Content } = Layout;
 const { Title } = Typography;
@@ -55,8 +55,8 @@ const SignInPage = () => {
 
     return (
         <Layout>
-            <Header style={{ padding: '0' }}><NavBar /></Header>
-            <Content style={{ padding: '0 15%', margin: ' 2%', height: "81vh" }}>
+            {/* <Header style={{ padding: '0' }}><NavBar /></Header> */}
+            <Content style={{padding:'10px'}}>
                 <Title level={2}>Sign In</Title>
                 <Form
                     name="normal_login"

@@ -7,6 +7,12 @@ import back1 from '../images/a.jpg';
 import Slider from '../components/Slider'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
+import React, { useState } from 'react';
+import { Drawer, Button, Space } from 'antd';
+import SignInPage from'./SignInPage';
+import SignUpPage from './SignUpPage';
+import { CloseOutlined  } from '@ant-design/icons';
+
 const { Header, Footer, Sider, Content } = Layout;
 const contentStyle = {
     height: '10vh',
@@ -19,43 +25,96 @@ const contentStyle = {
     // objectFit:"cover"
 };
 const EntryPage = () => {
+    const [visibleSignIn, setVisibleSignIn] = useState(false);
+    const [visibleSignUp, setVisibleSignUp] = useState(false);
+    const [type, setType] = useState();
+
+    const showSignIn = () => {
+        setType('SignIn');
+        setVisibleSignIn(true);
+        setVisibleSignUp(false)
+    };
+
+    const showSignUp = () => {
+        setType('Sign Up');
+        setVisibleSignUp(true);
+        setVisibleSignIn(false)
+        
+    };
+
+    const onClose = () => {
+        setVisibleSignIn(false);
+        setVisibleSignUp(false);
+    };
+
     return (
-        <Layout style={{ padding: '0' ,margin:'0',height:'100vh'}} >
-            <Header style={{ padding: '0' }}>
+        <Layout style={{ padding: '0', margin: '0', height: '100vh' }} >
+            {/* <Header style={{ padding: '0' }}>
                 <NavBar />
-            </Header>
+            </Header> */}
+
             <Content >
-                {/* <Carousel autoplay={true} >
-                   
-                        {new Array(4).fill(null).map((_, index) => {
-                            
-                            const key = index + 1;
-                            return(
-                                <div style={contentStyle}> 
-                                    <Image
-                            
-                                    width={'100vw'}
-                                        height={'87vh'}
-                                        style={{objectFit:"cover" }}
-                                        src={back1}
-                                        preview={false}
-                                    />
-                                </div>
-                            );
-
-                        })}
-                   
-                    
-                </Carousel>, */
                 <div >
-                    <Slider image_array={[back1,back1]} width={'50vw'} height={'50vh'}/>
+                    <Slider image_array={[back1, back1]} width={'100vw'} height={'90vh'} />
                 </div>
-                
-                // image_array={[back1,back1]} width={'10vw'} height={'15vh'}
-                }
-            </Content>
+            </Content>            
 
-            {/* <Footer>Footer</Footer> */}
+            <Footer>
+                <center>
+                <Space>
+                    Have an account
+                    <Button type="primary" onClick={showSignIn}>
+                        SignIn
+                    </Button>
+                    or
+                    <Button type="primary" onClick={showSignUp}>
+                        Sign Up
+                    </Button>
+                    </Space>
+                </center>
+                <Drawer
+                    title={<Button shape='circle' icon={<CloseOutlined /> } onClick={onClose}/>}
+                    placement="right"
+                    type={type}
+                    onClose={onClose}
+                    visible={visibleSignIn}
+                    closable={false}
+                    headerStyle={{ position: 'center',textAlign:'center' }}
+                    // extra={
+                    //     <Space>
+                    //         <Button onClick={onClose}>Cancel</Button>
+                    //         <Button type="primary" onClick={onClose}>
+                    //             OK
+                    //         </Button>
+                    //     </Space>
+                    // }
+                >
+                    
+                    <SignInPage/>
+                </Drawer>
+                <Drawer
+                    title={<Button shape='circle' icon={<CloseOutlined /> } onClick={onClose}/>}
+                    placement="right"
+                    type={type}
+                    onClose={onClose}
+                    visible={visibleSignUp}
+                    closable={false}
+                    headerStyle={{ position: 'center',textAlign:'center' }}
+                    // size={'large'}
+                    // extra={
+                    //     <Space>
+                    //         <Button onClick={onClose}>Cancel</Button>
+                    //         <Button type="primary" onClick={onClose}>
+                    //             OK
+                    //         </Button>
+                    //     </Space>
+                    // }
+                    // style={{width:'10vw'}}
+                >
+                    
+                    <SignUpPage/>
+                </Drawer>
+            </Footer>
         </Layout>
 
     );
