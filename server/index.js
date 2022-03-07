@@ -58,3 +58,7 @@ app.use(express.static("public"))
 var server = app.listen(port, function () {
     console.log("server started " + port)
 })
+
+app.post('/signin', passport.authenticate('custom'), async (req, res) => {
+    
+})
