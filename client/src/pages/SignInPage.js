@@ -29,20 +29,26 @@ const SignInPage = () => {
             notification.open({
                 message: 'Failed',
                 description:
-                'unable to submit. Please try again later. :(',
-              });
+                    'unable to submit. Please try again later. :(',
+            });
             return;
         }
 
         const data = await res.json();
 
-        if (data.status === 422 || !data) {
-            window.alert("Invalid registration");
-            console.log("Invalid registration");
+        if (data.result == 'success') {
+            notification.open({
+                message: 'logged in',
+                description:
+                    'yoohoo!!',
+            });
         }
         else {
-            window.alert("Invalid registration");
-            console.log("Invalid registration");
+            notification.open({
+                message: 'Login failed!',
+                description:
+                    'unable to log in. Please try again later. :(',
+            });
         }
 
     };
