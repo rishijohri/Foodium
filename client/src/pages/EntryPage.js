@@ -53,13 +53,13 @@ const EntryPage = () => {
                 <NavBar />
             </Header> */}
 
-            <Content >
+            <Content style={{height:'90vh'}}>
                 <div >
                     <Slider image_array={[back1, back1]} width={'100vw'} height={'90vh'} />
                 </div>
             </Content>            
 
-            <Footer>
+            <Footer style={{height:'10vh'}}>
                 <center>
                 <Space>
                     Have an account
