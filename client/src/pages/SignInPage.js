@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import foodiumLogo from '../images/foodiumLogo.png';
-// import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 import '../assets/signIn.css';
 import NavBar from '../components/NavBar'
@@ -11,8 +10,6 @@ const { Title } = Typography;
 
 const SignInPage = () => {
     const onFinish = async (values) => {
-        console.log('Received values of form: ', values);
-
         const { username, password } = values;
 
         const res = await fetch("/signin", {
@@ -65,7 +62,6 @@ const SignInPage = () => {
                         remember: true,
                     }}
                     onFinish={onFinish}
-                // method="POST"
                 >
                     <Form.Item
                         name="username"
@@ -119,18 +115,4 @@ const SignInPage = () => {
     );
 };
 
-// ReactDOM.render(<NormalLoginForm />, mountNode);
 export default SignInPage
-
-
-
-
-// const SignInPage = () => {
-
-//     return (
-//         <></>
-//     );
-// }
-
-
-// export default SignInPage

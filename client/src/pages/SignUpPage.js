@@ -3,19 +3,8 @@ import { Link } from "react-router-dom";
 import foodiumLogo from '../images/foodiumLogo.png';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-// import '../assets/signUpPage.css';
 import '../assets/signIn.css';
-import {
-    Form,
-    Input,
-    Cascader,
-    Select,
-    Checkbox,
-    Button,
-    Typography,
-    Layout,
-    notification
-} from 'antd';
+import { Form, Input, Cascader, Select, Checkbox, Button, Typography, Layout, notification } from 'antd';
 import NavBar from '../components/NavBar'
 const { Title } = Typography;
 const { Option } = Select;
@@ -62,36 +51,6 @@ const position = [
         label: 'Guest',
     },
 ];
-// const formItemLayout = {
-//     labelCol: {
-//         xs: {
-//             span: 24,
-//         },
-//         sm: {
-//             span: 8,
-//         },
-//     },
-//     wrapperCol: {
-//         xs: {
-//             span: 24,
-//         },
-//         sm: {
-//             span: 16,
-//         },
-//     },
-// };
-// const tailFormItemLayout = {
-//     wrapperCol: {
-//         xs: {
-//             span: 24,
-//             offset: 0,
-//         },
-//         sm: {
-//             span: 16,
-//             offset: 8,
-//         },
-//     },
-// };
 
 const SignUpPage = () => {
     const [form] = Form.useForm();
@@ -99,9 +58,8 @@ const SignUpPage = () => {
     var phoneno = /^\d{10}$/;
 
     const onFinish = async (values) => {
-        console.log('Received values of form: ', values);
-
-        const { username, prefix, phone, password, email, confirm, agreement, position } = values;
+        const { username, prefix, phone, password, email, confirm, agreement } = values;
+        const position = values.position[0];
 
         const res = await fetch("/signup", {
             method: 'POST',
@@ -109,7 +67,7 @@ const SignUpPage = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username, prefix, phone, password, email, confirm, agreement, position
+                username, prefix, phone, password, email, confirm, agreement, position,
             })
         })
 
@@ -242,11 +200,10 @@ const SignUpPage = () => {
                     </Form.Item>
 
                     <Form.Item
-                        name="Position"
+                        name="position"
                         label="Who are you?"
                         rules={[
                             {
-                                type: 'array',
                                 required: true,
                                 message: 'Who are you?',
                             },
@@ -262,7 +219,7 @@ const SignUpPage = () => {
                             {
                                 required: true,
                                 message: 'Please input your phone number!',
-                                validator: (_, value) => 
+                                validator: (_, value) =>
                                     value.match(phoneno) ? Promise.resolve() : Promise.reject(new Error('Invalid phone number')),
                             },
                         ]}
