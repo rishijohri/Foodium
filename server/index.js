@@ -9,6 +9,7 @@ const mongoose = require("mongoose")
 const localmongo = "mongodb://localhost:27017/foodium"
 const cors = require("cors");
 const User = require('./models/user');
+const Feedback = require('./models/feedback')
 const port = 3001 || process.env.PORT
 const corsOptions = {
     origin: '*',
@@ -60,5 +61,28 @@ var server = app.listen(port, function () {
 })
 
 app.post('/signin', passport.authenticate('custom'), async (req, res) => {
+    res.json({
+        result: "success"
+    })
+})
     
+app.post('/feedback', (req, res) => {
+    req.body.date = new Date(req.body.date)
+    console.log(typeof req.body.date)
+    Feedback.create(
+        req.body, (err, doc) => {
+            if (err || doc==null) {
+                console.log(err)
+                console.log(doc)
+                res.json({
+                    result: 'fail'
+                })
+            } else {
+                console.log('feedback success')
+                res.json({
+                    result: "success"
+                })
+            }
+        }
+    )
 })

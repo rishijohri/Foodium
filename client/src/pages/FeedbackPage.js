@@ -1,20 +1,54 @@
 import React, { useState } from 'react';
-import { Form, Typography, Input, Button, Radio, Slider, Layout, DatePicker } from 'antd';
+import {useNavigate} from 'react-router'
+import { Form, Typography, Input, Button, Radio, Slider, Layout, DatePicker, notification } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css'
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 const { TextArea } = Input;
 const { Title } = Typography;
+
+
+function sendFeedback(data, nav) {
+    var req = {
+        method: 'POST',
+        body : JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    }
+    fetch('/feedback', req).then((res)=> {
+        if (!res.ok)
+            return {};
+        return res.json();
+    }).then((res)=> {
+        if (res.result==='success') {
+            notification.open({
+                message: 'Success',
+                description:
+                'Thank you for filling out the form',
+              });
+        } else {
+            notification.open({
+                message: 'Failed',
+                description:
+                'unable to submit. Please try again later. :(',
+              });
+            console.log()
+        }
+    })
+}
+
 const FeedbackPage = () => {
     const [form] = Form.useForm();
     const [hiddenField, setHiddenField] = useState('text')
+    const navigate = useNavigate()
+
     const onFinish = (values) => {
         console.log('Success:', values);
+        sendFeedback(values, navigate)
     };
     const onValuesChange = (_, allv) => {
-        if (allv.vendorName == 'Mess')
+        if (allv.vendorName === 'Mess')
         {
             setHiddenField('')
         } else {
@@ -121,7 +155,7 @@ const FeedbackPage = () => {
                             }}
                         />
                     </Form.Item>
-                    <Form.Item name="overall-food" label="Overall Food Quality">
+                    <Form.Item name="overallFood" label="Overall Food Quality">
                         <Slider
                             marks={{
                                 0: '0',
@@ -133,7 +167,7 @@ const FeedbackPage = () => {
                             }}
                         />
                     </Form.Item>
-                    <Form.Item name="overall-service" label="Overall Service">
+                    <Form.Item name="overallService" label="Overall Service">
                         <Slider
                             marks={{
                                 0: '0',
