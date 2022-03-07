@@ -4,7 +4,7 @@ import NavBar from '../components/NavBar'
 import { Carousel } from 'antd';
 import { Image } from 'antd';
 import back1 from '../images/a.jpg';
-
+import Slider from '../components/Slider'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const { Header, Footer, Sider, Content } = Layout;
@@ -15,7 +15,7 @@ const contentStyle = {
     textAlign: 'center',
     background: '#364d79',
     margin: '0',
-    display: 'block',
+    // display: 'block',
     // objectFit:"cover"
 };
 const EntryPage = () => {
@@ -25,7 +25,7 @@ const EntryPage = () => {
                 <NavBar />
             </Header>
             <Content >
-                <Carousel autoplay={true} >
+                {/* <Carousel autoplay={true} >
                    
                         {new Array(4).fill(null).map((_, index) => {
                             
@@ -33,7 +33,8 @@ const EntryPage = () => {
                             return(
                                 <div style={contentStyle}> 
                                     <Image
-                                        width={'100vw'}
+                            
+                                    width={'100vw'}
                                         height={'87vh'}
                                         style={{objectFit:"cover" }}
                                         src={back1}
@@ -45,7 +46,13 @@ const EntryPage = () => {
                         })}
                    
                     
-                </Carousel>,
+                </Carousel>, */
+                <div >
+                    <Slider image_array={[back1,back1]} width={'50vw'} height={'50vh'}/>
+                </div>
+                
+                // image_array={[back1,back1]} width={'10vw'} height={'15vh'}
+                }
             </Content>
 
             {/* <Footer>Footer</Footer> */}
