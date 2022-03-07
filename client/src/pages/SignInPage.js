@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox ,Layout, Typography} from 'antd';
+import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import foodiumLogo from '../images/foodiumLogo.png';
 // import 'antd/dist/antd.min.css';
@@ -10,11 +10,10 @@ const { Header, Footer, Sider, Content } = Layout;
 const { Title } = Typography;
 
 const SignInPage = () => {
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log('Received values of form: ', values);
 
-        e.preventDefault();
-        const {username, password} = values;
+        const { username, password } = values;
 
         const res = await fetch("/signin", {
             method: 'POST',
@@ -26,17 +25,22 @@ const SignInPage = () => {
             })
         })
 
-        if(!res.ok){
+        if (!res.ok) {
+            notification.open({
+                message: 'Failed',
+                description:
+                'unable to submit. Please try again later. :(',
+              });
             return;
         }
 
         const data = await res.json();
 
-        if(data.status === 422 || !data){
+        if (data.status === 422 || !data) {
             window.alert("Invalid registration");
             console.log("Invalid registration");
         }
-        else{
+        else {
             window.alert("Invalid registration");
             console.log("Invalid registration");
         }
@@ -45,65 +49,65 @@ const SignInPage = () => {
 
     return (
         <Layout>
-            <Header style={{padding:'0'}}><NavBar/></Header>
-            <Content style={{ padding: '0 15%', margin:' 2%', height:"81vh"}}>
-                    <Title level={2}>Sign In</Title>
-                    <Form
-                        name="normal_login"
-                        className="login-form"
-                        initialValues={{
-                            remember: true,
-                        }}
-                        onFinish={onFinish}
-                        // method="POST"
+            <Header style={{ padding: '0' }}><NavBar /></Header>
+            <Content style={{ padding: '0 15%', margin: ' 2%', height: "81vh" }}>
+                <Title level={2}>Sign In</Title>
+                <Form
+                    name="normal_login"
+                    className="login-form"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    onFinish={onFinish}
+                // method="POST"
+                >
+                    <Form.Item
+                        name="username"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your Username!',
+                            },
+                        ]}
                     >
-                        <Form.Item
-                            name="username"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your Username!',
-                                },
-                            ]}
-                        >
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-                        </Form.Item>
-                        <Form.Item
-                            name="password"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your Password!',
-                                },
-                            ]}
-                        >
-                            <Input.Password
-                                prefix={<LockOutlined className="site-form-item-icon" />}
-                                type="password"
-                                placeholder="Password"
-                            />
-                        </Form.Item>
-                        <Form.Item className="login-form-second-last-item">
-                            <Form.Item name="remember" valuePropName="checked" noStyle>
-                                <Checkbox>Remember me</Checkbox>
-                            </Form.Item>
-
-                            <a className="login-form-forgot" href="">
-                                Forgot password
-                            </a>
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                    </Form.Item>
+                    <Form.Item
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your Password!',
+                            },
+                        ]}
+                    >
+                        <Input.Password
+                            prefix={<LockOutlined className="site-form-item-icon" />}
+                            type="password"
+                            placeholder="Password"
+                        />
+                    </Form.Item>
+                    <Form.Item className="login-form-second-last-item">
+                        <Form.Item name="remember" valuePropName="checked" noStyle>
+                            <Checkbox>Remember me</Checkbox>
                         </Form.Item>
 
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit" className="login-form-button">
-                                Log in
-                            </Button>
-                            <center>
-                                Or <Link to="/sign-up">register now!</Link>
-                            </center>
-                        </Form.Item>
-                    </Form>
+                        <a className="login-form-forgot" href="">
+                            Forgot password
+                        </a>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                        </Button>
+                        <center>
+                            Or <Link to="/sign-up">register now!</Link>
+                        </center>
+                    </Form.Item>
+                </Form>
             </Content>
-            
+
         </Layout>
 
     );

@@ -13,7 +13,8 @@ import {
     Checkbox,
     Button,
     Typography,
-    Layout
+    Layout,
+    notification
 } from 'antd';
 import NavBar from '../components/NavBar'
 const { Title } = Typography;
@@ -95,8 +96,41 @@ const position = [
 const SignUpPage = () => {
     const [form] = Form.useForm();
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log('Received values of form: ', values);
+
+        const { username, prefix, phone, password, email, confirm, agreement, position } = values;
+
+        const res = await fetch("/signin", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username, prefix, phone, password, email, confirm, agreement, position
+            })
+        })
+
+        if (!res.ok) {
+            notification.open({
+                message: 'Failed',
+                description:
+                'unable to submit. Please try again later. :(',
+              });
+            return;
+        }
+
+        const data = await res.json();
+
+        if (data.status === 422 || !data) {
+            window.alert("Invalid registration");
+            console.log("Invalid registration");
+        }
+        else {
+            window.alert("Invalid registration");
+            console.log("Invalid registration");
+        }
+
     };
 
     const prefixSelector = (

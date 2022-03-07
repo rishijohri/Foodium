@@ -65,6 +65,33 @@ app.post('/signin', passport.authenticate('custom'), async (req, res) => {
         result: "success"
     })
 })
+
+app.post("/sign-up", function(req, res) {
+    console.log("entered "+"/sign-up")
+    // console.log(req._passport.instance)
+    User.register(new User({username: req.body.username,prefix: req.body.prefix,phone: req.body.phone,email: req.body.email,confirm: req.body.confirm,agreement:req.body.agreement,position:req.body.position}), req.body.password, function (err, newUser) { 
+        if (err) {
+            console.log(err)
+            res.json({
+                result: "error",
+                nav: "/sign-up",
+                error: err,
+                src: "signup"
+            })
+        }
+        else {
+            passport.authenticate("custom")
+            (req, res, ()=> {
+                res.json({
+                    result: "success",
+                    nav: "/secret",
+                    src:"signup"
+                })
+            })
+    }
+    console.log("exited "+"/sign-up")
+});
+})
     
 app.post('/feedback', (req, res) => {
     req.body.date = new Date(req.body.date)
