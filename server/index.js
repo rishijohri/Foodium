@@ -60,6 +60,12 @@ var server = app.listen(port, function () {
     console.log("server started " + port)
 })
 
+app.post('/signin', passport.authenticate('custom'), async (req, res) => {
+    res.json({
+        result: "success"
+    })
+})
+    
 app.post('/feedback', (req, res) => {
     req.body.date = new Date(req.body.date)
     console.log(typeof req.body.date)

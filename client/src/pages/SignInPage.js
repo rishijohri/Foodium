@@ -12,6 +12,35 @@ const { Title } = Typography;
 const SignInPage = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
+
+        e.preventDefault();
+        const {username, password} = values;
+
+        const res = await fetch("/signin", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username, password
+            })
+        })
+
+        if(!res.ok){
+            return;
+        }
+
+        const data = await res.json();
+
+        if(data.status === 422 || !data){
+            window.alert("Invalid registration");
+            console.log("Invalid registration");
+        }
+        else{
+            window.alert("Invalid registration");
+            console.log("Invalid registration");
+        }
+
     };
 
     return (
@@ -26,6 +55,7 @@ const SignInPage = () => {
                             remember: true,
                         }}
                         onFinish={onFinish}
+                        // method="POST"
                     >
                         <Form.Item
                             name="username"
