@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router'
-import { Form, Typography, Input, Button, Radio, Slider, Layout, DatePicker, notification } from 'antd';
-
+import { Typography, Input, Layout, Avatar } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {isMobile} from 'react-device-detect';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css'
@@ -13,30 +14,38 @@ const { Title } = Typography;
 
 const QRScanPage=()=>{
     const [data, setData] = useState('No result');
+    var camSetting;
+    if (isMobile) {
+        camSetting = {exact: 'environment'}
+    } else {
+        camSetting = {exact: 'user'}
+    }
     return (
         <Layout style={{height:'100vh', width:'100vw'}}>
-            <Header style={{height:'10vh'}}>
-                <NavBar/>
-            </Header>
-            <center>
-            <Content >
-                <div style={{height:'10vh', width:'10vw'}}>
-                <QrReader
-                constraints={{autoGainControl: true}}
-                    onResult={(result, error) => {
-                    if (!!result) {
-                        setData(result?.text);
-                    }
+                <Content >
+                    <div style={{height:'50vh', 
+                                width:'80vw', 
+                                marginTop:'15vh',
+                                marginBottom:'15vh', 
+                                marginLeft: '6vw',
+                                marginRight: '6vw'}}>
+                        <QrReader
+                        constraints={{autoGainControl: true, facingMode:camSetting}}
+                            onResult={(result, error) => {
+                            if (!!result) {
+                                setData(result?.text);
+                            }
 
-                    if (!!error) {
-                        console.info(error);
-                    }
-                    }}
-                />
-            <p>{data}</p>
-            </div>
-            </Content>
-            </center>
+                            if (!!error) {
+                                console.info(error);
+                            }
+                            }}
+                        />
+                        <center>
+                            <p>{data}</p>
+                        </center>
+                    </div>
+                </Content>
         </Layout>
     );
 }
