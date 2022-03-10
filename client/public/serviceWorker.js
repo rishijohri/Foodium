@@ -1,4 +1,4 @@
-let CACHE_NAME = 'my-site-cache-v1';
+let CACHE_NAME = 'foodium';
 const urlsToCache = [
   '/',
   '/index.html',
