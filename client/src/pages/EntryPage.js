@@ -1,19 +1,15 @@
 import { Outlet } from 'react-router';
-import { Layout } from 'antd';
-import NavBar from '../components/NavBar'
-import { Carousel } from 'antd';
-import { Image } from 'antd';
+import { Layout,  Drawer, Button, Space} from 'antd';
 import back1 from '../images/a.jpg';
 import Slider from '../components/Slider'
 import 'antd/dist/antd.min.css';
-import '../assets/main.css';
+// import '../assets/main.css';
 import React, { useState } from 'react';
-import { Drawer, Button, Space } from 'antd';
 import SignInPage from'./SignInPage';
 import SignUpPage from './SignUpPage';
 import { CloseOutlined  } from '@ant-design/icons';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Content } = Layout;
 const contentStyle = {
     height: '10vh',
     color: '#fff',

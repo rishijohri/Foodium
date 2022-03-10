@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { Menu, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import MenuItem from 'antd/lib/menu/MenuItem';
-import '../assets/main.css';
+import 'antd/dist/antd.min.css';
+// import '../assets/main.css';
 import '../assets/NavBar.css';
 import { Image } from 'antd';
 

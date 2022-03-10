@@ -16,7 +16,7 @@ const corsOptions = {
     credentials: true,
     optionSuccessStatus: 200
 }
-const { uuid } = require('uuidv4')
+
 
 mongoose.connect(localmongo, {useUnifiedTopology:true ,useNewUrlParser: true})
 var db = mongoose.connection
@@ -68,8 +68,8 @@ app.post('/signin', passport.authenticate('custom'), async (req, res) => {
 })
 
 app.post("/signup", function(req, res) {
-    qr_id=uuid();
-    User.register(new User({username: req.body.username,prefix: req.body.prefix,phone: req.body.phone,email: req.body.email,confirm: req.body.confirm,agreement:req.body.agreement,position:req.body.position,qr_id:qr_id}), req.body.password, function (err, newUser) { 
+    var balance=0;
+    User.register(new User({username: req.body.username,prefix: req.body.prefix,phone: req.body.phone,email: req.body.email,confirm: req.body.confirm,agreement:req.body.agreement,position:req.body.position,balance:balance}), req.body.password, function (err, newUser) { 
         if (err) {
             console.log(err)
             res.json({
@@ -111,4 +111,55 @@ app.post('/feedback', (req, res) => {
             }
         }
     )
+})
+
+app.get("/authenticate", function(req, res) {
+    console.log("entered "+"/authenticate")
+    if (req.isAuthenticated()) {
+        console.log('logged in')
+        res.json({
+            result: "success",
+            user: req.user,
+            src: "auth"
+        })
+    } else {
+        console.log('not logged')
+        res.json({
+            result:"error",
+            src: "auth"
+        })
+    }
+    console.log("exited "+"/authenticate")
+})
+
+app.post('/payeat', async (req, res) => {
+    const dateTime = new Date();
+    const hours = dateTime.getHours();
+    const user = req.body.username;
+    const mess = req.body.messUsername;
+
+    const messDetails = await Mess.find({username: mess});
+    const userDetails = await User.find({username: user});
+
+    var charges=0;
+    if(hours>=7 && hours<=10){
+        charges = messDetails.breakfast;
+    }
+    else if(hours>=11 && hours<=15){
+        charges = messDetails.lunch;
+    }
+    else{
+        charges = messDetails.dinner;
+    }
+    userDetails.balance -= charges;
+
+    User.findByIdAndUpdate(user,{$set:userDetails}, function(err, result){
+        if(err){
+            console.log(err);
+        }
+        console.log("RESULT: " + result);
+        res.json({
+            result: "success"
+        })
+    });
 })

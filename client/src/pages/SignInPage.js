@@ -1,17 +1,14 @@
 import { Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import foodiumLogo from '../images/foodiumLogo.png';
-// import 'antd/dist/antd.min.css';
+import 'antd/dist/antd.min.css';
 // import '../assets/main.css';
-// import '../assets/signIn.css';
-import NavBar from '../components/NavBar'
-const { Header, Footer, Sider, Content } = Layout;
+const {Content } = Layout;
 const { Title } = Typography;
 
 const SignInPage = () => {
     const onFinish = async (values) => {
-        const { username, password } = values;
+        const { username, password } = values;//{username:Anirudh,password:abc,k:dsas,k:asjas}
 
         const res = await fetch("/signin", {
             method: 'POST',

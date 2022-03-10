@@ -1,12 +1,8 @@
-import { Carousel } from 'antd';
-import { Image } from 'antd';
+import { Carousel, Image } from 'antd';
 import back1 from '../images/a.jpg';
+import 'antd/dist/antd.min.css';
+// import '../assets/main.css';
 
-var props = {
-    image_array: [back1],
-    height: '87vh',
-    width: '100vw'
-}
 var Slider = (props) => {
 
     const contentStyle = {

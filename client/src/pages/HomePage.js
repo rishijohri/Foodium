@@ -3,9 +3,9 @@ import { Layout, Card, Col, Row } from 'antd';
 import React, { useState } from 'react';
 import back1 from '../images/a.jpg';
 import Slider from '../components/Slider'
+import {isMobile} from 'react-device-detect';
 const { Header, Footer, Sider, Content } = Layout;
-const { Meta } = Card;
-var isMoibile = false
+
 
 
 const HomePage = () => {

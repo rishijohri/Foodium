@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import foodiumLogo from '../images/foodiumLogo.png';
 import 'antd/dist/antd.min.css';
-import '../assets/main.css';
-import '../assets/signIn.css';
+// import '../assets/main.css';
 import {
     Form,
     Input,
@@ -14,13 +12,11 @@ import {
     Typography,
     Layout,
     notification,
-    Card
 } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined, TeamOutlined } from '@ant-design/icons';
-import NavBar from '../components/NavBar'
 const { Title } = Typography;
 const { Option } = Select;
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 const position = [
     {
         value: 'Student',
