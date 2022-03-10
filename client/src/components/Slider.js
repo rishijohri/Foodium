@@ -8,8 +8,7 @@ var props = {
     width: '100vw'
 }
 var Slider = (props) => {
-    // console.log(typeof image_array)
-    // console.log(image_array[0])
+
     const contentStyle = {
         height: props.height,
         width: props.width,
@@ -29,8 +28,9 @@ var Slider = (props) => {
 
                     const key = index + 1;
                     return (
-                        <div style={contentStyle}>
+                        <div key={key}>
                             <Image
+                                
                                 width={props.width}
                                 height={props.height}
                                 style={{ objectFit: "cover" }}
@@ -51,6 +51,6 @@ var Slider = (props) => {
 Slider.defaultProps = {
     image_array: [back1, back1, back1],
     width: '10vw',
-    height: '15vh'
+    height: '15vh',
 }
 export default Slider

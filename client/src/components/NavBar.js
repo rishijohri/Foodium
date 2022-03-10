@@ -24,6 +24,9 @@ const NavBar = () => {
             <MenuItem key="SignUp">
                 <Link to="/sign-up">Sign Up</Link>
             </MenuItem>
+            <MenuItem key="QRScanner">
+                <Link to="/qr-scan">QR Scan</Link>
+            </MenuItem>
 
             <MenuItem key="user" style={{ float: 'right', marginLeft: 'auto' }}>
                 <Avatar icon={<UserOutlined />} />

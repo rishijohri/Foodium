@@ -80,16 +80,7 @@ const EntryPage = () => {
                     visible={visibleSignIn}
                     closable={false}
                     headerStyle={{ position: 'center',textAlign:'center' }}
-                    // extra={
-                    //     <Space>
-                    //         <Button onClick={onClose}>Cancel</Button>
-                    //         <Button type="primary" onClick={onClose}>
-                    //             OK
-                    //         </Button>
-                    //     </Space>
-                    // }
-                >
-                    
+                >    
                     <SignInPage/>
                 </Drawer>
                 <Drawer
@@ -100,18 +91,7 @@ const EntryPage = () => {
                     visible={visibleSignUp}
                     closable={false}
                     headerStyle={{ position: 'center',textAlign:'center' }}
-                    // size={'large'}
-                    // extra={
-                    //     <Space>
-                    //         <Button onClick={onClose}>Cancel</Button>
-                    //         <Button type="primary" onClick={onClose}>
-                    //             OK
-                    //         </Button>
-                    //     </Space>
-                    // }
-                    // style={{width:'10vw'}}
                 >
-                    
                     <SignUpPage/>
                 </Drawer>
             </Footer>
