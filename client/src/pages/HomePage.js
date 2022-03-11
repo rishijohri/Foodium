@@ -9,30 +9,35 @@ const { Header, Footer, Sider, Content } = Layout;
 
 
 const HomePage = () => {
-
+    var hg= 6;
+    var vg=6;
+    var span=16;
+    if (isMobile) {
+            hg= 6
+            vg= 6
+            span= 16
+    } else {
+            hg=6;
+            vg= 6
+            span= 10
+    }
     return (
-        <Layout>
-            <Header style={{ padding: '0', marginBottom: '5vh' }}>
-                <NavBar />
-            </Header>
-            <Content>
+        <Layout style={{height: '90vh'}}>
+            {/* <Header collapsible={true} style={{ padding: '0',height:'1', zIndex: '1'}}> */}
+            {/* </Header> */}
+            <Content >
                 <div className="site-card-wrapper">
-                    <Row gutter={16}>
-                        <Col span={10}>
-                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} title="Mess 1" bordered={true}>
-                                Card content
-                            </Card>
+                    <Row gutter={[hg, vg]} justify={'center'}>
+                        <Col span={span}>
+                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} wrap={true} title="Mess 1" bordered={true} />
                         </Col>
-                        <Col span={12}>  
-                            <Card   cover={<Slider image_array={[back1, back1]}  />} title="Mess2" bordered={true}>
-                                Card content
-                            </Card>
+                        <Col span={span}>  
+                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Mess2" bordered={true}/>
                         </Col>
-                        
                     </Row>
-                </div>,
-
+                </div>
             </Content>
+            
         </Layout>
     );
 }

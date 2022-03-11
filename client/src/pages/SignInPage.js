@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useNavigate , Navigate} from 'react-router';
 import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.min.css';
@@ -7,9 +8,10 @@ const {Content } = Layout;
 const { Title } = Typography;
 
 const SignInPage = () => {
+    const navigate = useNavigate();
     const onFinish = async (values) => {
         const { username, password } = values;//{username:Anirudh,password:abc,k:dsas,k:asjas}
-
+        
         const res = await fetch("/signin", {
             method: 'POST',
             headers: {
@@ -32,11 +34,7 @@ const SignInPage = () => {
         const data = await res.json();
 
         if (data.result == 'success') {
-            notification.open({
-                message: 'logged in',
-                description:
-                    'yoohoo!!',
-            });
+            return navigate('/qr-scan', {replace:true});
         }
         else {
             notification.open({

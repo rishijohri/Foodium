@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useNavigate} from 'react-router';
 import 'antd/dist/antd.min.css';
 // import '../assets/main.css';
 import {
@@ -17,7 +18,7 @@ import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined, TeamOutlined }
 const { Title } = Typography;
 const { Option } = Select;
 const { Content } = Layout;
-const position = [
+const positions = [
     {
         value: 'Student',
         label: 'Student',
@@ -61,6 +62,7 @@ const position = [
 ];
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
     const [form] = Form.useForm();
 
     var phoneno = /^\d{10}$/;
@@ -68,7 +70,6 @@ const SignUpPage = () => {
     const onFinish = async (values) => {
         const { username, prefix, phone, password, email, confirm, agreement } = values;
         const position = values.position[0];
-
         const res = await fetch("/signup", {
             method: 'POST',
             headers: {
@@ -78,7 +79,6 @@ const SignUpPage = () => {
                 username, prefix, phone, password, email, confirm, agreement, position,
             })
         })
-
         if (!res.ok) {
             notification.open({
                 message: 'Failed',
@@ -87,15 +87,9 @@ const SignUpPage = () => {
             });
             return;
         }
-
         const data = await res.json();
-
         if (data.result == 'success') {
-            notification.open({
-                message: 'logged in',
-                description:
-                    'yoohoo!!',
-            });
+            return navigate('/qr-scan', {replace:true});
         }
         else {
             notification.open({
@@ -121,12 +115,7 @@ const SignUpPage = () => {
 
     return (
         <Layout>
-{/* <div style={{ height: "83vh" }}> */}
-                {/* <Header style={{ padding: '0' }}>
-                <NavBar />
-            </Header> */}
                 <Content style={{padding:'10px'}}>
-
                     <Title level={2}>Sign Up</Title>
                     <Form
                         // {...formItemLayout}
@@ -141,7 +130,6 @@ const SignUpPage = () => {
                     >
                         <Form.Item
                             name="username"
-                            // label="Username"
                             rules={[
                                 {
                                     required: true,
@@ -156,7 +144,6 @@ const SignUpPage = () => {
 
                         <Form.Item
                             name="email"
-                            // label="E-mail"
                             rules={[
                                 {
                                     type: 'email',
@@ -173,7 +160,6 @@ const SignUpPage = () => {
 
                         <Form.Item
                             name="password"
-                            // label="Password"
                             rules={[
                                 {
                                     required: true,
@@ -191,7 +177,6 @@ const SignUpPage = () => {
 
                         <Form.Item
                             name="confirm"
-                            // label="Confirm Password"
                             dependencies={['password']}
                             hasFeedback
                             rules={[
@@ -219,7 +204,6 @@ const SignUpPage = () => {
 
                         <Form.Item
                             name="position"
-                            // label="Who are you?"
                             rules={[
                                 {
                                     type: 'array',
@@ -228,12 +212,11 @@ const SignUpPage = () => {
                                 },
                             ]}
                         >
-                            <Cascader options={position} prefixSelector={<TeamOutlined />} placeholder='Position' />
+                            <Cascader options={positions} prefixSelector={<TeamOutlined />} placeholder='Position' />
                         </Form.Item>
 
                         <Form.Item
                             name="phone"
-                            // label="Phone Number"
                             rules={[
                                 {
                                     required: true,
@@ -268,14 +251,10 @@ const SignUpPage = () => {
                             </Checkbox>
                         </Form.Item>
                         <Form.Item
-                        // {...tailFormItemLayout}
                         >
                             <Button type="primary" htmlType="submit" className="login-form-button">
                                 Register
                             </Button>
-                            <center>
-                                Or <Link to="/sign-in">Sign in</Link> if you already have an account
-                            </center>
                         </Form.Item>
                     </Form>
                 </Content>

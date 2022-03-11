@@ -10,6 +10,7 @@ const localmongo = "mongodb://localhost:27017/foodium"
 const cors = require("cors");
 const User = require('./models/user');
 const Feedback = require('./models/feedback')
+const Mess = require('./models/mess')
 const port = 3001 || process.env.PORT
 const corsOptions = {
     origin: '*',
@@ -18,7 +19,10 @@ const corsOptions = {
 }
 
 
-mongoose.connect(localmongo, {useUnifiedTopology:true ,useNewUrlParser: true})
+mongoose.connect(localmongo, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(cors(corsOptions))
@@ -35,15 +39,15 @@ app.use(require("express-session")({
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new customStrategy(
-    function(req, done) {
+    function (req, done) {
         User.findOne({
             username: req.body.username
-        }, function(err, user) {
-            if (err || user==null) {
+        }, function (err, user) {
+            if (err || user == null) {
                 return done(err, false)
             }
-            user.authenticate(req.body.password, (error)=> {
-                if (error==null) {
+            user.authenticate(req.body.password, (error) => {
+                if (error == null) {
                     done(err, user)
                 } else {
                     done(error, false)
@@ -67,9 +71,18 @@ app.post('/signin', passport.authenticate('custom'), async (req, res) => {
     })
 })
 
-app.post("/signup", function(req, res) {
-    var balance=0;
-    User.register(new User({username: req.body.username,prefix: req.body.prefix,phone: req.body.phone,email: req.body.email,confirm: req.body.confirm,agreement:req.body.agreement,position:req.body.position,balance:balance}), req.body.password, function (err, newUser) { 
+app.post("/signup", function (req, res) {
+    var balance = 0;
+    User.register(new User({
+        username: req.body.username,
+        prefix: req.body.prefix,
+        phone: req.body.phone,
+        email: req.body.email,
+        confirm: req.body.confirm,
+        agreement: req.body.agreement,
+        position: req.body.position,
+        balance: balance
+    }), req.body.password, function (err, newUser) {
         if (err) {
             console.log(err)
             res.json({
@@ -78,26 +91,25 @@ app.post("/signup", function(req, res) {
                 error: err,
                 src: "signup"
             })
-        }
-        else {
+        } else {
             passport.authenticate("custom")
-            (req, res, ()=> {
-                res.json({
-                    result: "success",
-                    nav: "/secret",
-                    src:"signup"
+                (req, res, () => {
+                    res.json({
+                        result: "success",
+                        nav: "/secret",
+                        src: "signup"
+                    })
                 })
-            })
-    }
-});
+        }
+    });
 })
-    
+
 app.post('/feedback', (req, res) => {
     req.body.date = new Date(req.body.date)
     console.log(typeof req.body.date)
     Feedback.create(
         req.body, (err, doc) => {
-            if (err || doc==null) {
+            if (err || doc == null) {
                 console.log(err)
                 console.log(doc)
                 res.json({
@@ -113,8 +125,8 @@ app.post('/feedback', (req, res) => {
     )
 })
 
-app.get("/authenticate", function(req, res) {
-    console.log("entered "+"/authenticate")
+app.get("/authenticate", function (req, res) {
+    console.log("entered " + "/authenticate")
     if (req.isAuthenticated()) {
         console.log('logged in')
         res.json({
@@ -125,41 +137,57 @@ app.get("/authenticate", function(req, res) {
     } else {
         console.log('not logged')
         res.json({
-            result:"error",
+            result: "error",
             src: "auth"
         })
     }
-    console.log("exited "+"/authenticate")
+    console.log("exited " + "/authenticate")
 })
 
-app.post('/payeat', async (req, res) => {
-    const dateTime = new Date();
-    const hours = dateTime.getHours();
-    const user = req.body.username;
-    const mess = req.body.messUsername;
-
-    const messDetails = await Mess.find({username: mess});
-    const userDetails = await User.find({username: user});
-
-    var charges=0;
-    if(hours>=7 && hours<=10){
-        charges = messDetails.breakfast;
-    }
-    else if(hours>=11 && hours<=15){
-        charges = messDetails.lunch;
-    }
-    else{
-        charges = messDetails.dinner;
-    }
-    userDetails.balance -= charges;
-
-    User.findByIdAndUpdate(user,{$set:userDetails}, function(err, result){
-        if(err){
-            console.log(err);
-        }
-        console.log("RESULT: " + result);
+app.post('/payeat', (req, res) => {
+    if (req.isAuthenticated()) {
+        const dateTime = new Date();
+        console.log(req.user)
+        const hours = dateTime.getHours();
+        const user = req.user.username;
+        const mess = req.body.messUsername;
+        console.log(mess)
+        Mess.findOne({
+            vendor: mess
+        }, (err, vendor) => {
+            if (!err && vendor) {
+                User.findOne({
+                    username: user
+                }, (error, currUser) => {
+                    if (!error && currUser) {
+                        currUser.balance -= 50
+                        currUser.save()
+                        console.log('logged In')
+                        res.json({
+                            result: "success",
+                            src: "auth"
+                        })
+                    } else {
+                        console.log('not logged')
+                        res.json({
+                            result: "error",
+                            src: "auth"
+                        })
+                    }
+                });
+            } else {
+                console.log('mess not found')
+                        res.json({
+                            result: "error",
+                            src: "auth"
+                        })
+            }
+        });
+    } else {
+        console.log('not logged')
         res.json({
-            result: "success"
+            result: "error",
+            src: "auth"
         })
-    });
+    }
 })

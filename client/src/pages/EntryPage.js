@@ -66,6 +66,7 @@ const EntryPage = () => {
                     <Button type="primary" onClick={showSignUp}>
                         Sign Up
                     </Button>
+                    {/* <Link to='/qr-scan'>go to qr</Link> */}
                     </Space>
                 </center>
                 <Drawer

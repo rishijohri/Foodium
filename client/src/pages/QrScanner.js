@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router'
-import { Typography, Input, Layout, Avatar ,notification} from 'antd';
+import { Typography, Input, Layout, Avatar ,notification, Button} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {isMobile} from 'react-device-detect';
 import NavBar from '../components/NavBar';
@@ -13,22 +13,52 @@ const { TextArea } = Input;
 const { Title } = Typography;
 
 const QRScanPage=()=>{
-    const [data, setData] = useState('No result');
-    const [keepScan,setKeepScan]=useState(true);
-    var onResult= async (values,error)=>{
-        setData(values?.text)
-        console.log(values)
-        if (values?.text && keepScan) { 
-               //check validity of value.txt in future
+    var [data, setData] = useState('');
+    var [keepScan,setKeepScan]=useState(true);
+    var onResult = (values, err)=> {
+        
+        if (values?.text && keepScan)
+        {
+            setData(values?.text)
             setKeepScan(false)
-            notification.open({
-                message: 'Success',
-                description:
-                    'Go!!!!! And eat the Shit',
-            });
-           
         }
     }
+    useEffect(() => {
+        console.log('entered')
+        if (!keepScan && data.length>2) {
+        console.log(data)
+        fetch("/payeat",{
+            method:'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+                messUsername :data
+            })
+       }).then(
+           (res) => {
+            if (!res.ok) {
+                return {}
+           }
+           return res.json()
+        }
+       ).then((res)=> {
+        if (res.result=='success') {
+            notification.open({
+                message: 'success',
+                description:
+                    'sccning complete :(',
+            });
+        } else {
+        notification.open({
+            message: 'Failed',
+            description:
+                'unable to scan. :(',
+        });
+    }
+    });
+    }
+    }, [keepScan, data])
     var camSetting;
     if (isMobile) {
         camSetting = {exact: 'environment'}
@@ -37,30 +67,23 @@ const QRScanPage=()=>{
     }
     return (
         <Layout style={{height:'100vh', width:'100vw'}}>
-                <Content >
-                    <div style={{height:'50vh', 
+                <Content style={{height:'50vh', 
                                 width:'80vw', 
                                 marginTop:'15vh',
                                 marginBottom:'15vh', 
                                 marginLeft: '6vw',
                                 marginRight: '6vw'}}>
                         <QrReader
+                        scanDelay={1500}
                         constraints={{autoGainControl: true, facingMode:camSetting}}
                             onResult={onResult}
-                            // onResult={(result, error) => {
-                            // if (!!result) {
-                            //     setData(result?.text);
-                            // }
-
-                            // if (!!error) {
-                            //     console.info(error);
-                            // }
-                            // }}
                         />
                         <center>
                             <p>{data}</p>
                         </center>
-                    </div>
+                        {/* <Button onClick={onClick}>
+
+                        </Button> */}
                 </Content>
         </Layout>
     );
