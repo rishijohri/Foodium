@@ -1,9 +1,9 @@
 let CACHE_NAME = 'foodium';
-const urlsToCache = [
-  '/',
-  '/home',
-];
+
 self.addEventListener('install', function (event) {
+  const urlsToCache = [
+    '/',
+  ];
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -15,6 +15,7 @@ self.addEventListener('install', function (event) {
   self.skipWaiting();
 });
 self.addEventListener('fetch', function (event) {
+  
   event.respondWith(caches.match(event.request)
     .then(function (response) {
       if (response) {
