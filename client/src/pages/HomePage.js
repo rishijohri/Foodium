@@ -13,8 +13,8 @@ const HomePage = () => {
     var vg=6;
     var span=16;
     if (isMobile) {
-            hg= 6
-            vg= 6
+            hg= 1
+            vg= 1
             span= 16
     } else {
             hg=6;
