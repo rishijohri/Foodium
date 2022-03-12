@@ -13,8 +13,8 @@ const HomePage = () => {
     var vg=6;
     var span=16;
     if (isMobile) {
-            hg= 6
-            vg= 6
+            hg= 1
+            vg= 1
             span= 16
     } else {
             hg=6;
@@ -22,7 +22,7 @@ const HomePage = () => {
             span= 10
     }
     return (
-        <Layout style={{height: '95vh', width:'93.4vw'}}>
+        <Layout style={{height: '95vh', width:'99vw'}}>
             <NavBar/>
             <Content >
                 <div className="site-card-wrapper">
