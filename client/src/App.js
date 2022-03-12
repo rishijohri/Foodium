@@ -7,7 +7,7 @@ import { createBrowserHistory } from "history";
 import EntryPage from './pages/EntryPage';
 import FeedbackPage from './pages/FeedbackPage';
 import HomePage from './pages/HomePage';
-import LiveMenuPage from './pages/LiveMenuPage';
+import LiveMenu from './pages/LiveMenu';
 import QRScanPage from "./pages/QrScanner";
 const customHistory = createBrowserHistory();
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Route path='feedback' element={<FeedbackPage/>} />
         <Route path='home' element={<HomePage/>}/>
         <Route path='qr-scan' element={<QRScanPage/>}/>
-        <Route path='live-menu' element={<LiveMenuPage/>} />
+        <Route path='live-menu' element={<LiveMenu/>} />
       </Routes>
     </BrowserRouter>
   );

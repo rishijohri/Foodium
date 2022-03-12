@@ -22,7 +22,10 @@ const HomePage = () => {
             span= 10
     }
     return (
-        <Layout style={{height: '95vh', width:'93.4vw'}}>
+        
+        // 
+            <div style={{height: '95vh', width:'98.75vw'}}>
+                <Layout >
             <NavBar/>
             <Content >
                 <div className="site-card-wrapper">
@@ -32,12 +35,24 @@ const HomePage = () => {
                         </Col>
                         <Col span={span}>  
                             <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>
+                        </Col>  
+                        <Col span={span}>
+                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} title="Mess" bordered={true} />
+                        </Col>
+                        <Col span={span}>  
+                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>
+                        </Col>
+                        <Col span={span}>  
+                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>
                         </Col>         
                     </Row>
                 </div>
             </Content>
+            </Layout>
+            </div>
             
-        </Layout>
+            
+        //  
     );
 }
 
