@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import { useNavigate} from 'react-router';
 import 'antd/dist/antd.min.css';
 // import '../assets/main.css';
@@ -14,7 +13,7 @@ import {
     Layout,
     notification,
 } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined, TeamOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailOutlined, TeamOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 const { Option } = Select;
 const { Content } = Layout;
@@ -88,8 +87,8 @@ const SignUpPage = () => {
             return;
         }
         const data = await res.json();
-        if (data.result == 'success') {
-            return navigate('/qr-scan', {replace:true});
+        if (data.result === 'success') {
+            return navigate('/home', {replace:true});
         }
         else {
             notification.open({
@@ -247,7 +246,7 @@ const SignUpPage = () => {
                         // {...tailFormItemLayout}
                         >
                             <Checkbox>
-                                I have read the <a href="">agreement</a>
+                                I have read the <a href="/">agreement</a>
                             </Checkbox>
                         </Form.Item>
                         <Form.Item

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router'
-import { Typography, Input, Layout, Avatar ,notification, Button} from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Typography, Layout,notification} from 'antd';
 import {isMobile} from 'react-device-detect';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
@@ -9,7 +8,6 @@ import 'antd/dist/antd.min.css';
 
 import { QrReader } from 'react-qr-reader';
 const { Header, Content } = Layout;
-const { TextArea } = Input;
 const { Title } = Typography;
 
 const QRScanPage=()=>{
@@ -43,7 +41,7 @@ const QRScanPage=()=>{
            return res.json()
         }
        ).then((res)=> {
-        if (res.result=='success') {
+        if (res.result==='success') {
             notification.open({
                 message: 'success',
                 description:
@@ -59,6 +57,7 @@ const QRScanPage=()=>{
     });
     }
     }, [keepScan, data])
+
     var camSetting;
     if (isMobile) {
         camSetting = {exact: 'environment'}
@@ -67,12 +66,16 @@ const QRScanPage=()=>{
     }
     return (
         <Layout style={{height:'100vh', width:'100vw'}}>
-                <Content style={{height:'50vh', 
-                                width:'80vw', 
-                                marginTop:'15vh',
-                                marginBottom:'15vh', 
-                                marginLeft: '6vw',
-                                marginRight: '6vw'}}>
+            <NavBar/>
+                <Content>
+                <center><h2>QR Scanner</h2></center>
+                    <div style={{height:'50vh', 
+                    width:'80vw', 
+                    marginTop:'10vh',
+                    marginBottom:'15vh', 
+                    marginLeft: '8vw',
+                    marginRight: '5vw',
+                    verticalAlign:'center'}}>
                         <QrReader
                         scanDelay={1500}
                         constraints={{autoGainControl: true, facingMode:camSetting}}
@@ -81,9 +84,7 @@ const QRScanPage=()=>{
                         <center>
                             <p>{data}</p>
                         </center>
-                        {/* <Button onClick={onClick}>
-
-                        </Button> */}
+                        </div>
                 </Content>
         </Layout>
     );

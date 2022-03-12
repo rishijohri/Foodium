@@ -5,7 +5,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
 // import '../assets/main.css'
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const { TextArea } = Input;
 const { Title } = Typography;
 
@@ -67,9 +67,7 @@ const FeedbackPage = () => {
     };
     return (
         <Layout className='layout'>
-            <Header style={{padding:'0'}}>
-                <NavBar/>
-            </Header>
+            <NavBar/>
             <Content style={{ padding: '0 15%', margin:' 2%'}}>
                 <Title level={2}>Feedback</Title>
                 <Form

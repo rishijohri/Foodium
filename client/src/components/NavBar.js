@@ -1,47 +1,46 @@
-import { Menu, Button } from 'antd';
 import React,{ useState } from 'react';
-import { Layout, Card, Col, Row } from 'antd';
-import {
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
-} from '@ant-design/icons';
-const {Sider } = Layout;
-const { SubMenu } = Menu;
+import { PageHeader, Drawer, Menu, Button, } from 'antd';
+import { UserOutlined, MenuOutlined, CloseOutlined,} from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 var NavBar = () => {
-    const [collapsed, setCollapsed] = useState(false);
-    const onCollapse = collapse => {
-      console.log(collapse);
-      setCollapsed(collapse);
-    };
+  const [menuvisible, setMenuvisible] = useState(false);
+  // const [visibleSignUp, setVisibleSignUp] = useState(false);
+  const showMenu = () => {
+      setMenuvisible(true);
+  };
+  const onClose = () => {
+      setMenuvisible(false);
+  };
     return (
-      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-      <div className="logo" />
-      <Menu defaultSelectedKeys={['1']} mode="inline">
-        <Menu.Item key="1" icon={<PieChartOutlined />}>
-          Option 1
-        </Menu.Item>
-        <Menu.Item key="2" icon={<DesktopOutlined />}>
-          Option 2
-        </Menu.Item>
-        <SubMenu key="sub1" icon={<PieChartOutlined  />} title="User">
-          <Menu.Item key="3">Tom</Menu.Item>
-          <Menu.Item key="4">Bill</Menu.Item>
-          <Menu.Item key="5">Alex</Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub2" icon={<PieChartOutlined />} title="Team">
-          <Menu.Item key="6">Team 1</Menu.Item>
-          <Menu.Item key="8">Team 2</Menu.Item>
-        </SubMenu>
-        <Menu.Item key="9" icon={<PieChartOutlined />}>
-          Files
-        </Menu.Item>
-      </Menu>
-    </Sider>
+      <div>
+      <PageHeader
+                className="site-page-header"
+                onBack={showMenu}
+                title={<h3>Foodium</h3>}
+                backIcon = {<MenuOutlined  style={{fontSize:'2h', paddingBottom:'1.3vh'}}/>}
+                extra={[
+                    <Button icon={<UserOutlined/>} />,
+                ]}
+            />
+        <Drawer
+            title={<Button shape='circle' icon={<CloseOutlined /> } onClick={onClose}/>}
+            placement="left"
+            type='Menu'
+            onClose={onClose}
+            visible={menuvisible}
+            closable={false}
+            headerStyle={{ position: 'center',textAlign:'center' }}
+                >
+                {/*Add Menu Items Here  */}
+                <Menu
+                  mode="inline"
+                >
+                  <Menu.Item key="1"><Link to="/home">Home</Link></Menu.Item>
+                  <Menu.Item key="2"><Link to="/qr-scan">QR Scanner</Link></Menu.Item>
+                  <Menu.Item key="3"><Link to="/feedback">Feedback</Link></Menu.Item>
+              </Menu>
+            </Drawer>
+      </div>
     );
 }
 

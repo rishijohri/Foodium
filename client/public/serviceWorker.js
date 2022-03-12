@@ -1,7 +1,7 @@
 let CACHE_NAME = 'foodium';
 const urlsToCache = [
   '/',
-  '/index.html',
+  '/home',
 ];
 self.addEventListener('install', function (event) {
   // Perform install steps

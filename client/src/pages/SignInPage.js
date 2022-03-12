@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useNavigate , Navigate} from 'react-router';
+import { useNavigate } from 'react-router';
 import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.min.css';
@@ -33,8 +33,8 @@ const SignInPage = () => {
 
         const data = await res.json();
 
-        if (data.result == 'success') {
-            return navigate('/qr-scan', {replace:true});
+        if (data.result === 'success') {
+            return navigate('/home', {replace:true});
         }
         else {
             notification.open({

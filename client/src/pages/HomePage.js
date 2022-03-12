@@ -1,11 +1,11 @@
 import NavBar from '../components/NavBar'
-import { Layout, Card, Col, Row } from 'antd';
+import { Layout, Card, Col, Row, Typography, Button } from 'antd';
 import React, { useState } from 'react';
 import back1 from '../images/a.jpg';
 import Slider from '../components/Slider'
 import {isMobile} from 'react-device-detect';
 const { Header, Footer, Sider, Content } = Layout;
-
+const { Title } = Typography;
 
 
 const HomePage = () => {
@@ -22,18 +22,17 @@ const HomePage = () => {
             span= 10
     }
     return (
-        <Layout style={{height: '90vh'}}>
-            {/* <Header collapsible={true} style={{ padding: '0',height:'1', zIndex: '1'}}> */}
-            {/* </Header> */}
+        <Layout style={{height: '95vh', width:'93.4vw'}}>
+            <NavBar/>
             <Content >
                 <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>
                         <Col span={span}>
-                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} wrap={true} title="Mess 1" bordered={true} />
+                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} title="Mess" bordered={true} />
                         </Col>
                         <Col span={span}>  
-                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Mess2" bordered={true}/>
-                        </Col>
+                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>
+                        </Col>         
                     </Row>
                 </div>
             </Content>
