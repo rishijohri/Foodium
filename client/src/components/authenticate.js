@@ -1,38 +1,53 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Navigate} from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { asyncAuthenticate } from '../features/authSlice';
 import { notification} from 'antd';
-export function Authenticate(props) {
+const Authenticate = (props) =>  {
     var [check, setCheck] = useState('wait')
-    fetch('/authenticate', {
-        method: 'GET',
-        body: "Check"
-    }).then(
-        (result)=>{
-            if (!result.ok) {
-                return {}
+    var [position, setPosition] = useState("wait")
+    var pos = "";
+    const getauth = () => {
+        fetch('/authenticate', {
+            method: 'GET',
+        }).then(
+            (result)=>{
+                if (!result.ok) {
+                    return {}
+                }
+                return result.json()
             }
-            return result.json()
-        }
-    ).then(
-        (result) => {
-            if (result.result=='success') {
-                check = setCheck('success')
-            } else {
-                check = setCheck('error')
+        ).then(
+            (result) => {
+                if (result.result=='success') {
+                    setCheck('success')
+                    console.log(result.position)
+                    console.log(props.position)
+                    console.log(result.position==props.position)
+                    setPosition(result.position)
+                } else {
+                    setPosition('error')
+                    setCheck('error')
+                }
             }
-        }
-    )
-    if (check=='wait') {
+        )
+    }
+    useEffect(()=> {
+        getauth()
+    }, [])
+    if (check=='wait' || position=='wait') {
         return <h1>Loading....</h1>
     }else if (check=='success') {
-        return props.children;
+        if (props.position==position) {
+            return props.children;
+        }
+        return <Navigate to="/home" replace={true}/>
     } else {
-        notification.open({
-            message:'Not a valid user',
-            discription:'Sign in again'
-        })
-        return <Navigate to="/" replace={True}/>
+        return <Navigate to="/" replace={true}/>
     }
 }
+
+Authenticate.defaultProps = {
+    position: "Ftudent"
+}
+
+export default Authenticate

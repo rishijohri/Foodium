@@ -7,14 +7,13 @@ import FileBase64 from 'react-file-base64';
 import NavBar from '../components/NavBar'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
+import Authenticate from "../components/authenticate";
 const {Content } = Layout;
 const { Title } = Typography;
 
 const UploadImage = () => {
     const navigate = useNavigate();
     const [item, setItem] = useState({ image: '' });
-    
-
     const onFinish = (values) => {
         fetch("/uploadimage", {
             method:'POST',
@@ -52,8 +51,8 @@ const UploadImage = () => {
     })
     }
 
-      
     return (
+        <Authenticate>
         <Layout>
             <NavBar />
             <Content style={{padding:'10px'}}>
@@ -133,6 +132,7 @@ const UploadImage = () => {
                 <Image src={item.image}/>
             </Content>
         </Layout>
+        </Authenticate>
     );
 };
 

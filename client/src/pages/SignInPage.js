@@ -99,9 +99,6 @@ const SignInPage = () => {
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Log in
                         </Button>
-                        <center>
-                            Or <Link to="/sign-up">register now!</Link>
-                        </center>
                     </Form.Item>
                 </Form>
             </Content>

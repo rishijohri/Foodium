@@ -79,10 +79,8 @@ app.post("/signup", function (req, res) {
     var balance = 0;
     User.register(new User({
         username: req.body.username,
-        prefix: req.body.prefix,
         phone: req.body.phone,
         email: req.body.email,
-        confirm: req.body.confirm,
         agreement: req.body.agreement,
         position: req.body.position,
         balance: balance
@@ -132,11 +130,12 @@ app.post('/feedback', (req, res) => {
 app.get("/authenticate", function (req, res) {
     console.log("entered " + "/authenticate")
     if (req.isAuthenticated()) {
-        console.log('logged in')
+        console.log('logged in authenticate')
         res.json({
             result: "success",
-            user: req.user,
-            src: "auth"
+            username: req.user.username,
+            position: req.user.position,
+            src: "auth" 
         })
     } else {
         console.log('not logged')
@@ -216,15 +215,20 @@ app.post('/uploadimage',(req, res, next) => {
     });
 })
 
-app.get('/livemenu', (req, res) => {
-    const mess=req.body.messName
-    MenuItem.findMany({messName:mess}, (err, items) => {
+app.get('/livemenu/:param1', (req, res) => {
+    const mess=req.params.param1
+    console.log(mess)
+    MenuItem.find({vendor:mess}, (err, items) => {
         if (!err && items) {
-            console.log(items);
-            res.status(500).send('An error occurred', err);
+            // console.log(items);
+            res.json({
+                result: "success",
+                menuItems: items
+            });
+            // ('imagesPage', { items: items });
         }
         else {
-            res.render('imagesPage', { items: items });
+            res.status(500).send('An error occurred', err);
         }
     });
 })
