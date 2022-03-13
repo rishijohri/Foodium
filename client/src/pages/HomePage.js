@@ -9,9 +9,9 @@ const { Title } = Typography;
 
 
 const HomePage = () => {
-    var hg= 6;
-    var vg=6;
-    var span=16;
+    var hg= 2;
+    var vg=2;
+    var span=12;
     if (isMobile) {
             hg= 1
             vg= 1
@@ -25,22 +25,13 @@ const HomePage = () => {
         
         // 
             <div style={{height: '95vh', width:'98.75vw'}}>
-                <Layout >
+            <Layout >
             <NavBar/>
             <Content >
                 <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>
                         <Col span={span}>
                             <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} title="Mess" bordered={true} />
-                        </Col>
-                        <Col span={span}>  
-                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>
-                        </Col>  
-                        <Col span={span}>
-                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} title="Mess" bordered={true} />
-                        </Col>
-                        <Col span={span}>  
-                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>
                         </Col>
                         <Col span={span}>  
                             <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>

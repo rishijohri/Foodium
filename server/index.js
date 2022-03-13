@@ -11,8 +11,10 @@ const cors = require("cors");
 const User = require('./models/user');
 const Feedback = require('./models/feedback')
 const Mess = require('./models/mess')
-const Menu = require('./models/menu')
+const MenuItem = require('./models/menuItem')
 const port = 3001 || process.env.PORT
+var fs = require('fs');
+var path = require('path');
 const corsOptions = {
     origin: '*',
     credentials: true,
@@ -27,8 +29,9 @@ mongoose.connect(localmongo, {
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(cors(corsOptions))
-app.use(bodyparser.json());
+app.use(bodyparser.json({limit: '50mb'}));
 app.use(bodyparser.urlencoded({
+    limit: '50mb',
     extended: true
 }))
 
@@ -192,11 +195,32 @@ app.post('/payeat', (req, res) => {
         })
     }
 })
-app.get('/live-menu', (req, res) => {
+
+app.post('/uploadimage',(req, res, next) => {
+    console.log("entered stage")
+    let obj = req.body 
+    MenuItem.create(obj, (err, item) => {
+        if (err) {
+            console.log("entered error")
+            console.log(err);
+            res.json({
+                result:"fail"
+            })
+        }
+        else {
+            console.log("entered success")
+            res.json({
+                result:'success'
+            })
+        }
+    });
+})
+
+app.get('/livemenu', (req, res) => {
     const mess=req.body.messName
-    Menu.findMany({messName:mess}, (err, items) => {
-        if (!err and items) {
-            console.log(items.);
+    MenuItem.findMany({messName:mess}, (err, items) => {
+        if (!err && items) {
+            console.log(items);
             res.status(500).send('An error occurred', err);
         }
         else {

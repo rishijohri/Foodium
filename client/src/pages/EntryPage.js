@@ -1,25 +1,14 @@
-import { Outlet } from 'react-router';
 import { Layout,  Drawer, Button, Space} from 'antd';
 import back1 from '../images/a.jpg';
 import Slider from '../components/Slider'
 import 'antd/dist/antd.min.css';
-// import '../assets/main.css';
+import '../assets/main.css';
 import React, { useState } from 'react';
 import SignInPage from'./SignInPage';
 import SignUpPage from './SignUpPage';
 import { CloseOutlined  } from '@ant-design/icons';
 
 const { Footer, Content } = Layout;
-const contentStyle = {
-    height: '10vh',
-    color: '#fff',
-    lineHeight: '0',
-    textAlign: 'center',
-    background: '#364d79',
-    margin: '0',
-    // display: 'block',
-    // objectFit:"cover"
-};
 const EntryPage = () => {
     const [visibleSignIn, setVisibleSignIn] = useState(false);
     const [visibleSignUp, setVisibleSignUp] = useState(false);
@@ -48,7 +37,6 @@ const EntryPage = () => {
             {/* <Header style={{ padding: '0' }}>
                 <NavBar />
             </Header> */}
-
             <Content style={{height:'90vh'}}>
                 <div >
                     <Slider image_array={[back1, back1]} width={'100vw'} height={'90vh'} />

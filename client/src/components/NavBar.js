@@ -19,7 +19,7 @@ var NavBar = () => {
                 title={<h3>Foodium</h3>}
                 backIcon = {<MenuOutlined  style={{fontSize:'2h', paddingBottom:'1.3vh'}}/>}
                 extra={[
-                    <Button icon={<UserOutlined/>} />,
+                    <Button key="1.1" icon={<UserOutlined/>} />,
                 ]}
             />
         <Drawer
@@ -38,6 +38,8 @@ var NavBar = () => {
                   <Menu.Item key="1"><Link to="/home">Home</Link></Menu.Item>
                   <Menu.Item key="2"><Link to="/qr-scan">QR Scanner</Link></Menu.Item>
                   <Menu.Item key="3"><Link to="/feedback">Feedback</Link></Menu.Item>
+                  <Menu.Item key="3"><Link to="/upload-image">Upload Image</Link></Menu.Item>
+                  <Menu.Item key="3"><Link to="/live-menu">Live Menu</Link></Menu.Item>
               </Menu>
             </Drawer>
       </div>
