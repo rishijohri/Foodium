@@ -11,6 +11,7 @@ const cors = require("cors");
 const User = require('./models/user');
 const Feedback = require('./models/feedback')
 const Mess = require('./models/mess')
+const Menu = require('./models/menu')
 const port = 3001 || process.env.PORT
 const corsOptions = {
     origin: '*',
@@ -190,4 +191,16 @@ app.post('/payeat', (req, res) => {
             src: "auth"
         })
     }
+})
+app.get('/live-menu', (req, res) => {
+    const mess=req.body.messName
+    Menu.findMany({messName:mess}, (err, items) => {
+        if (!err and items) {
+            console.log(items.);
+            res.status(500).send('An error occurred', err);
+        }
+        else {
+            res.render('imagesPage', { items: items });
+        }
+    });
 })
