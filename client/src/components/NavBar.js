@@ -1,7 +1,8 @@
 import React,{ useState } from 'react';
-import { PageHeader, Drawer, Menu, Button, } from 'antd';
+import { PageHeader, Drawer, Menu, Button} from 'antd';
 import { UserOutlined, MenuOutlined, CloseOutlined,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+const {SubMenu} = Menu
 var NavBar = () => {
   const [menuvisible, setMenuvisible] = useState(false);
   // const [visibleSignUp, setVisibleSignUp] = useState(false);
@@ -36,7 +37,7 @@ var NavBar = () => {
                   mode="inline"
                 >
                   <Menu.Item key="1"><Link to="/home">Home</Link></Menu.Item>
-                  <Menu.Item key="2"><Link to="/qr-scan">QR Scanner</Link></Menu.Item>
+                  <Menu.Item key="2"><Link to="/mess-pay">Mess Payment</Link></Menu.Item>
                   <Menu.Item key="3"><Link to="/feedback">Feedback</Link></Menu.Item>
                   <Menu.Item key="4"><Link to="/upload-image">Upload Image</Link></Menu.Item>
                   <Menu.Item key="5"><Link to="/live-menu">Live Menu</Link></Menu.Item>

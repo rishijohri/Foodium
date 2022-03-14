@@ -31,10 +31,10 @@ const HomePage = () => {
                 <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>
                         <Col span={span}>
-                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} title="Mess" bordered={true} />
+                            <Card  cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'}/>} title={<Title level={2} >Mess</Title>} bordered={true} />
                         </Col>
                         <Col span={span}>  
-                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title="Canteen" bordered={true}/>
+                            <Card   cover={<Slider image_array={[back1, back1]} width={'100%'} height={'50%'} />} title={<Title level={2} >Canteen</Title>} bordered={true}/>
                         </Col>         
                     </Row>
                 </div>

@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router';
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Layout, Typography, notification, Image, Rate, Card} from 'antd';
-import { UserOutlined} from '@ant-design/icons';
+import { Form, Input, Button, Layout, Typography, notification, Image, Rate, Card, Cascader} from 'antd';
+import { UserOutlined, TeamOutlined} from '@ant-design/icons';
 import FileBase64 from 'react-file-base64';
 import NavBar from '../components/NavBar'
 import 'antd/dist/antd.min.css';
@@ -12,11 +10,16 @@ const {Content } = Layout;
 const { Title, Text } = Typography;
 
 const UploadImage = () => {
-    const navigate = useNavigate();
     const [item, setItem] = useState({ image: '' });
     const [health, setHealth] = useState(0);
     const [quality, setQuality] = useState(0);
+    const [data, setData] = useState([{
+        value: 'Label',
+        label: 'Label',
+    }]);
+
     const onFinish = (values) => {
+        console.log(values)
         fetch("/uploadimage", {
             method:'POST',
             headers: {
@@ -26,7 +29,7 @@ const UploadImage = () => {
                 name: values.food_name,
                 health: health,
                 quality: quality,
-                vendor: values.vendor,
+                vendor: values.vendor[0],
                 desc: values.desc,
                 image: item.image
             })
@@ -59,14 +62,46 @@ const UploadImage = () => {
     const handleQuality = (val) => {
         setQuality(val)
     }
+    const getData = () => {
+        console.log("entered getDATA")
+        fetch("/messvendors", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((res) => {
+            if (!res.ok) {
+                return {}
+            }
+            return res.json()
+        }).then(
+            (res) => {
+                if (res.result==="success") {
+                    // console.log(res.menuItems)
+                    setData(res.menuItems)
+                } else {
+                    notification.open({
+                        message: 'Failed',
+                        description:
+                            'unable to fetch Data :(',
+                    });
+                }
+            }
+        )
+    }
+
+    useEffect(()=> {
+        getData()
+        console.log(data)
+    }, [])
+
     return (
-        <Authenticate  position={["Student"]}>
         <Layout>
             <NavBar />
-            <Content style={{padding:'10px'}}>
+            <Content style={{padding:'0vh 5vh'}}>
                 <Title level={2}>Upload Image</Title>
                 <Form
-                    action="" onFinish={onFinish}
+                    onFinish={onFinish}
                 >
                     <Form.Item
                         name="food_name"
@@ -80,16 +115,17 @@ const UploadImage = () => {
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="item name" />
                     </Form.Item>
                     <Form.Item
-                        name="vendor"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input the name of food item!',
-                            },
-                        ]}
-                    >
-                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="name of vendor" />
-                    </Form.Item>
+                            name="vendor"
+                            rules={[
+                                {
+                                    type: 'array',
+                                    required: true,
+                                    message: 'Mess Name',
+                                },
+                            ]}
+                        >
+                            <Cascader options={data} placeholder='vendor name' />
+                        </Form.Item>
                     <Form.Item
                         name="desc"
                         rules={[
@@ -150,7 +186,6 @@ const UploadImage = () => {
                 <Image src={item.image}/>
             </Content>
         </Layout>
-        </Authenticate>
     );
 };
 

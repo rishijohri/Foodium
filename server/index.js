@@ -151,12 +151,11 @@ app.post('/payeat', (req, res) => {
     if (req.isAuthenticated()) {
         const dateTime = new Date();
         console.log(req.user)
-        const hours = dateTime.getHours();
         const user = req.user.username;
-        const mess = req.body.messUsername;
-        console.log(mess)
+        const messval = req.body.pin;
+        console.log(messval)
         Mess.findOne({
-            vendor: mess
+            pin: messval
         }, (err, vendor) => {
             if (!err && vendor) {
                 User.findOne({
@@ -168,6 +167,7 @@ app.post('/payeat', (req, res) => {
                         console.log('logged In')
                         res.json({
                             result: "success",
+                            data: vendor.vendor,
                             src: "auth"
                         })
                     } else {
@@ -217,6 +217,7 @@ app.post('/uploadimage',(req, res, next) => {
 
 app.get('/livemenu/:param1', (req, res) => {
     const mess=req.params.param1
+    console.log("live menu entered")
     console.log(mess)
     MenuItem.find({vendor:mess}, (err, items) => {
         if (!err && items) {
@@ -232,4 +233,35 @@ app.get('/livemenu/:param1', (req, res) => {
     });
 })
 
+app.get('/messvendors', (req, res) => {
+    console.log("entered mess vendors")
+    Mess.find({}, (err, items) => {
+        if (!err && items) {
+            res.json({
+                result: "success",
+                menuItems: items.map(a => {return {'label': a.vendor, 'value': a.vendor}})
+            })
+        }
+        else {
+            res.status(500).send('An error occurred', err);
+        }
+    });
+})
 
+app.get('/livereview/:param1', (req, res) => {
+    const mess=req.params.param1
+    console.log("live review entered")
+    console.log(mess)
+    Feedback.find({vendorName:mess}, (err, items) => {
+        if (!err && items) {
+            // console.log(items);
+            res.json({
+                result: "success",
+                reviews: items
+            });
+        }
+        else {
+            res.status(500).send('An error occurred', err);
+        }
+    });
+})

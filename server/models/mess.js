@@ -9,7 +9,8 @@ var MessSchema = mongoose.Schema({
     email: String,
     breakfast: Number,
     lunch: Number,
-    dinner: Number
+    dinner: Number,
+    pin: Number
 })
 
 MessSchema.plugin(passportLocalMongoose);

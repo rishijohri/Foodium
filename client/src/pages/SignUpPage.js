@@ -13,7 +13,7 @@ import {
     Layout,
     notification,
 } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined, TeamOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 const { Option } = Select;
 const { Content } = Layout;
@@ -200,20 +200,6 @@ const SignUpPage = () => {
                                 placeholder="Confirm Password"
                             />
                         </Form.Item>
-
-                        <Form.Item
-                            name="position"
-                            rules={[
-                                {
-                                    type: 'array',
-                                    required: true,
-                                    message: 'Who are you?',
-                                },
-                            ]}
-                        >
-                            <Cascader options={positions} prefixSelector={<TeamOutlined />} placeholder='Position' />
-                        </Form.Item>
-
                         <Form.Item
                             name="phone"
                             rules={[
@@ -226,12 +212,25 @@ const SignUpPage = () => {
                             ]}
                         >
                             <Input
-                                addonBefore={prefixSelector}
+                                
                                 style={{
                                     width: '100%',
                                 }}
-                            // prefix={<PhoneOutlined/>}
+                                placeholder="Enter Mobile NUmber"
+                            prefix={<PhoneOutlined/>}
                             />
+                        </Form.Item>
+                        <Form.Item
+                            name="position"
+                            rules={[
+                                {
+                                    type: 'array',
+                                    required: true,
+                                    message: 'Who are you?',
+                                },
+                            ]}
+                        >
+                            <Cascader options={positions} placeholder='Position' />
                         </Form.Item>
 
                         <Form.Item

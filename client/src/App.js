@@ -8,8 +8,9 @@ import EntryPage from './pages/EntryPage';
 import FeedbackPage from './pages/FeedbackPage';
 import HomePage from './pages/HomePage';
 import LiveMenuPage from './pages/LiveMenuPage';
-import QRScanPage from "./pages/QrScanner";
+import MessPayPage from "./pages/MessPayPage";
 import UploadImage from "./pages/UploadFoodImages";
+import Authenticate from "./components/authenticate";
 const customHistory = createBrowserHistory();
 function App() {
   return (
@@ -18,9 +19,9 @@ function App() {
         <Route path='/' element={<EntryPage/>}/>
         <Route path='feedback' element={<FeedbackPage/>} />
         <Route path='home' element={<HomePage/>}/>
-        <Route path='qr-scan' element={<QRScanPage/>}/>
+        <Route path='mess-pay' element={<MessPayPage/>}/>
         <Route path='live-menu' element={<LiveMenuPage/>} />
-        <Route path='upload-image' element={<UploadImage/>} />
+        <Route path='upload-image' element={<Authenticate  position={["Student"]}><UploadImage/></Authenticate>} />
       </Routes>
     </BrowserRouter>
   );
