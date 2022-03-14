@@ -1,5 +1,4 @@
 import { Tabs, Radio, Space,Layout, Typography, notification } from 'antd';
-import {isMobile} from 'react-device-detect';
 import React, { useState ,useEffect} from 'react';
 import LiveMenu from '../components/LiveMenu';
 import NavBar from '../components/NavBar'
@@ -40,11 +39,7 @@ useEffect(()=> {
     getData()
     console.log(data)
 }, [])
-    if (isMobile) {
-
-    } else {
-        
-    }
+    
     return (
         <Layout>
           <NavBar/>

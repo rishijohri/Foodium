@@ -1,5 +1,5 @@
 import { Carousel, Image } from 'antd';
-import back1 from '../images/a.jpg';
+import back1 from '../images/default.jpg';
 import 'antd/dist/antd.min.css';
 // import '../assets/main.css';
 

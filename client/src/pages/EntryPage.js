@@ -1,5 +1,5 @@
 import { Layout,  Drawer, Button, Space} from 'antd';
-import back1 from '../images/a.jpg';
+import back1 from '../images/default.jpg';
 import Slider from '../components/Slider'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
@@ -9,6 +9,12 @@ import SignUpPage from './SignUpPage';
 import { CloseOutlined  } from '@ant-design/icons';
 
 const { Footer, Content } = Layout;
+function importAll(r) {
+    let images = {};
+    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+    return images;
+  }
+const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 const EntryPage = () => {
     const [visibleSignIn, setVisibleSignIn] = useState(false);
     const [visibleSignUp, setVisibleSignUp] = useState(false);
@@ -39,7 +45,7 @@ const EntryPage = () => {
             </Header> */}
             <Content style={{height:'90vh'}}>
                 <div >
-                    <Slider image_array={[back1, back1]} width={'100vw'} height={'90vh'} />
+                    <Slider image_array={Object.values(images)} width={'100vw'} height={'90vh'} />
                 </div>
             </Content>            
 

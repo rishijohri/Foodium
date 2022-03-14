@@ -1,6 +1,8 @@
 import { Layout, notification } from 'antd';
 import React, { useState, useEffect } from 'react';
 import MenuCard from '../components/menuCard';
+import {isMobile} from 'react-device-detect';
+
 const { Content } = Layout;
 
 const LiveMenu = (props) => {
@@ -35,12 +37,35 @@ const LiveMenu = (props) => {
     useEffect(()=> {
         getData()
     }, [])
+    var iheight='150px';
+    var iwidth='150px';
+    var width='100vw';
+    var align='end'
+    var isCenter=true
+    if (isMobile) {
+        iheight='15vh'
+        iwidth='15vh'
+        width='100vw'
+        align='start'
+        isCenter=false
+    } else {
+        iheight='10vw';
+        iwidth='10vw';
+        width='50vw'
+    }
     return(
-            <div style={{padding:"5%"}}>
+            <div style={{padding:"5%" }}>
+                
+                
                 {data.map((item, index) => {
                     const key = index + 1;
-                    return (<MenuCard title={item.name} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/>);
+                    if(isCenter){
+                        return (<center><MenuCard title={item.name} width={width} iheight={iheight} iwidth={iwidth} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/></center>);
+                    }
+                    return (<MenuCard title={item.name} width={width} iheight={iheight} iwidth={iwidth} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/>);
+                    
                 })}
+                
             </div>
     );
 }
