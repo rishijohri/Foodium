@@ -225,10 +225,11 @@ app.get('/livemenu/:param1', (req, res) => {
                 result: "success",
                 menuItems: items
             });
-            // ('imagesPage', { items: items });
         }
         else {
             res.status(500).send('An error occurred', err);
         }
     });
 })
+
+

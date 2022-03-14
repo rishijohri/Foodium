@@ -7,7 +7,7 @@ import { createBrowserHistory } from "history";
 import EntryPage from './pages/EntryPage';
 import FeedbackPage from './pages/FeedbackPage';
 import HomePage from './pages/HomePage';
-import LiveMenuPage from './pages/LiveMenuPg';
+import LiveMenuPage from './pages/LiveMenuPage';
 import QRScanPage from "./pages/QrScanner";
 import UploadImage from "./pages/UploadFoodImages";
 const customHistory = createBrowserHistory();

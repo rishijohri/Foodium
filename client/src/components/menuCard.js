@@ -7,15 +7,16 @@ const MenuCard = (props) => {
 
 
     return (
-        <Card width={props.width} >
-            <Row gutter={[props.hg, props.vg]}>
-                <Col span={props.span}>
+        <Card width={props.width} height={props.height}>
+            <Row gutter={[props.hg, props.vg]} justify="space-between">
+                <Col span={props.spanc}>
                     <Title level={props.level}>{props.title}</Title>
                     <p>{props.content}</p>
-                    <Rate disabled defaultValue={props.rate} />
+                    Health: <Rate disabled defaultValue={props.rateh} />
+                    Quality: <Rate disabled defaultValue={props.rateq} />
                 </Col>
-                <Col span={props.span}>
-                    <Image src={props.img}/>
+                <Col span={props.spani}>
+                    <Image src={props.img} width={props.iwidth} height={props.iheight} style={{ objectFit: "cover" }}/>
                 </Col>
             </Row>
         </Card>
@@ -23,15 +24,20 @@ const MenuCard = (props) => {
 }
 
 MenuCard.defaultProps = {
+    iwidth: "150px",
+    iheight: "150px",
     width: "100vw",
+    height: "20vh",
     hg: 6,
     vg: 6,
-    span: 5,
+    spanc: 12,
+    spani: 10,
     img: '',
     content: "nothing",
     title: "Not",
-    level: 2,
-    rate: 2
+    level: 3,
+    rateh: 2,
+    rateq: 2
 
 }
 

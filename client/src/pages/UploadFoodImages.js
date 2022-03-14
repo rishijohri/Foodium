@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router';
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Checkbox, Layout, Typography, notification, Image} from 'antd';
-import { UserOutlined, LockOutlined, UploadOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Layout, Typography, notification, Image, Rate, Card} from 'antd';
+import { UserOutlined} from '@ant-design/icons';
 import FileBase64 from 'react-file-base64';
 import NavBar from '../components/NavBar'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 import Authenticate from "../components/authenticate";
 const {Content } = Layout;
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const UploadImage = () => {
     const navigate = useNavigate();
     const [item, setItem] = useState({ image: '' });
+    const [health, setHealth] = useState(0);
+    const [quality, setQuality] = useState(0);
     const onFinish = (values) => {
         fetch("/uploadimage", {
             method:'POST',
@@ -22,9 +24,10 @@ const UploadImage = () => {
             },
             body:JSON.stringify({
                 name: values.food_name,
-                health: values.health,
-                quality: values.quality,
+                health: health,
+                quality: quality,
                 vendor: values.vendor,
+                desc: values.desc,
                 image: item.image
             })
        }).then(
@@ -50,9 +53,14 @@ const UploadImage = () => {
         }
     })
     }
-
+    const handleHealth = (val) => {
+        setHealth(val)
+    }
+    const handleQuality = (val) => {
+        setQuality(val)
+    }
     return (
-        <Authenticate>
+        <Authenticate  position={["Student"]}>
         <Layout>
             <NavBar />
             <Content style={{padding:'10px'}}>
@@ -83,6 +91,17 @@ const UploadImage = () => {
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="name of vendor" />
                     </Form.Item>
                     <Form.Item
+                        name="desc"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Enter food description',
+                            },
+                        ]}
+                    >
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Normal" />
+                    </Form.Item>
+                    <Form.Item
                         name="quality"
                         rules={[
                             {
@@ -90,10 +109,10 @@ const UploadImage = () => {
                             },
                         ]}
                     >
-                        <Input
-                            prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder="quality"
-                        />
+                    <Card>
+                        <Text>Quality </Text><Rate  onChange={handleQuality} value={quality} />
+                    </Card>
+                        
                     </Form.Item>
                     <Form.Item
                         name="health"
@@ -103,10 +122,9 @@ const UploadImage = () => {
                             },
                         ]}
                     >
-                        <Input
-                            prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder="health"
-                        />
+                        <Card>
+                        <Text>Health </Text><Rate  onChange={handleHealth} value={health} />
+                        </Card>
                     </Form.Item>
 
                     <Form.Item
