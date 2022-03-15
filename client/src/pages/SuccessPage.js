@@ -4,6 +4,8 @@ import { Typography, Layout, Image} from 'antd';
 import NavBar from '../components/NavBar';
 import tick from '../images/tick.jpeg';
 import {isMobile} from 'react-device-detect';
+import 'antd/dist/antd.min.css';
+import '../assets/main.css';
 const { Header, Content } = Layout;
 const { Title } = Typography;
 

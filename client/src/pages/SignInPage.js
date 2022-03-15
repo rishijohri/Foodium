@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.min.css';
-// import '../assets/main.css';
+import '../assets/main.css';
 const {Content } = Layout;
 const { Title } = Typography;
 

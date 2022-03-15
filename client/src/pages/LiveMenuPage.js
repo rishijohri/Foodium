@@ -2,6 +2,8 @@ import { Tabs, Radio, Space,Layout, Typography, notification } from 'antd';
 import React, { useState ,useEffect} from 'react';
 import LiveMenu from '../components/LiveMenu';
 import NavBar from '../components/NavBar'
+import 'antd/dist/antd.min.css';
+import '../assets/main.css';
 const { TabPane } = Tabs;
 const { Header, Footer, Sider, Content } = Layout;
 const { Title } = Typography;

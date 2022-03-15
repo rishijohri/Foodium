@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router'
-import { Typography, Layout,notification, Button, Modal} from 'antd';
+import { Typography, Layout,notification, Button, Modal,Image} from 'antd';
 import {isMobile} from 'react-device-detect';
 import NavBar from '../components/NavBar';
 import PinInput from 'w-react-pin-input';
 import 'antd/dist/antd.min.css';
-// import '../assets/main.css'
+import '../assets/main.css';
+import logo from '../images/foodiumLogo.png'
 const { Header, Content } = Layout;
 const { Title } = Typography;
 
@@ -100,6 +101,7 @@ const MessPayPage=()=>{
                     verticalAlign:'center'}}>
                         <center>
                         <h2>Mess Payment</h2>
+                        <Image src={logo} width='24vh' height='24vh' />
                         <PinInput 
                             length={4} 
                             initialValue=""

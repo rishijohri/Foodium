@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate} from 'react-router';
 import 'antd/dist/antd.min.css';
-// import '../assets/main.css';
+import '../assets/main.css';
 import {
     Form,
     Input,

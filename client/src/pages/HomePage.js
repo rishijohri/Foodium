@@ -1,6 +1,8 @@
 import NavBar from '../components/NavBar'
 import { Layout, Card, Col, Row, Typography, Button } from 'antd';
 import React, { useState } from 'react';
+import 'antd/dist/antd.min.css';
+import '../assets/main.css';
 import back1 from '../images/default.jpg'
 import mess_1 from '../images/mess_1.jpg';
 import mess_2 from '../images/mess_2.jpg';

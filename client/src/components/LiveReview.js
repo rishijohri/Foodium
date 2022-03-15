@@ -1,6 +1,8 @@
 import { Layout, notification } from 'antd';
 import React, { useState, useEffect } from 'react';
 import MenuCard from '../components/menuCard';
+import 'antd/dist/antd.min.css';
+import '../assets/main.css';
 const { Content } = Layout;
 
 const LiveMenu = (props) => {

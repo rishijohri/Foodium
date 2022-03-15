@@ -3,6 +3,8 @@ import { PageHeader, Drawer, Menu, Button,Dropdown,notification} from 'antd';
 import { UserOutlined, MenuOutlined, CloseOutlined,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router'
+import 'antd/dist/antd.min.css';
+import '../assets/main.css';
 
 const {SubMenu} = Menu
 var NavBar = () => {
