@@ -37,7 +37,7 @@ const Authenticate = (props) =>  {
     if (check=='wait' || position=='wait') {
         return <h1>Loading....</h1>
     }else if (check=='success') {
-        if (props.position.includes(position)) {
+        if (props.position.length<1 || props.position.includes(position)) {
             return props.children;
         }
         return <Navigate to="/home" replace={true}/>

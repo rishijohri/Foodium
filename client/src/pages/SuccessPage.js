@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router'
+import React from 'react';
 import { Typography, Layout, Image} from 'antd';
 import NavBar from '../components/NavBar';
-import tick from '../images/tick.jpeg';
+import tick from '../assets/tick.jpeg';
 import {isMobile} from 'react-device-detect';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const { Title } = Typography;
 
 const SuccessPage = (props) => {

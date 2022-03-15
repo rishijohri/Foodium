@@ -9,7 +9,7 @@ import Authenticate from "../components/authenticate";
 const {Content } = Layout;
 const { Title, Text } = Typography;
 
-const UploadImage = () => {
+const InspectionPage = () => {
     const [item, setItem] = useState({ image: '' });
     const [health, setHealth] = useState(0);
     const [quality, setQuality] = useState(0);
@@ -99,7 +99,7 @@ const UploadImage = () => {
         <Layout>
             <NavBar />
             <Content style={{padding:'0vh 5vh'}}>
-                <Title level={2}>Upload Image</Title>
+                <Title level={2}>Inspection Report</Title>
                 <Form
                     onFinish={onFinish}
                 >
@@ -187,4 +187,4 @@ const UploadImage = () => {
     );
 };
 
-export default UploadImage
+export default InspectionPage

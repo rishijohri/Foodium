@@ -44,19 +44,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new customStrategy(
     function (req, done) {
-        User.findOne({
-            username: req.body.username
-        }, function (err, user) {
-            if (err || user == null) {
-                return done(err, false)
+        User.authenticate()(req.body.username, req.body.password, (error, fnd) => {
+            if (error == null) {
+                done(error, fnd)
+            } else {
+                done(error, null)
             }
-            user.authenticate(req.body.password, (error) => {
-                if (error == null) {
-                    done(err, user)
-                } else {
-                    done(error, false)
-                }
-            })
         })
     }
 ))
@@ -69,8 +62,9 @@ var server = app.listen(port, function () {
     console.log("server started " + port)
 })
 
-app.post('/signin', passport.authenticate('custom'), async (req, res) => {
+app.post('/signin', passport.authenticate('custom', { failureRedirect: '/fail' }), async (req, res) => {
     console.log('entered signin')
+    console.log(req.user)
     res.json({
         result: "success"
     })
@@ -79,6 +73,7 @@ app.post('/signin', passport.authenticate('custom'), async (req, res) => {
 app.post('/logout', (req, res) => {
     console.log('entered logout')
     if (req.isAuthenticated()) {
+        console.log(req.user)
         req.logOut();
         res.json({
             result:"success"
@@ -88,6 +83,13 @@ app.post('/logout', (req, res) => {
             result:'success'
         })
     }
+})
+
+app.get('/fail', function (req, res) {
+    console.log('entered fail')
+    res.json({
+        result: "fail"
+    })
 })
 
 app.post("/signup", function (req, res) {

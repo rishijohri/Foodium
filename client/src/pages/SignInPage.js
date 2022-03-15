@@ -40,7 +40,7 @@ const SignInPage = () => {
             notification.open({
                 message: 'Login failed!',
                 description:
-                    'unable to log in. Please try again later. :(',
+                    'Invalid Username or Password :(',
             });
         }
 

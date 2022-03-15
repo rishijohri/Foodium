@@ -6,7 +6,6 @@ import {
     Form,
     Input,
     Cascader,
-    Select,
     Checkbox,
     Button,
     Typography,
@@ -15,7 +14,6 @@ import {
 } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
 const { Title } = Typography;
-const { Option } = Select;
 const { Content } = Layout;
 const positions = [
     {
@@ -100,17 +98,6 @@ const SignUpPage = () => {
 
     };
 
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="91">+91</Option>
-            </Select>
-        </Form.Item>
-    );
 
     return (
         <Layout>

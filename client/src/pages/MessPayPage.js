@@ -7,7 +7,7 @@ import PinInput from 'w-react-pin-input';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 import logo from '../images/foodiumLogo.png'
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const { Title } = Typography;
 
 const MessPayPage=()=>{
@@ -100,7 +100,7 @@ const MessPayPage=()=>{
                     marginRight: '5vw',
                     verticalAlign:'center'}}>
                         <center>
-                        <h2>Mess Payment</h2>
+                        <Title level={2} >Mess Payment</Title>
                         <Image src={logo} width='24vh' height='24vh' />
                         <PinInput 
                             length={4} 
@@ -122,7 +122,7 @@ const MessPayPage=()=>{
                             autoSelect={true}
                             regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
                             />
-                            <Button type="primary" onClick={handleClick} disabled={ind!=1}>Submit</Button>
+                            <Button type="primary" onClick={handleClick} disabled={ind!==1}>Submit</Button>
                         </center>
                         <Modal 
                         title={modalTitle} 

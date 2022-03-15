@@ -51,7 +51,7 @@ var NavBar = () => {
   const menu = (
     <Menu>
       <Menu.Item key='1' onClick={logOut}>        
-          LogOut        
+          Logout        
       </Menu.Item>
       <Menu.Item key='2'>        
           Payment History        
@@ -91,7 +91,7 @@ var NavBar = () => {
                   <Menu.Item key="1"><Link to="/home">Home</Link></Menu.Item>
                   <Menu.Item key="2"><Link to="/mess-pay">Mess Payment</Link></Menu.Item>
                   <Menu.Item key="3"><Link to="/feedback">Feedback</Link></Menu.Item>
-                  <Menu.Item key="4"><Link to="/upload-image">Upload Image</Link></Menu.Item>
+                  <Menu.Item key="4"><Link to="/inspection">Inspection</Link></Menu.Item>
                   <Menu.Item key="5"><Link to="/live-menu">Live Menu</Link></Menu.Item>
               </Menu>
             </Drawer>
