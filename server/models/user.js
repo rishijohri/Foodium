@@ -1,3 +1,5 @@
+const HistoryItem = require('./historyItem.js').schema
+
 var mongoose=  require("mongoose")
 var passportLocalMongoose = require("passport-local-mongoose")
 
@@ -7,7 +9,8 @@ var UserSchema = mongoose.Schema({
     phone: String, 
     email: String,
     position: String,
-    balance: Number
+    balance: Number,
+    payments: [HistoryItem]
 })
 
 UserSchema.plugin(passportLocalMongoose);

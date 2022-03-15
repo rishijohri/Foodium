@@ -37,7 +37,6 @@ const LiveMenuPage=()=>{
 
 useEffect(()=> {
     getData()
-    console.log(data)
 }, [])
     
     return (

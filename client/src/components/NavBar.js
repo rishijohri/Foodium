@@ -1,17 +1,67 @@
 import React,{ useState } from 'react';
-import { PageHeader, Drawer, Menu, Button} from 'antd';
+import { PageHeader, Drawer, Menu, Button,Dropdown,notification} from 'antd';
 import { UserOutlined, MenuOutlined, CloseOutlined,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import {useNavigate} from 'react-router'
+
 const {SubMenu} = Menu
 var NavBar = () => {
+  const navigate = useNavigate()
   const [menuvisible, setMenuvisible] = useState(false);
-  // const [visibleSignUp, setVisibleSignUp] = useState(false);
+  
   const showMenu = () => {
       setMenuvisible(true);
   };
   const onClose = () => {
       setMenuvisible(false);
   };
+
+  const logOut=()=>{
+      fetch('/logout',{
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json"
+      }
+      }).then((res)=>{
+        if(!res.ok){
+          return{}
+        }
+        return res.json()
+      }).then((res)=>{
+        if(res.result==="success"){
+            console.log('Logged Out Successfully')
+            notification.open({
+              message: 'Logged Out',
+              description:
+                  'Successfully',
+          });
+            return navigate("/ ", {replace:true})
+        }
+        else{
+          notification.open({
+            message: 'Failed',
+            description:
+                'unable to logout :(',
+        });
+        }
+      })
+  }
+  const menu = (
+    <Menu>
+      <Menu.Item key='1' onClick={logOut}>        
+          LogOut        
+      </Menu.Item>
+      <Menu.Item key='2'>        
+          Payment History        
+      </Menu.Item>
+      
+    </Menu>
+  );
+  const DropdownMenu = () => (
+    <Dropdown key="more"  overlay={menu} placement="bottomRight">
+      <Button type="text" icon={<UserOutlined style={{ fontSize: 20 }} />} />
+    </Dropdown>
+  );
     return (
       <div>
       <PageHeader
@@ -20,7 +70,7 @@ var NavBar = () => {
                 title={<h3>Foodium</h3>}
                 backIcon = {<MenuOutlined  style={{fontSize:'2h', paddingBottom:'1.3vh'}}/>}
                 extra={[
-                    <Button key="1.1" icon={<UserOutlined/>} />,
+                  <DropdownMenu key="more" />
                 ]}
             />
         <Drawer

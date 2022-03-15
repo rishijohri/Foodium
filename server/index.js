@@ -70,12 +70,28 @@ var server = app.listen(port, function () {
 })
 
 app.post('/signin', passport.authenticate('custom'), async (req, res) => {
+    console.log('entered signin')
     res.json({
         result: "success"
     })
 })
 
+app.post('/logout', (req, res) => {
+    console.log('entered logout')
+    if (req.isAuthenticated()) {
+        req.logOut();
+        res.json({
+            result:"success"
+        })
+    } else {
+        res.json({
+            result:'success'
+        })
+    }
+})
+
 app.post("/signup", function (req, res) {
+    console.log('entered signup')
     var balance = 0;
     User.register(new User({
         username: req.body.username,
@@ -107,6 +123,7 @@ app.post("/signup", function (req, res) {
 })
 
 app.post('/feedback', (req, res) => {
+    console.log('entered feedback')
     req.body.date = new Date(req.body.date)
     console.log(typeof req.body.date)
     Feedback.create(
@@ -148,8 +165,15 @@ app.get("/authenticate", function (req, res) {
 })
 
 app.post('/payeat', (req, res) => {
+    console.log('entered payeat')
     if (req.isAuthenticated()) {
         const dateTime = new Date();
+        const date = dateTime.getDate();
+        const month = dateTime.getMonth()+1;
+        const year = dateTime.getFullYear();
+        const hour = dateTime.getHours();
+        const minutes = dateTime.getMinutes();
+        const stringDateTime = date.toString()+"/"+month.toString()+"/"+year.toString()+" "+hour.toString()+":"+minutes.toString()
         console.log(req.user)
         const user = req.user.username;
         const messval = req.body.pin;
@@ -162,11 +186,27 @@ app.post('/payeat', (req, res) => {
                     username: user
                 }, (error, currUser) => {
                     if (!error && currUser) {
-                        currUser.balance -= 50
-                        currUser.save()
+                        var payment = 0;
+                        if(hour<=10){
+                            payment = vendor.breakfast;
+                        }
+                        else if(hour <= 16){
+                            payment = vendor.lunch;
+                        }
+                        else{
+                            payment = vendor.dinner;
+                        }
+                        currUser.balance -= payment
                         console.log('logged In')
+                        currUser.payments.push({
+                            dateTime: stringDateTime,
+                            payment: payment,
+                            currBalance: currUser.balance
+                        });
+                        currUser.save();
                         res.json({
                             result: "success",
+                            date: stringDateTime,
                             data: vendor.vendor,
                             src: "auth"
                         })
@@ -196,7 +236,7 @@ app.post('/payeat', (req, res) => {
 })
 
 app.post('/uploadimage',(req, res, next) => {
-    console.log("entered stage")
+    console.log("entered uploadimage")
     let obj = req.body 
     MenuItem.create(obj, (err, item) => {
         if (err) {
@@ -216,6 +256,7 @@ app.post('/uploadimage',(req, res, next) => {
 })
 
 app.get('/livemenu/:param1', (req, res) => {
+    console.log('entered livemenu')
     const mess=req.params.param1
     console.log("live menu entered")
     console.log(mess)
@@ -233,7 +274,30 @@ app.get('/livemenu/:param1', (req, res) => {
     });
 })
 
+app.get('/confirmmess/:param1', (req, res) => {
+    console.log('entered confirmmess')
+    const messval=req.params.param1
+    console.log("live menu entered")
+    console.log(messval)
+    Mess.findOne({
+        pin: messval
+    }, (err, vendor)=> {
+        if (!err && vendor) {
+            res.json({
+                result: "success",
+                data: vendor.vendor
+            })
+        } else {
+            res.json({
+                result:"success",
+                data: "unknown"
+            })
+        }
+    })
+})
+
 app.get('/messvendors', (req, res) => {
+    console.log('entered messvendors')
     console.log("entered mess vendors")
     Mess.find({}, (err, items) => {
         if (!err && items) {
@@ -249,6 +313,7 @@ app.get('/messvendors', (req, res) => {
 })
 
 app.get('/livereview/:param1', (req, res) => {
+    console.log('entered livereview')
     const mess=req.params.param1
     console.log("live review entered")
     console.log(mess)

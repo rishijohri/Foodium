@@ -47,6 +47,7 @@ const UploadImage = () => {
                 description:
                     'success :)',
             });
+            window.location.reload();
         } else {
         notification.open({
             message: 'Failed',
@@ -92,7 +93,6 @@ const UploadImage = () => {
 
     useEffect(()=> {
         getData()
-        console.log(data)
     }, [])
 
     return (
@@ -148,7 +148,6 @@ const UploadImage = () => {
                     <Card>
                         <Text>Quality </Text><Rate  onChange={handleQuality} value={quality} />
                     </Card>
-                        
                     </Form.Item>
                     <Form.Item
                         name="health"
@@ -162,7 +161,6 @@ const UploadImage = () => {
                         <Text>Health </Text><Rate  onChange={handleHealth} value={health} />
                         </Card>
                     </Form.Item>
-
                     <Form.Item
                     name='file'
                     rules={[

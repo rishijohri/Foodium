@@ -27,6 +27,7 @@ function sendFeedback(data, nav) {
                 description:
                 'Thank you for filling out the form',
               });
+              window.location.reload();
         } else {
             notification.open({
                 message: 'Failed',

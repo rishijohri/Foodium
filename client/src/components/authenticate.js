@@ -47,7 +47,9 @@ const Authenticate = (props) =>  {
 }
 
 Authenticate.defaultProps = {
-    position: "Student"
+    position: "Student",
+    failPosRedirect: "/home",
+    fail: "/"
 }
 
 export default Authenticate

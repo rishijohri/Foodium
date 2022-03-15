@@ -11,6 +11,7 @@ import LiveMenuPage from './pages/LiveMenuPage';
 import MessPayPage from "./pages/MessPayPage";
 import UploadImage from "./pages/UploadFoodImages";
 import Authenticate from "./components/authenticate";
+import SuccessPage from "./pages/SuccessPage";
 const customHistory = createBrowserHistory();
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
         <Route path='/' element={<EntryPage/>}/>
         <Route path='feedback' element={<FeedbackPage/>} />
         <Route path='home' element={<HomePage/>}/>
-        <Route path='mess-pay' element={<MessPayPage/>}/>
-        <Route path='live-menu' element={<LiveMenuPage/>} />
+        <Route path='mess-pay' element={<Authenticate  position={["Student"]}><MessPayPage/></Authenticate>}/>
+        <Route path='success' element={<Authenticate  position={["Student"]}><SuccessPage/></Authenticate>} />
+        <Route path='live-menu' element={<Authenticate  position={["Student"]}><LiveMenuPage/></Authenticate>} />
         <Route path='upload-image' element={<Authenticate  position={["Student"]}><UploadImage/></Authenticate>} />
       </Routes>
     </BrowserRouter>
