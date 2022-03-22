@@ -2,12 +2,12 @@ import { Tabs, Radio, Space,Layout, Typography,notification } from 'antd';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 import React, { useState ,useEffect} from 'react';
-import LiveMenu from '../components/LiveMenu';
+import LiveReview from '../components/LiveReview';
 import NavBar from '../components/NavBar'
 const { TabPane } = Tabs;
 const { Header, Footer, Sider, Content } = Layout;
 const { Title } = Typography;
-const LiveMenuPage=()=>{
+const LiveReviewPage=()=>{
   const [data, setData] = useState([]);
   const getData = () => {
     console.log("entered getDATA")
@@ -49,7 +49,7 @@ useEffect(()=> {
             {data.map((item,index)=>{
               const key=index+1
               return(<TabPane tab={item.value} key={key}>
-                  <LiveMenu vendor={item.value}/>
+                  <LiveReview vendor={item.value}/>
               </TabPane>)
             })}
             
@@ -60,4 +60,4 @@ useEffect(()=> {
 }
 
 
-export default LiveMenuPage
+export default LiveReviewPage

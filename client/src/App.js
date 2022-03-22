@@ -12,6 +12,9 @@ import MessPayPage from "./pages/MessPayPage";
 import InspectionPage from "./pages/InspectionPage";
 import Authenticate from "./components/authenticate";
 import SuccessPage from "./pages/SuccessPage";
+import MessHome from "./pages/MessHome";
+import LiveReviewPage from "./pages/LiveReviewPage";
+
 const customHistory = createBrowserHistory();
 function App() {
   return (
@@ -23,7 +26,9 @@ function App() {
         <Route path='mess-pay' element={<Authenticate  position={[]}><MessPayPage/></Authenticate>}/>
         <Route path='success' element={<Authenticate  position={[]}><SuccessPage/></Authenticate>} />
         <Route path='live-menu' element={<Authenticate  position={[]}><LiveMenuPage/></Authenticate>} />
+        <Route path='live-review' element={<Authenticate  position={[]}><LiveReviewPage/></Authenticate>} />
         <Route path='inspection' element={<Authenticate  position={['Mess Inspection Team Member']}><InspectionPage/></Authenticate>} />
+        <Route path='mess-home' element={<Authenticate position={[]} ><MessHome/></Authenticate>} />
       </Routes>
     </BrowserRouter>
   );

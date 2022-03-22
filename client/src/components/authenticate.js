@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Navigate} from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
-import { notification} from 'antd';
+import { Spin, Space } from 'antd';
 const Authenticate = (props) =>  {
     var [check, setCheck] = useState('wait')
     var [position, setPosition] = useState("wait")
@@ -35,7 +34,7 @@ const Authenticate = (props) =>  {
         getauth()
     }, [])
     if (check=='wait' || position=='wait') {
-        return <h1>Loading....</h1>
+        return <center><Spin size="large" /></center>
     }else if (check=='success') {
         if (props.position.length<1 || props.position.includes(position)) {
             return props.children;
@@ -47,7 +46,7 @@ const Authenticate = (props) =>  {
 }
 
 Authenticate.defaultProps = {
-    position: "Student",
+    position: ["Student"],
     failPosRedirect: "/home",
     fail: "/"
 }

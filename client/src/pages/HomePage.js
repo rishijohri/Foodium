@@ -9,6 +9,8 @@ import mess_2 from '../images/mess_2.jpg';
 
 import Slider from '../components/Slider'
 import {isMobile} from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
 const { Header, Footer, Sider, Content } = Layout;
 const { Title } = Typography;
 
@@ -38,10 +40,10 @@ const HomePage = () => {
             <Layout >
             <NavBar/>
             <Content >
-                <div className="site-card-wrapper">
+                <div className="site -card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>
                         <Col span={span}>
-                            <Card  cover={<Slider image_array={[images['mess_1.jpg'], images['mess_2.jpg']]} width={'100%'} height={'50%'}/>} title={<Title level={2} >Mess</Title>} bordered={true} />
+                            <Link to="/mess-home"><Card   cover={<Slider image_array={[images['mess_1.jpg'], images['mess_2.jpg']]} width={'100%'} height={'50%'}/>} title={<Title level={2} >Mess</Title>} bordered={true} /></Link>
                         </Col>
                         <Col span={span}>  
                             <Card   cover={<Slider image_array={[images['default.jpg'], images['juice-corner.jpg']]} width={'100%'} height={'50%'} />} title={<Title level={2} >Canteen</Title>} bordered={true}/>

@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 import MenuCard from '../components/menuCard';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
+import { Card, Row, Typography} from 'antd';
+import { StarOutlined } from '@ant-design/icons';
 const { Content } = Layout;
 
-const LiveMenu = (props) => {
+const LiveReview = (props) => {
     const [data, setData] = useState([])
+    let clean, speed, taste, overallFood, overallService, items = 0;
     const getData = () => {
-        fetch("/livemenu/"+props.vendor, {
+        fetch("/livereview/"+props.vendor, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -36,19 +39,45 @@ const LiveMenu = (props) => {
 
     useEffect(()=> {
         getData()
+        console.log(data)
+    }
+    , [])
+    useEffect(()=> {
+        console.log(data)
+        data.forEach(() => {
+            clean += data.clean;
+            speed += data.speed;
+            taste += data.taste;
+            overallFood += data.overallFood;
+            overallService += data.overallService;
+            items += 1;
+        });
     }, [])
     return(
+        <div>
+            <div>
+                <Card style={{width:props.width}}>
+                    <Row gutter={[props.hg, props.vg]} justify="space-between">
+                        Clean: {clean}<StarOutlined /><br/>
+                        Speed: {speed}<StarOutlined /><br/>
+                        Taste: {taste}<StarOutlined /><br/>
+                        Overall Food: {overallFood}<StarOutlined /><br/>
+                        Overall Service: {overallService}<StarOutlined /><br/>
+                    </Row>
+                </Card>
+            </div>
             <div style={{padding:"5%"}}>
                 {data.map((item, index) => {
                     const key = index + 1;
-                    return (<MenuCard title={item.name} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/>);
+                    return (<MenuCard title={item.name} content={item.comment} key={key}/>);
                 })}
             </div>
+        </div>
     );
 }
 
-LiveMenu.defaultProps = {
+LiveReview.defaultProps = {
     vendor: "Kitchen"
 }
 
-export default LiveMenu
+export default LiveReview

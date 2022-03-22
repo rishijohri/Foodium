@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router'
-import { Form, Typography, Input, Button, Radio, Slider, Layout, DatePicker, notification } from 'antd';
+import { Form, Typography, Input, Button, Radio, Slider, Card, Layout, DatePicker, notification, Rate } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
@@ -12,6 +12,7 @@ const { Title } = Typography;
 
 
 function sendFeedback(data, nav) {
+    console.log(data)
     var req = {
         method: 'POST',
         body : JSON.stringify(data),
@@ -44,6 +45,7 @@ const FeedbackPage = () => {
     const [form] = Form.useForm();
     const [hiddenField, setHiddenField] = useState('text')
     const navigate = useNavigate()
+    const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
     const onFinish = (values) => {
         console.log('Success:', values);
@@ -70,7 +72,7 @@ const FeedbackPage = () => {
     return (
         <Layout className='layout'>
             <NavBar/>
-            <Content style={{ padding: '0 15%', margin:' 2%'}}>
+            <Content style={{ padding: '0 5%', margin:' 2%'}}>
                 <Title level={2}>Feedback</Title>
                 <Form
                     form={form}
@@ -87,13 +89,16 @@ const FeedbackPage = () => {
                     onFinish={onFinish}
                     onValuesChange={onValuesChange}
                 >
-                    <Form.Item label="Choose Vendor" name="vendorName">
-                        <Radio.Group>
+                    <Card>
+                    <Form.Item label="Choose Vendor" name="vendorName" >
+                        <Radio.Group >
                             <Radio.Button value="Mess">Mess</Radio.Button>
                             <Radio.Button value="Canteen">Canteen</Radio.Button>
                             <Radio.Button value="Other">Other Vendor</Radio.Button>
                         </Radio.Group>
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item label="Choose Slot" name="slotName" style={{display:hiddenField}}>
                         <Radio.Group>
                             <Radio.Button value="Breakfast">Breakfast</Radio.Button>
@@ -101,84 +106,48 @@ const FeedbackPage = () => {
                             <Radio.Button value="Dinner">Dinner</Radio.Button>
                         </Radio.Group>
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item label="Enter name" required="optional" tooltip="This is an optional field" name="name">
                         <Input placeholder="Enter Name (Optional)" />
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item name="date" label="Date of Feedback" {...config}>
                         <DatePicker />
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item name="rating" label="Rating">
-                        <Slider
-                            marks={{
-                                0: '0',
-                                20: '20',
-                                40: '40',
-                                60: '60',
-                                80: '80',
-                                100: '100',
-                            }}
-                        />
+                    <Rate tooltips={desc} />
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item name="clean" label="Cleanliness">
-                        <Slider
-                            marks={{
-                                0: '0',
-                                20: '20',
-                                40: '40',
-                                60: '60',
-                                80: '80',
-                                100: '100',
-                            }}
-                        />
+                    <Rate tooltips={desc}/>
                     </Form.Item>
-                    <Form.Item name="speed" label="Speed of Service" style={{display:'none'}}>
-                        <Slider
-                            marks={{
-                                0: '0',
-                                20: '20',
-                                40: '40',
-                                60: '60',
-                                80: '80',
-                                100: '100',
-                            }}
-                        />
+                    </Card>
+                    <Card>
+                    <Form.Item name="speed" label="Speed of Service">
+                    <Rate tooltips={desc} />
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item name="taste" label="Taste of Food">
-                        <Slider
-                            marks={{
-                                0: '0',
-                                20: '20',
-                                40: '40',
-                                60: '60',
-                                80: '80',
-                                100: '100',
-                            }}
-                        />
+                    <Rate tooltips={desc} />
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item name="overallFood" label="Overall Food Quality">
-                        <Slider
-                            marks={{
-                                0: '0',
-                                20: '20',
-                                40: '40',
-                                60: '60',
-                                80: '80',
-                                100: '100',
-                            }}
-                        />
+                    <Rate tooltips={desc} />
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item name="overallService" label="Overall Service">
-                        <Slider
-                            marks={{
-                                0: '0',
-                                20: '20',
-                                40: '40',
-                                60: '60',
-                                80: '80',
-                                100: '100',
-                            }}
-                        />
+                    <Rate tooltips={desc} />
                     </Form.Item>
+                    </Card>
+                    <Card>
                     <Form.Item name="comment" label="Comments"
                         tooltip={{
                             title: 'Any additional comments',
@@ -187,6 +156,7 @@ const FeedbackPage = () => {
                     >
                         <TextArea placeholder="Enter Details here" rows={4}/>
                     </Form.Item>
+                    </Card>
                     <Form.Item >
                         <Button type="primary" htmlType="submit">Submit</Button>
                     </Form.Item>
