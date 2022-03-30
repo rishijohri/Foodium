@@ -4,52 +4,48 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import { faCashRegister,faBookOpenReader,faBookOpen,faComment,faFilePen,faUpload } from "@fortawesome/free-solid-svg-icons";
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import NavBar from '../components/NavBar'
 const { Header, Footer, Sider, Content } = Layout;
 
 const { Title } = Typography;
 
 const MessHome=()=>{
-    var hg= 2;
-    var vg=2;
-    var span=12;
-    if (isMobile) {
-            hg= 1
-            vg= 1
-            span= 18
-    } else {
-            hg=12;
-            vg= 6
-            span= 10
-    }
+    var compstor = [
+        {ic: faCashRegister, name: 'Mess Payment', link: '/mess-pay'},
+        {ic: faBookOpenReader, name: 'Live Menu Page', link: "/live-menu"},
+        // {ic: faBookOpen, name: 'Book Open', link: '#'},        
+        {ic: faUpload, name: 'Inspection', link: '/inspection'},
+        {ic: faComment, name: 'Comment', link: '#'},
+        {ic: faFilePen, name: 'Feedback', link: '/feedback'},
+    ]
+    const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
+
     return(
     
-    <div>
-    <Layout>
-    <Content >
-    
-        {/* <Avatar style={{margin:"10vh"}} size={300} icon={<FontAwesomeIcon icon={ faCashRegister }  />} />
-        <Avatar style={{margin:"10vh"}} size={300} icon={<FontAwesomeIcon icon={ faBookOpenReader } />} />
-        <Avatar style={{margin:"10vh"}} size={300} icon={<FontAwesomeIcon icon={ faBookOpen } />} />
-        <Avatar style={{margin:"10vh"}} size={300} icon={<FontAwesomeIcon icon={ faComment } />} />
-        <Avatar style={{margin:"10vh"}} size={300} icon={<FontAwesomeIcon icon={ faFilePen } />} />
-        <Avatar style={{margin:"10vh"}} size={300} icon={<FontAwesomeIcon icon={ faUpload } />} /> */}
-        <div className="site -card-wrapper">
-                    <Row gutter={[hg, vg]} justify={'center'}>
-                        <Col span={span}>
-                            <Link to="/mess-home"><Card   cover={<Avatar size={300} icon={<FontAwesomeIcon icon={ faBookOpenReader } />} />} title={<Title level={2} >Mess</Title>} bordered={true} /></Link>
-                        </Col>
-                        <Col span={span}>  
-                            <Card   cover={<Avatar style={{margin:"10vh"}} size={300} icon={<FontAwesomeIcon icon={ faBookOpen } />} />} title={<Title level={2} >Canteen</Title>} bordered={true}/>
-                        </Col>         
+    <Layout  style={{overflow: 'hidden'}}>
+        <NavBar/>
+    <Content>
+        <div className="site-card-wrapper">
+                    <Row gutter={[hg, vg]} justify='center' style={{ marginTop:{mg}}}>
+                        {compstor.map(comp =>  <Col span={span}>
+                                    <Link to={comp.link}>
+                                        <Card style={{backgroundColor:'#f1f1f1'}} >
+                                            <center>
+                                            <Avatar style={{margin:"auto", display:'block', backgroundColor: 'rgba(100, 0, 0, 0.85)'}} size={size} 
+                                                    icon={<FontAwesomeIcon icon={ comp.ic }/>}
+                                            />
+                                            <Title level={5}>{comp.name}</Title>
+                                            </center>
+                                        </Card>
+                                    </Link>
+                                </Col>
+                                
+                            )}
                     </Row>
                 </div>
         </Content>
     </Layout>
-        
-
-    </div>
-      
-      
     )
     
 }

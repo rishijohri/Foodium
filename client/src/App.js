@@ -27,8 +27,8 @@ function App() {
         <Route path='success' element={<Authenticate  position={[]}><SuccessPage/></Authenticate>} />
         <Route path='live-menu' element={<Authenticate  position={[]}><LiveMenuPage/></Authenticate>} />
         <Route path='live-review' element={<Authenticate  position={[]}><LiveReviewPage/></Authenticate>} />
-        <Route path='inspection' element={<Authenticate  position={['Mess Inspection Team Member']}><InspectionPage/></Authenticate>} />
-        <Route path='mess-home' element={<Authenticate position={[]} ><MessHome/></Authenticate>} />
+        <Route path='inspection' element={<Authenticate  position={['Mess Inspection Team Member', 'Student']}><InspectionPage/></Authenticate>} />
+        <Route path='mess-home' element={<Authenticate position={[]}><MessHome/></Authenticate>} />
       </Routes>
     </BrowserRouter>
   );

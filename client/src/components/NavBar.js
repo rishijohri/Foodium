@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import { PageHeader, Drawer, Menu, Button,Dropdown,notification} from 'antd';
-import { UserOutlined, MenuOutlined, CloseOutlined,} from '@ant-design/icons';
+import { UserOutlined, ArrowLeftOutlined , CloseOutlined,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router'
 import 'antd/dist/antd.min.css';
@@ -51,10 +51,10 @@ var NavBar = () => {
   const menu = (
     <Menu>
       <Menu.Item key='1' onClick={logOut}>        
-          Logout        
+          <h3>Logout</h3>     
       </Menu.Item>
       <Menu.Item key='2'>        
-          Payment History        
+        <h3>Payment History</h3>            
       </Menu.Item>
       
     </Menu>
@@ -68,33 +68,14 @@ var NavBar = () => {
       <div>
       <PageHeader
                 className="site-page-header"
-                onBack={showMenu}
-                title={<h3>Foodium</h3>}
-                backIcon = {<MenuOutlined  style={{fontSize:'2h', paddingBottom:'1.3vh'}}/>}
+                onBack={() => window.history.back()}
+                title={<Link to='/home'><h3>Foodium</h3></Link>}
+                backIcon = {<ArrowLeftOutlined  style={{fontSize:'10h', paddingBottom:'1.4vh' }}/>}
                 extra={[
                   <DropdownMenu key="more" />
                 ]}
             />
-        <Drawer
-            title={<Button shape='circle' icon={<CloseOutlined /> } onClick={onClose}/>}
-            placement="left"
-            type='Menu'
-            onClose={onClose}
-            visible={menuvisible}
-            closable={false}
-            headerStyle={{ position: 'center',textAlign:'center' }}
-                >
-                {/*Add Menu Items Here  */}
-                <Menu
-                  mode="inline"
-                >
-                  <Menu.Item key="1"><Link to="/home">Home</Link></Menu.Item>
-                  <Menu.Item key="2"><Link to="/mess-pay">Mess Payment</Link></Menu.Item>
-                  <Menu.Item key="3"><Link to="/feedback">Feedback</Link></Menu.Item>
-                  <Menu.Item key="4"><Link to="/inspection">Inspection</Link></Menu.Item>
-                  <Menu.Item key="5"><Link to="/live-menu">Live Menu</Link></Menu.Item>
-              </Menu>
-            </Drawer>
+        
       </div>
     );
 }
