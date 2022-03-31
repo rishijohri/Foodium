@@ -3,10 +3,6 @@ import { Layout, Card, Col, Row, Typography, Button } from 'antd';
 import React, { useState } from 'react';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-import back1 from '../images/default.jpg'
-import mess_1 from '../images/mess_1.jpg';
-import mess_2 from '../images/mess_2.jpg';
-
 import Slider from '../components/Slider'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
@@ -23,9 +19,7 @@ const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$
 const HomePage = () => {
     const [hg, vg, span] = isMobile ? [1, 10, 18] : [12, 6, 10];
     return (
-        // 
-            <div style={{height: '95vh', width:'98.75vw'}}>
-            <Layout >
+            <Layout style={{ overflow:'hidden', hidden:'100vh', width:'100vw'}} >
             <NavBar/>
             <Content >
                 <div className="site -card-wrapper">
@@ -40,10 +34,6 @@ const HomePage = () => {
                 </div>
             </Content>
             </Layout>
-            </div>
-            
-            
-        //  
     );
 }
 

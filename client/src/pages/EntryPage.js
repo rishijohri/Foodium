@@ -1,5 +1,4 @@
 import { Layout,  Drawer, Button, Space} from 'antd';
-import back1 from '../images/default.jpg';
 import Slider from '../components/Slider'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
@@ -10,11 +9,12 @@ import { CloseOutlined  } from '@ant-design/icons';
 
 const { Footer, Content } = Layout;
 function importAll(r) {
-    let images = {};
-    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-    return images;
+    let img = {};
+    r.keys().map((item, index) => { img[item.replace('./', '')] = r(item); });
+    return img;
   }
 const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+
 const EntryPage = () => {
     const [visibleSignIn, setVisibleSignIn] = useState(false);
     const [visibleSignUp, setVisibleSignUp] = useState(false);
@@ -37,7 +37,7 @@ const EntryPage = () => {
         setVisibleSignIn(false);
         setVisibleSignUp(false);
     };
-
+    
     return (
         <Layout style={{ padding: '0', margin: '0', height: '100vh' }} >
             {/* <Header style={{ padding: '0' }}>
@@ -60,7 +60,7 @@ const EntryPage = () => {
                     <Button type="primary" onClick={showSignUp}>
                         Sign Up
                     </Button>
-                    {/* <Link to='/qr-scan'>go to qr</Link> */}
+
                     </Space>
                 </center>
                 <Drawer

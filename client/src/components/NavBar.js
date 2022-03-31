@@ -9,17 +9,8 @@ import '../assets/main.css';
 const {SubMenu} = Menu
 var NavBar = () => {
   const navigate = useNavigate()
-  const [menuvisible, setMenuvisible] = useState(false);
-  
-  const showMenu = () => {
-      setMenuvisible(true);
-  };
-  const onClose = () => {
-      setMenuvisible(false);
-  };
-
   const logOut=()=>{
-      fetch('/logout',{
+      fetch('/signout',{
         method:"POST",
         headers: {
           "Content-Type": "application/json"
@@ -48,6 +39,9 @@ var NavBar = () => {
         }
       })
   }
+  const onPassChange =()=> {
+
+  }
   const menu = (
     <Menu>
       <Menu.Item key='1' onClick={logOut}>        
@@ -56,7 +50,9 @@ var NavBar = () => {
       <Menu.Item key='2'>        
         <h3>Payment History</h3>            
       </Menu.Item>
-      
+      <Menu.Item key='3'>        
+        <h3>Change Password</h3>            
+      </Menu.Item>
     </Menu>
   );
   const DropdownMenu = () => (

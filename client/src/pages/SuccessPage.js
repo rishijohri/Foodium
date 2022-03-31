@@ -16,7 +16,7 @@ const SuccessPage = (props) => {
     } 
     console.log(props.date)
     return(
-        <Layout>
+        <Layout style={{height:'100vh', width:'100vw', overflow:'hidden'}}>
             <NavBar/>
             <Content>
                 <center>

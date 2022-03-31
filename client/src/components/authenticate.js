@@ -39,9 +39,9 @@ const Authenticate = (props) =>  {
         if (props.position.length<1 || props.position.includes(position)) {
             return props.children;
         }
-        return <Navigate to="/home" replace={true}/>
+        return <Navigate to={props.failPosRedirect} replace={true}/>
     } else {
-        return <Navigate to="/" replace={true}/>
+        return <Navigate to={props.fail} replace={true}/>
     }
 }
 

@@ -6,12 +6,15 @@ import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const {Content } = Layout;
 const { Title } = Typography;
+const crypto = require('crypto-js');
+const nodemailer = require('nodemailer');
+
 
 const SignInPage = () => {
     const navigate = useNavigate();
+    
     const onFinish = async (values) => {
         const { username, password } = values;//{username:Anirudh,password:abc,k:dsas,k:asjas}
-        
         const res = await fetch("/signin", {
             method: 'POST',
             headers: {
@@ -21,7 +24,6 @@ const SignInPage = () => {
                 username, password
             })
         })
-
         if (!res.ok) {
             notification.open({
                 message: 'Failed',
@@ -30,20 +32,15 @@ const SignInPage = () => {
             });
             return;
         }
-
         const data = await res.json();
-
         if (data.result === 'success') {
             return navigate('/home', {replace:true});
         }
-        else {
-            notification.open({
-                message: 'Login failed!',
-                description:
-                    'Invalid Username or Password :(',
-            });
-        }
-
+        notification.open({
+            message: 'Login failed!',
+            description:
+                'Invalid Username or Password :(',
+        });
     };
 
     return (

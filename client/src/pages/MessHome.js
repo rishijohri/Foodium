@@ -12,23 +12,23 @@ const { Title } = Typography;
 
 const MessHome=()=>{
     var compstor = [
-        {ic: faCashRegister, name: 'Mess Payment', link: '/mess-pay'},
-        {ic: faBookOpenReader, name: 'Live Menu Page', link: "/live-menu"},
+        {ic: faCashRegister, name: 'Mess Payment', link: '/mess-pay', id: 1},
+        {ic: faBookOpenReader, name: 'Live Menu Page', link: "/live-menu", id: 2},
         // {ic: faBookOpen, name: 'Book Open', link: '#'},        
-        {ic: faUpload, name: 'Inspection', link: '/inspection'},
-        {ic: faComment, name: 'Comment', link: '#'},
-        {ic: faFilePen, name: 'Feedback', link: '/feedback'},
+        {ic: faUpload, name: 'Inspection', link: '/inspection', id: 3},
+        {ic: faComment, name: 'Comment', link: '#', id: 4},
+        {ic: faFilePen, name: 'Feedback', link: '/feedback', id: 5},
     ]
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
 
     return(
     
-    <Layout  style={{overflow: 'hidden'}}>
+    <Layout  style={{overflowX: 'hidden',height:'100vh', width:'100vw'}}>
         <NavBar/>
     <Content>
         <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify='center' style={{ marginTop:{mg}}}>
-                        {compstor.map(comp =>  <Col span={span}>
+                        {compstor.map(comp =>  <Col span={span} id={comp.id}>
                                     <Link to={comp.link}>
                                         <Card style={{backgroundColor:'#f1f1f1'}} >
                                             <center>
@@ -45,7 +45,9 @@ const MessHome=()=>{
                     </Row>
                 </div>
         </Content>
+        
     </Layout>
+    
     )
     
 }
