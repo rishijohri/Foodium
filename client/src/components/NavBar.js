@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-
+// import '../pages/PaymentHistoryPage'
 const {SubMenu} = Menu
 var NavBar = () => {
   const navigate = useNavigate()
@@ -13,7 +13,8 @@ var NavBar = () => {
       fetch('/signout',{
         method:"POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          'hashing': window.localStorage.getItem('hash')
       }
       }).then((res)=>{
         if(!res.ok){
@@ -21,7 +22,7 @@ var NavBar = () => {
         }
         return res.json()
       }).then((res)=>{
-        if(res.result==="success"){
+        if(res.result==="success-logout"){
             console.log('Logged Out Successfully')
             notification.open({
               message: 'Logged Out',
@@ -47,8 +48,8 @@ var NavBar = () => {
       <Menu.Item key='1' onClick={logOut}>        
           <h3>Logout</h3>     
       </Menu.Item>
-      <Menu.Item key='2'>        
-        <h3>Payment History</h3>            
+      <Menu.Item key='2' onClick={()=>{navigate("/payment-history ")}}>        
+        <h3>Payment History </h3>            
       </Menu.Item>
       <Menu.Item key='3'>        
         <h3>Change Password</h3>            

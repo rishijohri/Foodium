@@ -4,24 +4,22 @@ import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
+import {encode} from 'string-encode-decode'
 const {Content } = Layout;
 const { Title } = Typography;
-const crypto = require('crypto-js');
-const nodemailer = require('nodemailer');
-
-
 const SignInPage = () => {
     const navigate = useNavigate();
-    
     const onFinish = async (values) => {
-        const { username, password } = values;//{username:Anirudh,password:abc,k:dsas,k:asjas}
+        let { username, password } = values;//{username:Anirudh,password:abc,k:dsas,k:asjas}
+        password = encode(password)
         const res = await fetch("/signin", {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
             },
             body: JSON.stringify({
-                username, password
+                username,  password
             })
         })
         if (!res.ok) {

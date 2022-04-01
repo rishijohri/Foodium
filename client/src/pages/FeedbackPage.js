@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router'
-import { Form, Typography, Input, Button, Radio, Slider, Card, Layout, DatePicker, notification, Rate } from 'antd';
+import { Form, Typography, Input, Button, Radio, Card, Layout, DatePicker, notification, Rate } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-// import '../assets/main.css'
 const { Content } = Layout;
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -16,7 +15,8 @@ function sendFeedback(data, nav) {
     var req = {
         method: 'POST',
         body : JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json',
+        'hashing': window.localStorage.getItem('hash') }
     }
     fetch('/feedback', req).then((res)=> {
         if (!res.ok)

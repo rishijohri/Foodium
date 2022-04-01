@@ -22,7 +22,8 @@ const MessPayPage=()=>{
         fetch("/payeat",{
             method:'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
             },
             body:JSON.stringify({
                 pin: pin
@@ -55,13 +56,17 @@ const MessPayPage=()=>{
     }
     const handleClick = () => {
         fetch('/confirmmess/'+pin.toString(), {
-            method: 'GET'
-        }).then((res)=>{
-            if (!res.ok) {
-                return {}
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
             }
-            return res.json()
-        }).then((res)=>{
+        }).then(async (res)=>{
+            if (!res.ok) {
+                setModalTitle('Unknown Error')
+                setMess("unknown")
+            }
+            res = await res.json()
             if (res.result==='success')
             {
                 if (res.data==='unknown') {

@@ -13,7 +13,8 @@ const LiveMenu = (props) => {
         fetch("/livemenu/"+props.vendor, {
             method: "GET",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
             }
         }).then((res)=> {
             if (!res.ok) {

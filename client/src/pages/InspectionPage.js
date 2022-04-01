@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Layout, Typography, notification, Image, Rate, Card, Cascader} from 'antd';
-import { UserOutlined, TeamOutlined} from '@ant-design/icons';
+import { UserOutlined} from '@ant-design/icons';
 import FileBase64 from 'react-file-base64';
 import NavBar from '../components/NavBar'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-import Authenticate from "../components/authenticate";
 const {Content } = Layout;
 const { Title, Text } = Typography;
 
@@ -23,7 +22,8 @@ const InspectionPage = () => {
         fetch("/uploadimage", {
             method:'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
             },
             body:JSON.stringify({
                 name: values.food_name,
@@ -68,7 +68,8 @@ const InspectionPage = () => {
         fetch("/messvendors", {
             method: "GET",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
             }
         }).then((res) => {
             if (!res.ok) {

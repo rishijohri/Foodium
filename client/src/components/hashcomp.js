@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { Navigate} from 'react-router';
 import { Spin} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-const Authenticate = (props) =>  {
+const Hashcomp = (props) =>  {
     var [check, setCheck] = useState('wait')
     var [position, setPosition] = useState("wait")
     const getauth = () => {
-        fetch('/authenticate', {
+        fetch('/hashcomp', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -33,9 +33,10 @@ const Authenticate = (props) =>  {
         )
     }
     useEffect(()=> {
-        console.log('entered authentication loop')
+        console.log('entered hashcomploop')
         getauth()
         return ()=> {
+            console.log('exited hashcomploop')
             setPosition('wait')
             setCheck('wait')
         }
@@ -53,10 +54,10 @@ const Authenticate = (props) =>  {
     }
 }
 
-Authenticate.defaultProps = {
-    position: ["Student"],
+Hashcomp.defaultProps = {
+    position: [],
     failPosRedirect: "/home",
     fail: "/"
 }
 
-export default Authenticate
+export default Hashcomp

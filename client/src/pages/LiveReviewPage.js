@@ -1,11 +1,11 @@
-import { Tabs, Radio, Space,Layout, Typography,notification } from 'antd';
+import { Tabs,Layout, Typography,notification } from 'antd';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 import React, { useState ,useEffect} from 'react';
 import LiveReview from '../components/LiveReview';
 import NavBar from '../components/NavBar'
 const { TabPane } = Tabs;
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 const { Title } = Typography;
 const LiveReviewPage=()=>{
   const [data, setData] = useState([]);
@@ -14,7 +14,8 @@ const LiveReviewPage=()=>{
     fetch("/messvendors", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'hashing': window.localStorage.getItem('hash')
         }
     }).then((res) => {
         if (!res.ok) {

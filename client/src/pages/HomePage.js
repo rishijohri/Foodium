@@ -7,13 +7,13 @@ import Slider from '../components/Slider'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-const { Header, Footer, Sider, Content } = Layout;
+const {Content } = Layout;
 const { Title } = Typography;
 
 function importAll(r) {
-    let images = {};
-    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-    return images;
+    let img = {};
+    r.keys().map((item, index) => { img[item.replace('./', '')] = r(item); });
+    return img;
   }
 const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 const HomePage = () => {

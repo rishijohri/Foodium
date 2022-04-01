@@ -9,9 +9,25 @@ const historyHandler = (req, res) => {
             }, (err, currUser) => {
                 if (!err && currUser) {
                     const payments = currUser.payments
-                    res.json({
+                    console.log(payments)
+                    console.log("find the history")
+                    let all_payments=[]
+                    payments.map((item,index)=>{
+                        const key=index+1
+                        const currPayment={
+                            key:key,
+                            date:`${item['createdAt'].getDate()}/${item['createdAt'].getMonth() + 1}/${item['createdAt'].getFullYear()}`,
+                            time:`${item['createdAt'].getHours()}:${item['createdAt'].getMinutes()}`,                            
+                            payment:item['payment'],
+                            balance:item['currBalance']
+                        }
+                        all_payments.push(currPayment)
+                    })
+                    console.log(all_payments)
+                    all_payments.reverse()
+                    res.json({                        
                         result: "success",
-                        payments,
+                        payments: all_payments,
                         src: "payment history"
                     })
 

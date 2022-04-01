@@ -13,50 +13,19 @@ import {
     notification,
 } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
+import {encode} from 'string-encode-decode'
 const { Title } = Typography;
 const { Content } = Layout;
-const positions = [
-    {
-        value: 'Student',
-        label: 'Student',
-    },
-    {
-        value: 'Faculty',
-        label: 'Faculty',
-    },
-    {
-        value: 'Mess Vendor',
-        label: 'Mess Vendor',
-    },
-    {
-        value: 'Canteen Owner',
-        label: 'Canteen Owner',
-    },
-    {
-        value: 'Mess Inspection Team Member',
-        label: 'Mess Inspection Team Member',
-    },
-    {
-        value: 'Canteen Inspection Team Member',
-        label: 'Canteen Inspection Team Member',
-    },
-    {
-        value: 'Admin',
-        label: 'Admin',
-    },
-    {
-        value: 'BOHA',
-        label: 'BOHA',
-    },
-    {
-        value: 'President SC',
-        label: 'President SC',
-    },
-    {
-        value: 'Guest',
-        label: 'Guest',
-    },
-];
+const pos = ['Student',
+            'Faculty',
+            'Mess Vendor',
+            'Canteen Owner',
+            'Mess Inspection Team Member',
+            'Canteen Inspection Team Member',
+            'Admin',
+            'Student Admin',
+            'Guest']
+const positions = pos.map((item)=> {return {value: item, label: item}})
 
 const SignUpPage = () => {
     const navigate = useNavigate();
@@ -65,12 +34,14 @@ const SignUpPage = () => {
     var phoneno = /^\d{10}$/;
 
     const onFinish = async (values) => {
-        const { username, prefix, phone, password, email, confirm, agreement } = values;
+        let { username, prefix, phone, password, email, confirm, agreement } = values;
+        password = encode(password)
         const position = values.position[0];
         const res = await fetch("/signup", {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
             },
             body: JSON.stringify({
                 username, prefix, phone, password, email, confirm, agreement, position,

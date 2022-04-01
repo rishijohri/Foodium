@@ -10,6 +10,7 @@ var UserSchema = mongoose.Schema({
     email: String,
     position: String,
     balance: Number,
+    jwt: String,
     payments: [HistoryItem]
 })
 

@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const { TabPane } = Tabs;
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 const { Title } = Typography;
 const LiveMenuPage=()=>{
   const [data, setData] = useState([]);
@@ -14,7 +14,8 @@ const LiveMenuPage=()=>{
     fetch("/messvendors", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'hashing': window.localStorage.getItem('hash')
         }
     }).then((res) => {
         if (!res.ok) {
