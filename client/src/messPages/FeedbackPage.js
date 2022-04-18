@@ -44,6 +44,7 @@ function sendFeedback(data, nav) {
 const FeedbackPage = () => {
     const [form] = Form.useForm();
     const [hiddenField, setHiddenField] = useState('text')
+    const [hiddenField1, setHiddenField1] = useState('none')
     const navigate = useNavigate()
     const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
@@ -52,11 +53,13 @@ const FeedbackPage = () => {
         sendFeedback(values, navigate)
     };
     const onValuesChange = (_, allv) => {
-        if (allv.vendorName === 'Mess')
+        if (allv.vendorType === 'Mess')
         {
             setHiddenField('')
+            setHiddenField1('none')
         } else {
             setHiddenField('none')
+            setHiddenField1('')
         }
     }
     
@@ -78,7 +81,7 @@ const FeedbackPage = () => {
                     form={form}
                     layout="vertical"
                     initialValues={{
-                        vendorName: "Mess",
+                        vendorType: "Mess",
                         rating: 0,
                         clean: 0,
                         speed: 0,
@@ -90,7 +93,7 @@ const FeedbackPage = () => {
                     onValuesChange={onValuesChange}
                 >
                     <Card>
-                    <Form.Item label="Choose Vendor" name="vendorName" >
+                    <Form.Item label="Choose Vendor Type" name="vendorType" >
                         <Radio.Group >
                             <Radio.Button value="Mess">Mess</Radio.Button>
                             <Radio.Button value="Canteen">Canteen</Radio.Button>
@@ -99,7 +102,17 @@ const FeedbackPage = () => {
                     </Form.Item>
                     </Card>
                     <Card>
-                    <Form.Item label="Choose Slot" name="slotName" style={{display:hiddenField}}>
+                    <Form.Item label="Choose Vendor Name" name="vendorName" >
+                        <Radio.Group >
+                            <Radio.Button value="mess1" style={{display:hiddenField}}>Mess 1</Radio.Button>
+                            <Radio.Button value="mess2" style={{display:hiddenField}}>Mess 2</Radio.Button>
+                            <Radio.Button value="canteen1" style={{display:hiddenField1}}>canteen2</Radio.Button>
+                            <Radio.Button value="canteen2" style={{display:hiddenField1}}>canteen2</Radio.Button>
+                        </Radio.Group>
+                    </Form.Item>
+                    </Card>
+                    <Card style={{display:hiddenField}}>
+                    <Form.Item label="Choose Slot" name="slotName" >
                         <Radio.Group>
                             <Radio.Button value="Breakfast">Breakfast</Radio.Button>
                             <Radio.Button value="Lunch">Lunch</Radio.Button>

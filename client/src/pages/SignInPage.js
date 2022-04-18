@@ -4,14 +4,15 @@ import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-import {encode} from 'string-encode-decode'
 const {Content } = Layout;
+var CryptoJS = require("crypto-js");
 const { Title } = Typography;
+
 const SignInPage = () => {
     const navigate = useNavigate();
     const onFinish = async (values) => {
         let { username, password } = values;//{username:Anirudh,password:abc,k:dsas,k:asjas}
-        password = encode(password)
+        password = CryptoJS.AES.encrypt(password, 'my-secret-key@123').toString();
         const res = await fetch("/signin", {
             method: 'POST',
             headers: {
@@ -32,7 +33,7 @@ const SignInPage = () => {
         }
         const data = await res.json();
         if (data.result === 'success') {
-            return navigate('/home', {replace:true});
+            return navigate('home', {replace:true});
         }
         notification.open({
             message: 'Login failed!',

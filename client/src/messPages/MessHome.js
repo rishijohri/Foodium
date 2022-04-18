@@ -10,11 +10,11 @@ const { Title } = Typography;
 
 const MessHome=()=>{
     var compstor = [
-        {ic: faCashRegister, name: 'Mess Payment', link: '/mess-pay', id: 111},
-        {ic: faBookOpenReader, name: 'Live Menu Page', link: "/live-menu", id: 211},     
-        {ic: faUpload, name: 'Inspection', link: '/inspection', id: 311},
+        {ic: faCashRegister, name: 'Mess Payment', link: '/mess/mess-pay', id: 111},
+        {ic: faBookOpenReader, name: 'Live Menu Page', link: "/mess/live-menu", id: 211},     
+        {ic: faUpload, name: 'Inspection', link: '/mess/inspection', id: 311},
         {ic: faComment, name: 'Comment', link: '#', id: 411},
-        {ic: faFilePen, name: 'Feedback', link: '/feedback', id: 511},
+        {ic: faFilePen, name: 'Feedback', link: '/mess/feedback', id: 511},
     ]
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
 

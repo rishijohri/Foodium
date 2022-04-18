@@ -13,7 +13,7 @@ import {
     notification,
 } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
-import {encode} from 'string-encode-decode'
+var CryptoJS = require("crypto-js");
 const { Title } = Typography;
 const { Content } = Layout;
 const pos = ['Student',
@@ -35,7 +35,7 @@ const SignUpPage = () => {
 
     const onFinish = async (values) => {
         let { username, prefix, phone, password, email, confirm, agreement } = values;
-        password = encode(password)
+        password = CryptoJS.AES.encrypt(password, 'my-secret-key@123').toString();
         const position = values.position[0];
         const res = await fetch("/signup", {
             method: 'POST',
@@ -57,7 +57,7 @@ const SignUpPage = () => {
         }
         const data = await res.json();
         if (data.result === 'success') {
-            return navigate('/home', {replace:true});
+            return navigate('home', {replace:true});
         }
         else {
             notification.open({

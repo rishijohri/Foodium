@@ -25,7 +25,7 @@ const HomePage = () => {
                 <div className="site -card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>
                         <Col span={span}>
-                            <Link to="/mess-home"><Card title={<Title level={2} >Mess</Title>} bordered={false} ><Slider image_array={[images['mess_1.jpg'], images['mess_2.jpg']]} width={'100%'} height={'50%'}/></Card></Link>
+                            <Link to="/mess/home"><Card title={<Title level={2} >Mess</Title>} bordered={false} ><Slider image_array={[images['mess_1.jpg'], images['mess_2.jpg']]} width={'100%'} height={'50%'}/></Card></Link>
                         </Col>
                         <Col span={span}>  
                         <Link to="#"><Card title={<Title level={2} >Canteen</Title>} bordered={true}><Slider image_array={[images['default.jpg'], images['juice-corner.jpg']]} width={'100%'} height={'50%'} /></Card></Link>

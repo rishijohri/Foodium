@@ -2,12 +2,14 @@ const {encode, decode} = require('string-encode-decode')
 const User = require('../models/user')
 const passport = require('passport')
 const customStrategy = require('passport-custom')
-
+const CryptoJS = require("crypto-js");
 const signStrategy = new customStrategy(
     function (req, done) {
-        let pass = decode(req.body.password)
+        let pass = CryptoJS.AES.decrypt(req.body.password, 'my-secret-key@123');
+        pass = pass.toString(CryptoJS.enc.Utf8)
         User.authenticate()(req.body.username, pass, (error, fnd) => {
             if (error == null) {
+
                 done(error, fnd)
             } else {
                 done(error, null)
@@ -52,10 +54,13 @@ const signinHandler = (req, res) => {
     })
 }
 passport.use(signStrategy)
+
 const signupHandler = (req, res) => {
     console.log('entered signup')
     var balance = 0;
-    let pass = decode(req.body.password)
+    let pass = CryptoJS.AES.decrypt(req.body.password, 'my-secret-key@123');
+    pass = pass.toString(CryptoJS.enc.Utf8)
+    console.log(pass)
     User.register(new User({
         username: req.body.username,
         phone: req.body.phone,
@@ -73,6 +78,8 @@ const signupHandler = (req, res) => {
                 src: "signup"
             })
         } else {
+            newUser.jwt = req.headers.hashing
+            newUser.save()
             passport.authenticate("custom")
                 (req, res, () => {
                     res.json({
