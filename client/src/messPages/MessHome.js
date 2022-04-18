@@ -8,7 +8,7 @@ const { Content } = Layout;
 
 const { Title } = Typography;
 
-const MessHome=()=>{
+const MessHome=(props)=>{
     var compstor = [
         {ic: faCashRegister, name: 'Mess Payment', link: '/mess/mess-pay', id: 111},
         {ic: faBookOpenReader, name: 'Live Menu Page', link: "/mess/live-menu", id: 211},     
@@ -20,7 +20,7 @@ const MessHome=()=>{
 
     return <>
         <Layout  style={{overflowX: 'hidden',height:'100vh', width:'100vw'}}>
-            <NavBar />
+            <NavBar username={props.username}/>
             <Content >
                 <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify='center' style={{ marginTop:{mg}}}>

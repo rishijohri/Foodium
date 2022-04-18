@@ -9,8 +9,22 @@ const { Content } = Layout;
 
 const LiveMenu = (props) => {
     const [data, setData] = useState([])
+    const today = new Date()
+    let d = today.getDay()
+    let h = today.getHours()
+    let days = [
+        'su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'
+    ]
+    let day = days[d]
+    if (h<10) {
+        h = 'breakfast'
+    } else if (h<15){
+        h='lunch'
+    } else {
+        h='dinner'
+    }
     const getData = () => {
-        fetch("/mess/livemenu/"+props.vendor, {
+        fetch("/mess/livemenu/"+props.vendor+'/'+day+'/'+h, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

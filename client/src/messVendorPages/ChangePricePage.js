@@ -83,7 +83,7 @@ const ChangePricePage=(props)=>{
     }, [])
     return <>
         <Layout style={{height:'100vh', width:'100vw'}}>
-            <NavBar/>
+        <NavBar username={props.username}/>
                 <Content>
                 <div className="site-card-wrapper">
                 <Card style={{margin:'0 10vh'}}>

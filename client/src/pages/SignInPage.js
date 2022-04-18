@@ -8,7 +8,7 @@ const {Content } = Layout;
 var CryptoJS = require("crypto-js");
 const { Title } = Typography;
 
-const SignInPage = () => {
+const SignInPage = (props) => {
     const navigate = useNavigate();
     const onFinish = async (values) => {
         let { username, password } = values;//{username:Anirudh,password:abc,k:dsas,k:asjas}

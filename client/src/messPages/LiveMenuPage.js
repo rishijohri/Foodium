@@ -7,7 +7,7 @@ import '../assets/main.css';
 const { TabPane } = Tabs;
 const { Content } = Layout;
 const { Title } = Typography;
-const LiveMenuPage=()=>{
+const LiveMenuPage=(props)=>{
   const [data, setData] = useState([]);
   const getData = () => {
     console.log("entered getDATA")
@@ -26,7 +26,7 @@ const LiveMenuPage=()=>{
         (res) => {
             if (res.result==="success") {
                 // console.log(res.menuItems)
-                setData(res.menuItems)
+                setData(res.vendors)
             } else {
                 notification.open({
                     message: 'Failed',
@@ -44,7 +44,7 @@ useEffect(()=> {
     
     return (
         <Layout>
-          <NavBar/>
+          <NavBar username={props.username}/>
           <Content>
           <Tabs tabPosition={'top'} animated={{inkbar:false, tabPane:true}} centered={true}>
             {data.map((item,index)=>{

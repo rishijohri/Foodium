@@ -15,30 +15,42 @@ const ChangeMenuPage = (props) => {
     const [time, setTime] = useState('breakfast')
     const [day, setDay] = useState('mo')
     let days = [
-        'mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'
-    ]
-    let times = [
-        'breakfast', 'lunch', 'dinner'
+        'su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'
     ]
     return (
         <Layout>
-            <NavBar/>
+            <NavBar username={props.username}/>
             <Content>
             <Tabs tabPosition={'top'} animated={{inkbar:false, tabPane:true}} centered={true}>
             {days.map((d, ind)=> {
                 return <>
                     <TabPane tab={d} key={ind}>
                     <Tabs tabPosition={'top'} animated={{inkbar:false, tabPane:true}} centered={true}>
-                    {times.map((tim, ink)=> {
-                        <TabPane tab={tim} key={ink}>
-                            <center><Button onClick={()=>{
-                                setTime(tim)
+                        <TabPane tab='breakfast' key={0}>
+                            <center>
+                                <Button onClick={()=>{
+                                setTime('breakfast')
                                 setDay(d)
                                 setAddItem(true)
                             }} >Add Item</Button></center>
-                            <VendorMenu vendor={props.username} time='breakfast' day={day}/>
+                            <VendorMenu vendor={props.username} time='breakfast' day={d}/>
                         </TabPane>
-                    })}
+                        <TabPane tab='lunch' key={1}>
+                            <center><Button onClick={()=>{
+                                setTime('lunch')
+                                setDay(d)
+                                setAddItem(true)
+                            }} >Add Item</Button></center>
+                            <VendorMenu vendor={props.username} time='lunch' day={d}/>
+                        </TabPane>
+                        <TabPane tab='dinner' key={2}>
+                            <center><Button onClick={()=>{
+                                setTime('dinner')
+                                setDay(d)
+                                setAddItem(true)
+                            }} >Add Item</Button></center>
+                            <VendorMenu vendor={props.username} time='dinner' day={d}/>
+                        </TabPane>
                     </Tabs>
                     </TabPane>
                 </>
@@ -56,7 +68,7 @@ const ChangeMenuPage = (props) => {
                     closable={false}
                     headerStyle={{ position: 'center',textAlign:'center' }}
                 >
-                <AddMenuPage time={time} day={day}/>
+                <AddMenuPage username={props.username} time={time} day={day}/>
             </Drawer>
             </Footer>
             </Layout>

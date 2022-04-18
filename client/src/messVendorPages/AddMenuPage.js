@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Form, Input, Button, Layout, Typography, notification, Image, Rate, Card, Cascader} from 'antd';
 import { UserOutlined} from '@ant-design/icons';
 import FileBase64 from 'react-file-base64';
@@ -10,7 +10,9 @@ const { Title, Text } = Typography;
 
 const AddMenuPage = (props) => {
     const [item, setItem] = useState({ image: '' });
-    
+    console.log(props.username)
+    console.log(props.time)
+    console.log(props.day)
     const onFinish = (values) => {
         console.log(values)
         fetch("/mess/uploadimage", {
@@ -43,7 +45,6 @@ const AddMenuPage = (props) => {
                 description:
                     'success :)',
             });
-            window.location.reload();
         } else {
         notification.open({
             message: 'Failed',
@@ -51,17 +52,20 @@ const AddMenuPage = (props) => {
                 'unable to upload :(',
         });
         }
+        setItem({ image: '' });
+        const event = new Event('build');
+        window.dispatchEvent(event)
+        formRef.current.resetFields()
     })
     }
+    const formRef = useRef();
 
     return (
         <Layout>
-            <NavBar />
+            <NavBar username={props.username}/>
             <Content style={{padding:'0vh 5vh'}}>
                 <Title level={2}>Menu for {props.time}</Title>
-                <Form
-                    onFinish={onFinish}
-                >
+                <Form onFinish={onFinish} ref={formRef}>
                     <Form.Item
                         name="food_name"
                         rules={[

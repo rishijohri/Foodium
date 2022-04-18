@@ -27,7 +27,7 @@ const pos = ['Student',
             'Guest']
 const positions = pos.map((item)=> {return {value: item, label: item}})
 
-const SignUpPage = () => {
+const SignUpPage = (props) => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
 

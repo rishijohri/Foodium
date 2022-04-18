@@ -7,7 +7,7 @@ import NavBar from '../components/NavBar'
 const { TabPane } = Tabs;
 const { Content } = Layout;
 const { Title } = Typography;
-const LiveReviewPage=()=>{
+const LiveReviewPage=(props)=>{
   const [data, setData] = useState([]);
   const getData = () => {
     console.log("entered getDATA")
@@ -44,7 +44,7 @@ useEffect(()=> {
 }, [])
     return (
         <Layout>
-          <NavBar/>
+          <NavBar username={props.username}/>
           <Content>
           <Tabs tabPosition={'top'} animated={{inkbar:false, tabPane:true}} centered={true}>
             {data.map((item,index)=>{

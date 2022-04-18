@@ -2,10 +2,12 @@ const MenuItem = require('../models/menuItem')
 
 const livemenuHandler = (req, res) => {
     console.log('entered livemenu')
-    const mess=req.params.param1
+    const vendor=req.params.vendor
+    const day = req.params.day
+    const time = req.params.time
     console.log("live menu entered")
-    console.log(mess)
-    MenuItem.find({vendor:mess}, (err, items) => {
+    console.log(vendor)
+    MenuItem.find({vendor:vendor, day:day, time:time}, (err, items) => {
         if (!err && items) {
             res.json({
                 result: "success",
@@ -21,6 +23,7 @@ const livemenuHandler = (req, res) => {
 const uploadimageHandler = (req, res) => {
     console.log("entered uploadimage")
     let obj = req.body 
+    console.log(req.body)
     MenuItem.create(obj, (err, _item) => {
         if (err) {
             console.log("entered error")
@@ -37,7 +40,34 @@ const uploadimageHandler = (req, res) => {
         }
     });
 }
+
+const updateimageHandler = (req, res) => {
+    console.log("entered uploadimage")
+    let obj = req.body 
+    console.log(req.body)
+    MenuItem.findOne({name:obj.name, vendor:obj.vendor}, (err, item) => {
+        if (err) {
+            console.log("entered error")
+            console.log(err);
+            res.json({
+                result:"fail"
+            })
+        }
+        else {
+            console.log("entered success")
+            item.quality = obj.quality
+            item.health = obj.health
+            item.image = obj.image
+            item.desc = obj.desc
+            item.save()
+            res.json({
+                result:'success'
+            })
+        }
+    });
+}
 module.exports =  {
     livemenuHandler,
-    uploadimageHandler
+    uploadimageHandler,
+    updateimageHandler
 }

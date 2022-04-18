@@ -1,83 +1,65 @@
-import { Avatar,Layout,Card,Col, Typography,Row,notification} from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import NavBar from '../components/NavBar'
+import { Layout, Card, Col, Row, Typography, Button } from 'antd';
+import React, { useState } from 'react';
+import 'antd/dist/antd.min.css';
+import '../assets/main.css';
+import Slider from '../components/Slider'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import { faCashRegister,faBookOpenReader,faComment,faFilePen,faUpload } from "@fortawesome/free-solid-svg-icons";
-import NavBar from '../components/NavBar'
-import CanteenCard from '../components/canteenCard';
 
-import React, { useState, useEffect } from 'react';
-const { Content } = Layout;
-
+const {Content } = Layout;
 const { Title } = Typography;
 
-const CanteenHome=(props)=>{
-
-    const [data, setData] = useState([])
-    const getData = () => {
-        fetch("/mess/livemenu/"+"mess1", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                'hashing': window.localStorage.getItem('hash')
-            }
-        }).then((res)=> {
-            if (!res.ok) {
-                return {}
-            }
-            return res.json()
-        }).then(
-            (res) => {
-                if (res.result==="success") {
-                    console.log(res.menuItems.length)
-                    setData(res.menuItems)
-                } else {
-                    notification.open({
-                        message: 'Failed',
-                        description:
-                            'unable to fetch Data :(',
-                    });
-                }
-            }
-        )
+function importAll(r) {
+    let img = {};
+    r.keys().map((item, index) => { img[item.replace('./', '')] = r(item); });
+    return img;
+  }
+const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+const HomePage = (props) => {
+    const [hg, vg, span] = isMobile ? [1, 10, 18] : [12, 6, 10];
+    let visible1 = 'none';
+    let visible2 = '';
+    if (props.position==='Mess Vendor') {
+        visible1 = '';
+        visible2 = 'none';
     }
-
-    useEffect(()=> {
-        getData()
-    }, [])
-
-    let iheight='150px';
-    let iwidth='150px';
-    let width='100vw';
-    let align='end'
-    let isCenter=true
-    if (isMobile) {
-        iheight='15vh'
-        iwidth='15vh'
-        width='100vw'
-        align='start'
-        isCenter=false
-    } else {
-        iheight='10vw';
-        iwidth='10vw';
-        width='50vw'
-    }
-
-    return <>
-         <div style={{padding:"5%" }}>
-                
-                
-                {data.map((item, index) => {
-                    const key = index + 1;
-                    if(isCenter){
-                        return (<center><CanteenCard title='something' width={width} iheight={iheight} iwidth={iwidth} key={key} img={item.image}/></center>);
-                    }
-                    return (<CanteenCard title='something' width={width} iheight={iheight} iwidth={iwidth} key={key} img={item.image}/>);
-                    
-                })}
-                
-            </div>
-    </>   
+    return (
+            <Layout style={{ overflow:'hidden', hidden:'100vh', width:'100vw'}} >
+            <NavBar username={props.username}/>
+            <Content >
+                <div className="site -card-wrapper">
+                    <Row gutter={[hg, vg]} justify={'center'}>
+                        <Col span={span} style={{display:visible2}}>
+                            <Link to="/mess/home">
+                                <Card title={<Title level={2} >Mess</Title>} bordered={false} >
+                                    <Slider image_array={[images['mess_1.jpg'], images['mess_2.jpg']]} width={'100%'} height={'50%'}/>
+                                </Card>
+                            </Link>
+                        </Col>
+                        <Col span={span} style={{display:visible2}}>  
+                        <Link to="/canteen/home">
+                            <Card title={<Title level={2} >Canteen</Title>} bordered={true}>
+                                <Slider image_array={[images['default.jpg'], images['juice-corner.jpg']]} width={'100%'} height={'50%'} />
+                            </Card>
+                        </Link>
+                        </Col>
+                        <Col span={span} style={{display:visible1}}>  
+                        <Link to="/mess-vendor/home">
+                            <Card title={<Title level={2} >Mess Vendor</Title>} bordered={true}>
+                                <Slider image_array={[images['default.jpg'], images['juice-corner.jpg']]} width={'100%'} height={'50%'} />
+                            </Card>
+                        </Link>
+                        </Col>           
+                    </Row>
+                </div>
+            </Content>
+            </Layout>
+    );
 }
-export default CanteenHome;
 
+HomePage.defaultProps = {
+    position: 'student'
+}
+
+export default HomePage

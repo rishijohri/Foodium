@@ -6,6 +6,8 @@ var MenuItemSchema = new mongoose.Schema({
     desc: {type: String, default: "Normal"},
     quality: {type: Number, default: 0}, 
     health: {type: Number, default: 0},
+    time: {type: String},
+    day: {type: String},
     image :String
 }, { timestamps: true });
   

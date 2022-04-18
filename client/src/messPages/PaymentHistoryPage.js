@@ -2,7 +2,7 @@ import React, { useState ,useEffect} from 'react';
 import {Table, notification,Layout} from 'antd';
 import NavBar from '../components/NavBar';
 const { Content } = Layout;
-const PaymentHistoryPage=()=>{
+const PaymentHistoryPage=(props)=>{
     const [payments, setPayments] = useState([]);
     const getPaymentsHistory=()=>{
         fetch('/mess/historyhandler',{
@@ -41,12 +41,13 @@ const PaymentHistoryPage=()=>{
             { title: 'Date',dataIndex: 'date',key: 'date'},
             { title: 'Time',dataIndex: 'time', key: 'time'},
             {title:'Payment',dataIndex:'payment',key:'payment'},
-            {title:'Balance',dataIndex:'balance',key:'balance'}
+            {title:'Balance',dataIndex:'balance',key:'balance'},
+            {title:'Vendor',dataIndex:'vendor',key:'vendor'}
         ];
     return(
         <div>  
             <Layout>    
-                <NavBar/>      
+            <NavBar username={props.username}/>     
                 <Content style={{padding:'2vh 10vh 2vh 10vh'}}>
                     <Table dataSource={payments} columns={columns} />
                 </Content>

@@ -10,7 +10,8 @@ const { Content } = Layout;
 const VendorMenu = (props) => {
     const [data, setData] = useState([])
     const getData = () => {
-        fetch("/mess/livemenu/"+props.vendor, {
+        console.log("/mess/livemenu/"+props.vendor+'/'+props.day+'/'+props.time)
+        fetch("/mess/livemenu/"+props.vendor+'/'+props.day+'/'+props.time, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -38,6 +39,7 @@ const VendorMenu = (props) => {
     }
 
     useEffect(()=> {
+        window.addEventListener('build', getData)
         getData()
     }, [])
     let iheight='150px';

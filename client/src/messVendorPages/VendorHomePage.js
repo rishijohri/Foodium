@@ -8,7 +8,7 @@ const { Content } = Layout;
 
 const { Title } = Typography;
 
-const VendorHomePage=()=>{
+const VendorHomePage=(props)=>{
     var compstor = [
         {ic: faCashRegister, name: 'Change Pin', link: '/mess-vendor/change-pin', id: 111},
         {ic: faMoneyBill, name: 'Change Price', link: "/mess-vendor/change-price", id: 211},     
@@ -19,7 +19,7 @@ const VendorHomePage=()=>{
 
     return <>
         <Layout  style={{overflowX: 'hidden',height:'100vh', width:'100vw'}}>
-            <NavBar />
+        <NavBar username={props.username}/>
             <Content >
                 <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify='center' style={{ marginTop:{mg}}}>

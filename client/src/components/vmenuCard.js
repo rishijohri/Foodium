@@ -14,7 +14,7 @@ const VMenuCard = (props) => {
                     <Title level={props.level}>{props.title}</Title>
                     <p>{props.content}</p>
                     Health: <Rate disabled defaultValue={props.rateh} /><br/>
-                    Quality: <Rate disabled defaultValue={props.rateq} />
+                    Quality: <Rate disabled defaultValue={props.rateq} /><br/>
                     <Button>Delete Item</Button>
                 </Col>
                 <Col span={props.spani}>

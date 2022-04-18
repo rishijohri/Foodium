@@ -10,7 +10,7 @@ import logo from '../images/foodiumLogo.png'
 const { Content } = Layout;
 const { Title } = Typography;
 
-const MessPayPage=()=>{
+const MessPayPage=(props)=>{
     const navigate = useNavigate()
     var [pin, setPin] = useState(0)
     var [ind, setInd] = useState(0)
@@ -95,7 +95,7 @@ const MessPayPage=()=>{
 
     return (
         <Layout style={{height:'100vh', width:'100vw'}}>
-            <NavBar/>
+            <NavBar username={props.username}/>
                 <Content>
                     <div style={{height:'50vh', 
                     width:'80vw', 

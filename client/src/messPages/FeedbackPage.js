@@ -41,7 +41,7 @@ function sendFeedback(data, nav) {
     })
 }
 
-const FeedbackPage = () => {
+const FeedbackPage = (props) => {
     const [form] = Form.useForm();
     const [hiddenField, setHiddenField] = useState('text')
     const [hiddenField1, setHiddenField1] = useState('none')
@@ -74,7 +74,7 @@ const FeedbackPage = () => {
     };
     return (
         <Layout className='layout'>
-            <NavBar/>
+            <NavBar username={props.username}/>
             <Content style={{ padding: '0 5%', margin:' 2%'}}>
                 <Title level={2}>Feedback</Title>
                 <Form

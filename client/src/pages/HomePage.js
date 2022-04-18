@@ -26,7 +26,7 @@ const HomePage = (props) => {
     }
     return (
             <Layout style={{ overflow:'hidden', hidden:'100vh', width:'100vw'}} >
-            <NavBar/>
+            <NavBar username={props.username}/>
             <Content >
                 <div className="site -card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>

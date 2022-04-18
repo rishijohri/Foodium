@@ -19,7 +19,8 @@ const historyHandler = (req, res) => {
                             date:`${item['createdAt'].getDate()}/${item['createdAt'].getMonth() + 1}/${item['createdAt'].getFullYear()}`,
                             time:`${item['createdAt'].getHours()}:${item['createdAt'].getMinutes()}`,                            
                             payment:item['payment'],
-                            balance:item['currBalance']
+                            balance:item['currBalance'],
+                            vendor: item['vendor']
                         }
                         all_payments.push(currPayment)
                     })
@@ -90,7 +91,8 @@ const payEatHandler = async (req, res) => {
         currUser.payments.push({
             dateTime: stringDateTime,
             payment: payment,
-            currBalance: currUser.balance
+            currBalance: currUser.balance,
+            vendor: vendor.vendor
         });
         currUser.save();
         res.json({
