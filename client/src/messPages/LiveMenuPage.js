@@ -1,4 +1,4 @@
-import { Tabs, Radio, Space,Layout, Typography, notification } from 'antd';
+import { Tabs, Layout, Typography, notification } from 'antd';
 import React, { useState ,useEffect} from 'react';
 import LiveMenu from '../components/LiveMenu';
 import NavBar from '../components/NavBar'
@@ -11,7 +11,7 @@ const LiveMenuPage=()=>{
   const [data, setData] = useState([]);
   const getData = () => {
     console.log("entered getDATA")
-    fetch("/messvendors", {
+    fetch("/mess/messvendors", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

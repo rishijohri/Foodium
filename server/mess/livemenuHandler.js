@@ -18,10 +18,10 @@ const livemenuHandler = (req, res) => {
     });
 }
 
-const uploadimageHandler = (req, res, next) => {
+const uploadimageHandler = (req, res) => {
     console.log("entered uploadimage")
     let obj = req.body 
-    MenuItem.create(obj, (err, item) => {
+    MenuItem.create(obj, (err, _item) => {
         if (err) {
             console.log("entered error")
             console.log(err);

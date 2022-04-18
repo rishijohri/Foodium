@@ -5,7 +5,7 @@ const { Content } = Layout;
 const PaymentHistoryPage=()=>{
     const [payments, setPayments] = useState([]);
     const getPaymentsHistory=()=>{
-        fetch('/historyhandler',{
+        fetch('/mess/historyhandler',{
             method:'GET',
             headers: {
                 "Content-Type": "application/json",

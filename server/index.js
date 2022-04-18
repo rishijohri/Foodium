@@ -9,11 +9,9 @@ const mongoose = require("mongoose")
 const localmongo = "mongodb://localhost:27017/foodium"
 const cors = require("cors");
 const User = require('./models/user');
-const Feedback = require('./models/feedback')
-const Mess = require('./models/mess')
-const MenuItem = require('./models/menuItem')
+const { signinHandler, signupHandler, signoutHandler, failHandler} = require('./signHandler.js')
+const {authenticateHandler, hashHandler, hashcompHandler} = require("./authenticateHandler.js")
 const port = 3001 || process.env.PORT
-
 const corsOptions = {
     origin: '*',
     credentials: true,
@@ -37,7 +35,25 @@ app.use(express.static("public"))
 var server = app.listen(port, function () {
     console.log("server started " + port)
 })
+app.use(require("express-session")({
+    secret: "wherever",
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+app.post('/signin', passport.authenticate('custom', { failureRedirect: '/fail' }), signinHandler)
+app.post('/signout', signoutHandler)
+app.post("/signup", signupHandler)
+app.get('/signout', signoutHandler)
+app.get('/fail', hashHandler, failHandler)
+app.get('/authenticate', authenticateHandler)
+app.get('/hashcomp', hashcompHandler)
 
 const router = require('./mess/messroute')
-app.use(router)
+const messvendorrouter = require('./messvendor/messvendorroute.js')
 
+app.use('/mess', router) 
+app.use('/messvendor', messvendorrouter)

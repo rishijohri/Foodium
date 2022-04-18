@@ -8,15 +8,9 @@ import '../assets/main.css';
 const {Content } = Layout;
 const { Title, Text } = Typography;
 
-const InspectionPage = () => {
+const AddMenuPage = (props) => {
     const [item, setItem] = useState({ image: '' });
-    const [health, setHealth] = useState(0);
-    const [quality, setQuality] = useState(0);
-    const [data, setData] = useState([{
-        value: 'Label',
-        label: 'Label',
-    }]);
-
+    
     const onFinish = (values) => {
         console.log(values)
         fetch("/mess/uploadimage", {
@@ -27,11 +21,13 @@ const InspectionPage = () => {
             },
             body:JSON.stringify({
                 name: values.food_name,
-                health: health,
-                quality: quality,
-                vendor: values.vendor[0],
+                health: 0,
+                quality: 0,
+                vendor: props.username,
                 desc: values.desc,
-                image: item.image
+                image: item.image,
+                time: props.time,
+                day: props.day
             })
        }).then(
            (res) => {
@@ -57,50 +53,12 @@ const InspectionPage = () => {
         }
     })
     }
-    const handleHealth = (val) => {
-        setHealth(val)
-    }
-    const handleQuality = (val) => {
-        setQuality(val)
-    }
-    const getData = () => {
-        console.log("entered getDATA")
-        fetch("/mess/messvendors", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                'hashing': window.localStorage.getItem('hash')
-            }
-        }).then((res) => {
-            if (!res.ok) {
-                return {}
-            }
-            return res.json()
-        }).then(
-            (res) => {
-                if (res.result==="success") {
-                    // console.log(res.menuItems)
-                    setData(res.menuItems)
-                } else {
-                    notification.open({
-                        message: 'Failed',
-                        description:
-                            'unable to fetch Data :(',
-                    });
-                }
-            }
-        )
-    }
-
-    useEffect(()=> {
-        getData()
-    }, [])
 
     return (
         <Layout>
             <NavBar />
             <Content style={{padding:'0vh 5vh'}}>
-                <Title level={2}>Inspection Report</Title>
+                <Title level={2}>Menu for {props.time}</Title>
                 <Form
                     onFinish={onFinish}
                 >
@@ -116,18 +74,6 @@ const InspectionPage = () => {
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="item name" />
                     </Form.Item>
                     <Form.Item
-                            name="vendor"
-                            rules={[
-                                {
-                                    type: 'array',
-                                    required: true,
-                                    message: 'Mess Name',
-                                },
-                            ]}
-                        >
-                            <Cascader options={data} placeholder='vendor name' />
-                        </Form.Item>
-                    <Form.Item
                         name="desc"
                         rules={[
                             {
@@ -137,30 +83,6 @@ const InspectionPage = () => {
                         ]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Normal" />
-                    </Form.Item>
-                    <Form.Item
-                        name="quality"
-                        rules={[
-                            {
-                                message: 'Please input your Quality!',
-                            },
-                        ]}
-                    >
-                    <Card>
-                        <Text>Quality </Text><Rate  onChange={handleQuality} value={quality} />
-                    </Card>
-                    </Form.Item>
-                    <Form.Item
-                        name="health"
-                        rules={[
-                            {
-                                message: 'Please input your Health!',
-                            },
-                        ]}
-                    >
-                        <Card>
-                        <Text>Health </Text><Rate  onChange={handleHealth} value={health} />
-                        </Card>
                     </Form.Item>
                     <Form.Item
                     name='file'
@@ -188,4 +110,4 @@ const InspectionPage = () => {
     );
 };
 
-export default InspectionPage
+export default AddMenuPage

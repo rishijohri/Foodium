@@ -1,10 +1,8 @@
 var mongoose=  require("mongoose")
-var passportLocalMongoose = require("passport-local-mongoose")
 
 var MessSchema = mongoose.Schema({
     vendor: String,
     username: String,
-    password: String,
     phone: String, 
     email: String,
     breakfast: Number,
@@ -13,5 +11,4 @@ var MessSchema = mongoose.Schema({
     pin: Number
 })
 
-MessSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model("Mess", MessSchema)

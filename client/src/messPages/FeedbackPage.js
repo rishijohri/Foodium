@@ -18,7 +18,7 @@ function sendFeedback(data, nav) {
         headers: { 'Content-Type': 'application/json',
         'hashing': window.localStorage.getItem('hash') }
     }
-    fetch('/feedback', req).then((res)=> {
+    fetch('/mess/feedback', req).then((res)=> {
         if (!res.ok)
             return {};
         return res.json();
@@ -29,7 +29,7 @@ function sendFeedback(data, nav) {
                 description:
                 'Thank you for filling out the form',
               });
-              window.location.reload();
+              nav("/mess/home", {replace:true});
         } else {
             notification.open({
                 message: 'Failed',

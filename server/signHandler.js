@@ -1,5 +1,5 @@
-const {encode, decode} = require('string-encode-decode')
-const User = require('../models/user')
+const User = require('./models/user')
+const Mess = require('./models/mess')
 const passport = require('passport')
 const customStrategy = require('passport-custom')
 const CryptoJS = require("crypto-js");
@@ -80,6 +80,18 @@ const signupHandler = (req, res) => {
         } else {
             newUser.jwt = req.headers.hashing
             newUser.save()
+            if (req.body.position=='Mess Vendor') {
+                Mess.create({
+                    vendor: req.body.username,
+                    username: req.body.username,
+                    phone: req.body.phone,
+                    email: req.body.email,
+                    breakfast: 0,
+                    lunch: 0,
+                    dinner: 0,
+                    pin: 1000
+                })
+            }
             passport.authenticate("custom")
                 (req, res, () => {
                     res.json({
@@ -90,6 +102,7 @@ const signupHandler = (req, res) => {
                 })
         }
     });
+    
 }
 
 const failHandler = (req, res) => {

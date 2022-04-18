@@ -11,7 +11,7 @@ const LiveReview = (props) => {
     const [data, setData] = useState([])
     let clean, speed, taste, overallFood, overallService, items = 0;
     const getData = () => {
-        fetch("/livereview/"+props.vendor, {
+        fetch("/mess/livereview/"+props.vendor, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

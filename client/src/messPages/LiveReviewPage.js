@@ -11,7 +11,7 @@ const LiveReviewPage=()=>{
   const [data, setData] = useState([]);
   const getData = () => {
     console.log("entered getDATA")
-    fetch("/messvendors", {
+    fetch("/mess/messvendors", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

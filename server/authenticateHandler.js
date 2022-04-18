@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const User = require('./models/user')
 
 const authenticateHandler = (req, res) => {
     console.log("entered " + "/authenticate")

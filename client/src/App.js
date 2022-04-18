@@ -7,8 +7,9 @@ import {
 import React, {useEffect} from 'react';
 import { createBrowserHistory } from "history";
 import EntryPage from './pages/EntryPage';
-import FeedbackPage from './messPages/FeedbackPage';
 import HomePage from './pages/HomePage';
+
+import FeedbackPage from './messPages/FeedbackPage';
 import LiveMenuPage from './messPages/LiveMenuPage';
 import MessPayPage from "./messPages/MessPayPage";
 import InspectionPage from "./messPages/InspectionPage";
@@ -16,8 +17,14 @@ import Hashcomp from "./components/hashcomp"
 import Authenticate from "./components/authenticate";
 import SuccessPage from "./messPages/SuccessPage";
 import MessHome from "./messPages/MessHome";
+import CanteenHome from "./canteenPages/canteenHome";
 import LiveReviewPage from "./messPages/LiveReviewPage";
 import PaymentHistoryPage from "./messPages/PaymentHistoryPage";
+
+import VendorHomePage from "./messVendorPages/VendorHomePage";
+import ChangePinPage from './messVendorPages/ChangePinPage';
+import ChangePricePage from './messVendorPages/ChangePricePage';
+import ChangeMenuPage from "./messVendorPages/ChangeMenuPage";
 var bcrypt = require('bcryptjs');
 
 const customHistory = createBrowserHistory();
@@ -86,18 +93,46 @@ function App() {
               }
             />
         </Route>
-        <Route path='canteen' element={<p>Nothing ready Yet</p>}>
-
+        <Route path='canteen' element={<Authenticate position={[]}><Hashcomp><Outlet/></Hashcomp></Authenticate>}>
+          <Route path='home' element={<Authenticate position={[]}>
+                <Hashcomp>
+                  <CanteenHome/>
+                </Hashcomp>
+              </Authenticate>}/>
+          </Route>
+        <Route path='mess-vendor' element={<Authenticate position={[]}><Hashcomp><Outlet/></Hashcomp></Authenticate>}>
+              <Route path='home' element={<Authenticate position={[]}>
+                                            <Hashcomp>
+                                              <VendorHomePage/>
+                                            </Hashcomp>
+                                          </Authenticate>}/>
+              <Route path='change-pin' element={<Authenticate  position={[]}>
+                                                  <Hashcomp>
+                                                    <ChangePinPage position={''}/>
+                                                  </Hashcomp>
+                                                </Authenticate>}/>
+              <Route path='change-price' element={<Authenticate  position={[]}>
+                                                  <Hashcomp>
+                                                    <ChangePricePage position={''}/>
+                                                  </Hashcomp>
+                                                </Authenticate>}/>
+              <Route path='change-menu' element={<Authenticate  position={[]}>
+                                                  <Hashcomp>
+                                                    <ChangeMenuPage position={''}/>
+                                                  </Hashcomp>
+                                                </Authenticate>}/>
+              <Route path="*" element={<main style={{ padding: "1rem" }}>
+                                          <p>There's nothing here in Mess Vendors!</p>
+                                        </main>}/>
         </Route>
         <Route path='home' element={<Authenticate  position={[]}>
                                       <Hashcomp>
-                                        <HomePage/>
+                                        <HomePage position={''}/>
                                       </Hashcomp>
                                     </Authenticate>}/>
-        
       <Route path="*" element={
         <main style={{ padding: "1rem" }}>
-          <p>There's nothing here!</p>
+          <p>There's nothing here At All!</p>
         </main>
       }
     />

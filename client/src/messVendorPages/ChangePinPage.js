@@ -4,29 +4,32 @@ import { Typography, Layout,notification, Button, Modal,Image} from 'antd';
 import {isMobile} from 'react-device-detect';
 import NavBar from '../components/NavBar';
 import PinInput from 'w-react-pin-input';
+import logo from '../images/foodiumLogo.png'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-import logo from '../images/foodiumLogo.png'
 const { Content } = Layout;
 const { Title } = Typography;
 
-const MessPayPage=()=>{
+const ChangePinPage=(props)=>{
     const navigate = useNavigate()
     var [pin, setPin] = useState(0)
+    var [newpin, setNewPin] = useState(0)
     var [ind, setInd] = useState(0)
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [modalTitle, setModalTitle] = useState('Loading')
     const [mess, setMess] = useState("")
     const [isOkDisable, setIsOkDisable] = useState(false)
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
+    const [pageTitle, setPageTitle] = useState('Re-enter Previous PIN')
     const onFinish = ()=> {
-        fetch("/mess/payeat",{
+        fetch("/messvendor/changepin",{
             method:'POST',
             headers: {
                 "Content-Type": "application/json",
                 'hashing': window.localStorage.getItem('hash')
             },
             body:JSON.stringify({
-                pin: pin
+                oldpin: pin,
+                newpin: newpin
             })
        }).then(
            (res) => {
@@ -40,14 +43,14 @@ const MessPayPage=()=>{
             notification.open({
                 message: 'success',
                 description:
-                    'Payment Complete complete :) to ' + res.data + "   "+res.date,
+                    'PIN Changed for ' + res.data,
             });
-            return navigate("/mess/success", {replace:true, state:{date: res.date}})
+            return navigate("/mess-vendor/home", {replace:true, state:{date: res.date}})
         } else {
         notification.open({
             message: 'Failed',
             description:
-                'unable to payment :(',
+                'unable to Set PIN',
         });
         setIsModalVisible(false)
         
@@ -55,7 +58,7 @@ const MessPayPage=()=>{
 })
     }
     const handleClick = () => {
-        fetch('/mess/confirmmess/'+pin.toString(), {
+        fetch('/messvendor/confirmmess/'+pin.toString(), {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -63,26 +66,30 @@ const MessPayPage=()=>{
             }
         }).then(async (res)=>{
             if (!res.ok) {
-                setModalTitle('Unknown Error')
                 setMess("unknown")
+                return false
             }
             res = await res.json()
             if (res.result==='success')
             {
                 if (res.data==='unknown') {
 
-                    setModalTitle('Wrong PIN')
                     setMess("unknown")
+                    notification.open({
+                        message: 'Wrong PIN'
+                    })
+                    return false
                 } else {
-                    setModalTitle("Confirm")
-                    setMess(res.data)
+                    if (res.data==props.username) {
+                        setMess(res.data)
+                        setPageTitle('Enter New PIN')
+                        setIsSubmitDisabled(false)
+                        return true
+                    }
                 }
-            } else {
-                setModalTitle('Wrong PIN')
-                setMess("unknown")
             }
-        }).then(()=>{
-            setIsModalVisible(true)
+        }).then((_val)=>{
+            setIsModalVisible(false)
         })
     }
 
@@ -91,7 +98,7 @@ const MessPayPage=()=>{
             setIsOkDisable(true)
         else
             setIsOkDisable(false)
-    }, [mess, modalTitle])
+    }, [mess])
 
     return (
         <Layout style={{height:'100vh', width:'100vw'}}>
@@ -105,15 +112,17 @@ const MessPayPage=()=>{
                     marginRight: '5vw',
                     verticalAlign:'center'}}>
                         <center>
-                        <Title level={2} >Mess Payment</Title>
+                        <Title level={2} >{pageTitle}</Title>
                         <Image src={logo} width='24vh' height='24vh' />
                         <PinInput 
                             length={4} 
                             initialValue=""
-                            onChange={(value, index) => {
-                                console.log(value)
-                                console.log(index)
-                                setPin(value)
+                            onChange={(value, _index) => {
+                                if (isSubmitDisabled) {
+                                    setPin(value)
+                                } else {
+                                    setNewPin(value)
+                                }
                                 setInd(0)
                             }} 
                             type="numeric" 
@@ -121,22 +130,24 @@ const MessPayPage=()=>{
                             style={{padding: '10px'}}  
                             inputStyle={{borderColor: 'red'}}
                             inputFocusStyle={{borderColor: 'blue'}}
-                            onComplete={(value, index) => {
+                            onComplete={(_value, _index) => {
+                                console.log(_value)
                                 setInd(1)
                             }}
                             autoSelect={true}
                             regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
                             />
-                            <Button type="primary" onClick={handleClick} disabled={ind!==1}>Submit</Button>
+                            <Button type="primary" onClick={handleClick} disabled={ind!==1}>Verify</Button>
+                            <Button type="primary" onClick={()=> {setIsModalVisible(true)}} disabled={ind!==1 || isSubmitDisabled}>Submit</Button>
                         </center>
                         <Modal 
-                        title={modalTitle} 
+                        title='Confirm New PIN' 
                         visible={isModalVisible} 
                         onCancel={()=> {setIsModalVisible(false)}}
                         okButtonProps={{disabled:isOkDisable}}
                         onOk={onFinish}
                         >
-                            Payment to {mess}
+                            Changing PIN from {pin} to {newpin}
                         </Modal>
                         </div>
                 </Content>
@@ -144,4 +155,4 @@ const MessPayPage=()=>{
     );
 }
 
-export default MessPayPage;
+export default ChangePinPage;

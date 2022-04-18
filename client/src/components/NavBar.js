@@ -7,7 +7,7 @@ import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 // import '../pages/PaymentHistoryPage'
 const {SubMenu} = Menu
-var NavBar = () => {
+var NavBar = (props) => {
   const navigate = useNavigate()
   const logOut=()=>{
       fetch('/signout',{
@@ -40,15 +40,15 @@ var NavBar = () => {
         }
       })
   }
-  const onPassChange =()=> {
-
-  }
   const menu = (
     <Menu>
+      <Menu.Item key='0'>        
+        <h3>{props.username}</h3>            
+      </Menu.Item>
       <Menu.Item key='1' onClick={logOut}>        
           <h3>Logout</h3>     
       </Menu.Item>
-      <Menu.Item key='2' onClick={()=>{navigate("/payment-history ")}}>        
+      <Menu.Item key='2' onClick={()=>{navigate("/mess/payment-history ")}}>        
         <h3>Payment History </h3>            
       </Menu.Item>
       <Menu.Item key='3'>        
@@ -75,6 +75,10 @@ var NavBar = () => {
         
       </div>
     );
+}
+
+NavBar.defaultProps = {
+  username: 'User'
 }
 
 export default NavBar;

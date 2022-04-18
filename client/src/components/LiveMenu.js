@@ -10,7 +10,7 @@ const { Content } = Layout;
 const LiveMenu = (props) => {
     const [data, setData] = useState([])
     const getData = () => {
-        fetch("/livemenu/"+props.vendor, {
+        fetch("/mess/livemenu/"+props.vendor, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -40,16 +40,14 @@ const LiveMenu = (props) => {
     useEffect(()=> {
         getData()
     }, [])
-    var iheight='150px';
-    var iwidth='150px';
-    var width='100vw';
-    var align='end'
-    var isCenter=true
+    let iheight='150px';
+    let iwidth='150px';
+    let width='100vw';
+    let isCenter=true
     if (isMobile) {
         iheight='15vh'
         iwidth='15vh'
         width='100vw'
-        align='start'
         isCenter=false
     } else {
         iheight='10vw';
@@ -63,7 +61,18 @@ const LiveMenu = (props) => {
                 {data.map((item, index) => {
                     const key = index + 1;
                     if(isCenter){
-                        return (<center><MenuCard title={item.name} width={width} iheight={iheight} iwidth={iwidth} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/></center>);
+                        return (<center>
+                            <MenuCard 
+                            title={item.name} 
+                            width={width} 
+                            iheight={iheight} 
+                            iwidth={iwidth} 
+                            content={item.desc} 
+                            key={key} 
+                            rateh={item.health} 
+                            rateq={item.quality} 
+                            div={item.desc} 
+                            img={item.image}/></center>);
                     }
                     return (<MenuCard title={item.name} width={width} iheight={iheight} iwidth={iwidth} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/>);
                     
@@ -74,7 +83,7 @@ const LiveMenu = (props) => {
 }
 
 LiveMenu.defaultProps = {
-    vendor: "Kitchen"
+    vendor: "Kitchen",
 }
 
 export default LiveMenu

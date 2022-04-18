@@ -1,38 +1,20 @@
 const express = require("express")
 const router = express.Router()
-const passport = require('passport')
 const livereviewHandler = require('./livereviewHandler')
 const messvendorsHandler = require('./messvendorsHandler')
 const confirmmessHandler = require('./confirmmessHandler')
 const { livemenuHandler, uploadimageHandler } = require("./livemenuHandler")
-const {authenticateHandler, hashHandler, hashcompHandler} = require("./authenticateHandler")
+const {authenticateHandler, hashHandler, hashcompHandler} = require("../authenticateHandler")
 const {historyHandler,payEatHandler}=require("./paymentHandler")
-const { signinHandler, signupHandler, signoutHandler, failHandler} = require('./signHandler')
-const User = require('../models/user')
 const feedbackHandler = require("./feedbackHandler")
-router.use(require("express-session")({
-    secret: "wherever",
-    resave: false,
-    saveUninitialized: false
-}))
-router.use(passport.initialize())
-router.use(passport.session())
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
-router.post('/signin', passport.authenticate('custom', { failureRedirect: '/fail' }), signinHandler)
-router.post('/signout', signoutHandler)
+
 router.post('/payeat',hashHandler, payEatHandler)
-router.post("/signup", signupHandler)
 router.post('/feedback',hashHandler, feedbackHandler)
 router.post('/uploadimage',hashHandler, uploadimageHandler)
-router.get('/fail',hashHandler, failHandler)
-router.get('/signout', signoutHandler)
 router.get('/livereview/:param1',hashHandler, livereviewHandler)
 router.get('/messvendors',hashHandler, messvendorsHandler)
 router.get('/confirmmess/:param1', hashHandler, confirmmessHandler)
 router.get('/livemenu/:param1',hashHandler, livemenuHandler)
-router.get('/authenticate', authenticateHandler)
-router.get('/hashcomp', hashcompHandler)
 router.get('/historyhandler',hashHandler, historyHandler)
 
 module.exports = router
