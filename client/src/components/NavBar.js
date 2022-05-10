@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-// import '../pages/PaymentHistoryPage'
+
 const {SubMenu} = Menu
 var NavBar = (props) => {
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ var NavBar = (props) => {
   }
   const menu = (
     <Menu>
-      <Menu.Item key='0'>        
+      <Menu.Item disabled={true} key='0'>        
         <h3>{props.username}</h3>            
       </Menu.Item>
       <Menu.Item key='1' onClick={logOut}>        

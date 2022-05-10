@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate} from 'react-router';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
@@ -16,22 +16,31 @@ import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from '@ant-de
 var CryptoJS = require("crypto-js");
 const { Title } = Typography;
 const { Content } = Layout;
-const pos = ['Student',
-            'Faculty',
-            'Mess Vendor',
-            'Canteen Owner',
-            'Mess Inspection Team Member',
-            'Canteen Inspection Team Member',
-            'Admin',
-            'Student Admin',
-            'Guest']
-const positions = pos.map((item)=> {return {value: item, label: item}})
 
 const SignUpPage = (props) => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
-
+    const [positions, setPositions] = useState([])
     var phoneno = /^\d{10}$/;
+    const getData = async () => {
+        const req = {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                'hashing': window.localStorage.getItem('hash')
+            },
+        }
+        let res = await fetch('/entry', req)
+        if (!res.ok)
+            return
+        res = await res.json()
+        if (res.result==='success') {
+            setPositions(res.positions)
+        }
+    }
+    useEffect(()=> {
+        getData()
+    }, [])
 
     const onFinish = async (values) => {
         let { username, prefix, phone, password, email, confirm, agreement } = values;

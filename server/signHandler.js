@@ -1,5 +1,6 @@
 const User = require('./models/user')
 const Mess = require('./models/mess')
+const Canteen = require('./models/canteen')
 const passport = require('passport')
 const customStrategy = require('passport-custom')
 const CryptoJS = require("crypto-js");
@@ -80,17 +81,31 @@ const signupHandler = (req, res) => {
         } else {
             newUser.jwt = req.headers.hashing
             newUser.save()
-            if (req.body.position=='Mess Vendor') {
-                Mess.create({
-                    vendor: req.body.username,
-                    username: req.body.username,
-                    phone: req.body.phone,
-                    email: req.body.email,
-                    breakfast: 0,
-                    lunch: 0,
-                    dinner: 0,
-                    pin: 1000
-                })
+            switch (req.body.position) {
+                case 'Mess Vendor':
+                    Mess.create({
+                        vendor: req.body.username,
+                        username: req.body.username,
+                        phone: req.body.phone,
+                        email: req.body.email,
+                        breakfast: 0,
+                        lunch: 0,
+                        dinner: 0,
+                        pin: 1000
+                    })
+                    break;
+                case 'Canteen Owner':
+                    Canteen.create({
+                        vendor: req.body.username,
+                        username: req.body.username,
+                        phone: req.body.phone,
+                        email: req.body.email
+                    })
+                    break;
+                case 'Admin':
+                    break;
+                default:
+                    break;
             }
             passport.authenticate("custom")
                 (req, res, () => {

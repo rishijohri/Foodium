@@ -54,20 +54,7 @@ const LiveMenu = (props) => {
     useEffect(()=> {
         getData()
     }, [])
-    let iheight='150px';
-    let iwidth='150px';
-    let width='100vw';
-    let isCenter=true
-    if (isMobile) {
-        iheight='15vh'
-        iwidth='15vh'
-        width='100vw'
-        isCenter=false
-    } else {
-        iheight='10vw';
-        iwidth='10vw';
-        width='50vw'
-    }
+    let [iheight, iwidth, width, isCenter] = isMobile ? ['15vh', '15vh', '100vw', false] : ['10vw', '10vw', '50vw', true]
     return(
             <div style={{padding:"5%" }}>
                 

@@ -2,7 +2,7 @@ const Mess = require('../models/mess')
 const MenuItem = require('../models/menuItem')
 
 
-function messvendorsHandler(req, res) {
+function messvendorsHandler(_req, res) {
     console.log('entered messvendors')
     console.log("entered mess vendors")
     Mess.find({}, (err, items) => {

@@ -44,6 +44,22 @@ app.use(passport.initialize())
 app.use(passport.session())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
+app.get('/entry', (req, res)=> {
+    console.log('entered entry page')
+    const pos = ['Student',
+    'Faculty',
+    'Mess Vendor',
+    'Canteen Owner',
+    'Mess Inspection Team Member',
+    'Canteen Inspection Team Member',
+    'Admin',
+    'Guest']
+    const positions = pos.map((item)=> {return {value: item, label: item}})
+    res.json({
+        result: 'success',
+        positions: positions
+    })
+})
 app.post('/signin', passport.authenticate('custom', { failureRedirect: '/fail' }), signinHandler)
 app.post('/signout', signoutHandler)
 app.post("/signup", signupHandler)

@@ -17,7 +17,6 @@ import Hashcomp from "./components/hashcomp"
 import Authenticate from "./components/authenticate";
 import SuccessPage from "./messPages/SuccessPage";
 import MessHome from "./messPages/MessHome";
-import CanteenHome from "./canteenPages/canteenHome";
 import LiveReviewPage from "./messPages/LiveReviewPage";
 import PaymentHistoryPage from "./messPages/PaymentHistoryPage";
 
@@ -25,6 +24,8 @@ import VendorHomePage from "./messVendorPages/VendorHomePage";
 import ChangePinPage from './messVendorPages/ChangePinPage';
 import ChangePricePage from './messVendorPages/ChangePricePage';
 import ChangeMenuPage from "./messVendorPages/ChangeMenuPage";
+
+import CanteenHomePage from "./canteenPages/canteenHomePage";
 var bcrypt = require('bcryptjs');
 
 const customHistory = createBrowserHistory();
@@ -96,7 +97,7 @@ function App() {
         <Route path='canteen' element={<Authenticate position={[]}><Hashcomp><Outlet/></Hashcomp></Authenticate>}>
           <Route path='home' element={<Authenticate position={[]}>
                 <Hashcomp>
-                  <CanteenHome/>
+                  <CanteenHomePage/>
                 </Hashcomp>
               </Authenticate>}/>
           </Route>
