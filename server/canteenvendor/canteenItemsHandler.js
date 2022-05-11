@@ -12,10 +12,10 @@ const canteenitemsFetch =async (req, res) => {
         return
     }
     console.log(shop)
-    let items = shop.items
+    let menu = shop.menu
     res.json({
         result: "success",
-        canteenItems: items
+        canteenItems: menu
     });
 }
 
@@ -31,7 +31,7 @@ const canteenitemsDelete = async (req, res) => {
         })
         return
     }
-    shop.items.id(req.body._id).remove()
+    shop.menu.id(req.body._id).remove()
     shop.save()
     res.json({
         result: 'success'
@@ -49,7 +49,7 @@ const canteenitemsModify = async (req, res) => {
         })
         return
     }
-    shop.items.id(req.body._id).price = req.body.price
+    shop.menu.id(req.body._id).price = req.body.price
     shop.save()
     res.json({
         result: 'success'

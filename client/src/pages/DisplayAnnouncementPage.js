@@ -1,30 +1,18 @@
-import { Layout, notification } from 'antd';
+import { Layout, notification, Typography } from 'antd';
 import React, { useState, useEffect } from 'react';
 import AnnouncementCard from '../components/announcementCard';
 import {isMobile} from 'react-device-detect';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
+import NavBar from '../components/NavBar'
 
+const { Title} = Typography;
 const { Content } = Layout;
 
 const LiveMenu = (props) => {
     const [data, setData] = useState([])
-    const today = new Date()
-    let d = today.getDay()
-    let h = today.getHours()
-    let days = [
-        'su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'
-    ]
-    let day = days[d]
-    if (h<10) {
-        h = 'breakfast'
-    } else if (h<15){
-        h='lunch'
-    } else {
-        h='dinner'
-    }
     const getData = () => {
-        fetch("/mess/livemenu/"+props.vendor+'/'+day+'/'+h, {
+        fetch("/fetchannouncement", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -38,8 +26,8 @@ const LiveMenu = (props) => {
         }).then(
             (res) => {
                 if (res.result==="success") {
-                    console.log(res.menuItems.length)
-                    setData(res.menuItems)
+                    console.log(res.announcement)
+                    setData(res.announcement)
                 } else {
                     notification.open({
                         message: 'Failed',
@@ -56,10 +44,16 @@ const LiveMenu = (props) => {
     }, [])
     let [width, isCenter] = isMobile ? ['100vw', false] : ['50vw', true]
     return(
+        <Layout>
+            <NavBar username={props.username}/>
+
+            <Content style={{padding:'0vh 5vh'}}>
+                <Title level={2}>Announcements</Title>
+            </Content>
+
             <div style={{padding:"5%" }}>
                 
                 {data.map((item, index) => {
-                    const key = index + 1;
                     if(isCenter){
                         return (<center>
                             <AnnouncementCard 
@@ -76,6 +70,7 @@ const LiveMenu = (props) => {
                 })}
                 
             </div>
+        </Layout>
     );
 }
 

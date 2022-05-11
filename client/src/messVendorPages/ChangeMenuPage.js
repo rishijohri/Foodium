@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router'
-import {Tabs, Typography, Layout,notification, Drawer,  Button, Modal,Image} from 'antd';
+import React, { useState, } from 'react';
+import {Tabs, Layout, Drawer,  Button} from 'antd';
 import { CloseOutlined  } from '@ant-design/icons';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
@@ -8,7 +7,6 @@ import '../assets/main.css';
 import VendorMenu from '../components/vendorMenu';
 import AddMenuPage from './AddMenuPage';
 const { Content, Footer } = Layout;
-const { Title } = Typography;
 const { TabPane } = Tabs;
 const ChangeMenuPage = (props) => {
     const [addItem, setAddItem] = useState(false) 

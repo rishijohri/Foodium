@@ -7,7 +7,7 @@ const { livemenuHandler, uploadimageHandler, updateimageHandler } = require("./l
 const {authenticateHandler, hashHandler, hashcompHandler} = require("../authenticateHandler")
 const {historyHandler,payEatHandler}=require("./paymentHandler")
 const feedbackHandler = require("./feedbackHandler")
-const {fetchAnnouncementHandler} = require('../messvendor/announcementHandler')
+const {fetchAnnouncementHandler} = require('../announcementHandler')
 
 router.post('/payeat',hashHandler, payEatHandler)
 router.post('/feedback',hashHandler, feedbackHandler)

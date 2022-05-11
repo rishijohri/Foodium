@@ -10,7 +10,7 @@ const addMenuItem = async (req, res) => {
             result: 'fail',
         })
     }
-    shop.items.push(req.body)
+    shop.menu.push(req.body)
     shop.save()
     res.json({
         result: 'success'

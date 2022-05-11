@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router'
-import { Typography,Card, Layout, notification, Button,Row, Col, Modal,Input} from 'antd';
-import {isMobile} from 'react-device-detect';
+import { Typography,Card, Layout, notification, Button,Row, Col,Input} from 'antd';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
@@ -10,7 +8,6 @@ const { Title } = Typography;
 
 
 const ChangePricePage=(props)=>{
-    const navigate = useNavigate()
     const [breakPrice, setbreakPrice] = useState(-1)
     const [lunchPrice, setLunchPrice] = useState(-1)
     const [dinnerPrice, setDinnerPrice] = useState(-1)

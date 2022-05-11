@@ -1,12 +1,11 @@
-import React,{ useState } from 'react';
-import { PageHeader, Drawer, Menu, Button,Dropdown,notification} from 'antd';
-import { UserOutlined, ArrowLeftOutlined , CloseOutlined,} from '@ant-design/icons';
+import React,{} from 'react';
+import { PageHeader, Menu, Button,Dropdown,notification} from 'antd';
+import { UserOutlined, ArrowLeftOutlined} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 
-const {SubMenu} = Menu
 var NavBar = (props) => {
   const navigate = useNavigate()
   const logOut=()=>{

@@ -6,7 +6,7 @@ function canteenvendorsHandler(_req, res) {
         if (!err && items) {
             res.json({
                 result: "success",
-                vendors: items.map(a => {return {'label': a.vendor, 'value': a.vendor}})
+                vendors: items.map(e => e.vendor)
             })
         }
         else {

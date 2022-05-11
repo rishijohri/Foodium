@@ -4,7 +4,7 @@ const { confirmmessHandler, changepinHandler } = require("./changepin")
 const {authenticateHandler, hashHandler, hashcompHandler} = require('../authenticateHandler')
 const feedbackHandler = require("../mess/feedbackHandler")
 const {findPrices, changePrices} = require("./changeprice")
-const {announcementHandler} = require('./announcementHandler')
+const {announcementHandler} = require('../announcementHandler')
 
 router.get('/confirmmess/:param1', hashHandler, confirmmessHandler)
 router.get('/getprice/:param1', hashHandler, findPrices)

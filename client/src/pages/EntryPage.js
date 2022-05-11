@@ -10,7 +10,7 @@ import { CloseOutlined  } from '@ant-design/icons';
 const { Footer, Content } = Layout;
 function importAll(r) {
     let img = {};
-    r.keys().map((item, index) => { img[item.replace('./', '')] = r(item); });
+    r.keys().map((item, _index) => { img[item.replace('./', '')] = r(item); });
     return img;
   }
 const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));

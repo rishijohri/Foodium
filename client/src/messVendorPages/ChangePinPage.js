@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router'
 import { Typography, Layout,notification, Button, Modal,Image} from 'antd';
-import {isMobile} from 'react-device-detect';
 import NavBar from '../components/NavBar';
 import PinInput from 'w-react-pin-input';
 import logo from '../images/foodiumLogo.png'
@@ -80,7 +79,7 @@ const ChangePinPage=(props)=>{
                     })
                     return false
                 } else {
-                    if (res.data==props.username) {
+                    if (res.data===props.username) {
                         setMess(res.data)
                         setPageTitle('Enter New PIN')
                         setIsSubmitDisabled(false)

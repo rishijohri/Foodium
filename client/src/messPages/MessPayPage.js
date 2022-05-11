@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router'
 import { Typography, Layout,notification, Button, Modal,Image} from 'antd';
-import {isMobile} from 'react-device-detect';
 import NavBar from '../components/NavBar';
 import PinInput from 'w-react-pin-input';
 import 'antd/dist/antd.min.css';

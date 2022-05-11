@@ -1,4 +1,4 @@
-const Announcement = require('../models/announcement')
+const Announcement = require('./models/announcement')
 
 const announcementHandler = (req, res) => {
     console.log(req.body)
@@ -20,16 +20,23 @@ const announcementHandler = (req, res) => {
     )
 }
 
-const fetchAnnouncementHandler = (req, res) => {
+const fetchAnnouncementHandler = (_req, res) => {
+    function isDayOver(item){
+        console.log(item)
+        let currDate = new Date()
+        let diff = currDate - item.createdAt
+        return diff <= 1000 * 60 * 60 * 24
+    }
     Announcement.find({}, (err, items) =>{
         if (!err && items) {
             console.log(items)
+            items = items.filter(isDayOver)
             res.json({
                 result: "success",
-                vendors: items.map(a => {return {'title': a.title, 
-                'description': a.description, 
-                'date':`${item['createdAt'].getDate()}/${item['createdAt'].getMonth() + 1}/${item['createdAt'].getFullYear()}`,
-                'time':`${item['createdAt'].getHours()}:${item['createdAt'].getMinutes()}`}})
+                announcement : items.map(a => {return {'title': a.title, 
+                description: a.description, 
+                date:`${a['createdAt'].getDate()}/${a['createdAt'].getMonth() + 1}/${a['createdAt'].getFullYear()}`,
+                time:`${a['createdAt'].getHours()}:${a['createdAt'].getMinutes()}`}})
             })
         }
         else {

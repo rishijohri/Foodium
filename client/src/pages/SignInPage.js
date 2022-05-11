@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router';
-import { Form, Input, Button, Checkbox, Layout, Typography, notification } from 'antd';
+import { Form, Input, Button, Layout, Typography, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
@@ -81,16 +80,6 @@ const SignInPage = (props) => {
                             placeholder="Password"
                         />
                     </Form.Item>
-                    <Form.Item className="login-form-second-last-item">
-                        <Form.Item name="remember" valuePropName="checked" noStyle>
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
-
-                        <a className="login-form-forgot" href="">
-                            Forgot password
-                        </a>
-                    </Form.Item>
-
                     <Form.Item>
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Log in

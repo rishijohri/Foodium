@@ -1,15 +1,13 @@
-import { Layout, notification } from 'antd';
 import React, { useState, useEffect } from 'react';
 import MenuCard from '../components/menuCard';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-import { Card, Row, Typography} from 'antd';
+import { Card, Row, notification} from 'antd';
 import { StarOutlined } from '@ant-design/icons';
-const { Content } = Layout;
 
 const LiveReview = (props) => {
     const [data, setData] = useState([])
-    let clean, speed, taste, overallFood, overallService, items = 0;
+    let clean, speed, taste, overallFood, overallService = 0;
     const getData = () => {
         fetch("/mess/livereview/"+props.vendor, {
             method: "GET",
@@ -51,7 +49,6 @@ const LiveReview = (props) => {
             taste += data.taste;
             overallFood += data.overallFood;
             overallService += data.overallService;
-            items += 1;
         });
     }, [])
     return(

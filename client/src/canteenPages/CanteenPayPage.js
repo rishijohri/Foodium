@@ -10,7 +10,7 @@ import logo from '../images/foodiumLogo.png'
 const { Content } = Layout;
 const { Title } = Typography;
 
-const MessPayPage=(props)=>{
+const CanteenPayPage=(props)=>{
     const navigate = useNavigate()
     var [pin, setPin] = useState(0)
     var [ind, setInd] = useState(0)
@@ -144,4 +144,4 @@ const MessPayPage=(props)=>{
     );
 }
 
-export default MessPayPage;
+export default CanteenPayPage;

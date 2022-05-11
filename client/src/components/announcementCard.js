@@ -2,7 +2,7 @@ import { Card } from 'antd';
 
 const announcementCard = (props) => {
   return (
-    <Card size="small" title={props.title} extra={<a href="#">More</a>} style={{ width: props.width }}>
+    <Card size="small" title={props.title} style={{ width: props.width }}>
       <p>{props.description}</p>
     </Card>
   );

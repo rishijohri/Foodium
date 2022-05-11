@@ -11,7 +11,8 @@ const { Title } = Typography;
 const CanteenVendorHomePage=(props)=>{
     var compstor = [   
         {ic: faBookOpenReader, name: 'Change Menu', link: '/canteen-vendor/change-menu', id: 311},
-        {ic: faBullhorn, name: 'Announcement', link: '/canteen-vendor/announcement', id: 511},
+        {ic: faBullhorn, name: 'Announcement', link: '/canteen-vendor/post-announcement', id: 511},
+        {ic: faCashRegister, name: 'Orders', link: '/canteen-vendor/orders', id: 711},
     ]
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
 

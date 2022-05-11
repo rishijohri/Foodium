@@ -20,7 +20,7 @@ import MessHome from "./messPages/MessHome";
 import LiveReviewPage from "./messPages/LiveReviewPage";
 import PaymentHistoryPage from "./messPages/PaymentHistoryPage";
 import MasterMenuPage from "./messPages/MasterMenuPage";
-import DisplayAnnouncementPage from "./messPages/DisplayAnnouncementPage"
+import DisplayAnnouncementPage from "./pages/DisplayAnnouncementPage"
 
 import CanteenPaymentHistoryPage from "./canteenPages/CanteenPaymentHistoryPage";
 
@@ -28,12 +28,17 @@ import MessVendorHomePage from './messVendorPages/MessVendorHomePage'
 import ChangePinPage from './messVendorPages/ChangePinPage';
 import ChangePricePage from './messVendorPages/ChangePricePage';
 import ChangeMenuPage from "./messVendorPages/ChangeMenuPage";
-import PostAnnouncementPage from "./messVendorPages/postAnnouncementPage";
+import PostAnnouncementPage from "./pages/postAnnouncementPage";
 
 import CanteenHomePage from "./canteenPages/CanteenHomePage";
 import CanteenMenuPage from "./canteenPages/CanteenMenuPage";
+import CanteenMenuChoice from "./canteenPages/CanteenMenuChoice";
+import CanteenPayPage from "./canteenPages/CanteenPayPage";
+import CanteenOrderPage from './canteenPages/CanteenOrderPage';
+
 import CanteenVendorHomePage from "./canteenVendorPages/CanteenVendorHomePage";
 import ChangeCanteenMenuPage from "./canteenVendorPages/CanteenChangeMenuPage";
+import VendorOrderPage from './canteenVendorPages/VendorOrderPage';
 let generator = require('string-generator-js');
 const customHistory = createBrowserHistory();
 function App() {
@@ -114,6 +119,16 @@ function App() {
                   <CanteenHomePage/>
                 </Hashcomp>   
               </Authenticate>}/>
+          <Route path='orders' element={<Authenticate position={[]}>
+                <Hashcomp>
+                  <CanteenOrderPage/>
+                </Hashcomp>   
+              </Authenticate>}/>
+          <Route path='display-announcement' element={<Authenticate  position={[]}>
+                                        <Hashcomp>
+                                          <DisplayAnnouncementPage/>
+                                        </Hashcomp>
+                                      </Authenticate>}/>
           <Route path='payment-history' element={<Authenticate position={[]}>
             <Hashcomp>
               <CanteenPaymentHistoryPage/>
@@ -121,11 +136,26 @@ function App() {
           </Authenticate>} />
           <Route path='menu' element={<Authenticate position={[]}>
             <Hashcomp>
-              <CanteenMenuPage/>
+              <Outlet/>
             </Hashcomp>
-          </Authenticate>} />
+          </Authenticate>} >
+          <Route path='choose' element={<Authenticate position={[]}>
+              <Hashcomp>
+              <CanteenMenuChoice/>
+              </Hashcomp>
+            </Authenticate>} />
+            <Route path=':canteenname' element={<Authenticate position={[]}>
+              <Hashcomp>
+                <CanteenMenuPage/>
+              </Hashcomp>
+            </Authenticate>} />
+            </Route>
+          <Route path='canteen-pay' element={<Authenticate position={[]}>
+                                                <Hashcomp>
+                                                  <CanteenPayPage/>
+                                                </Hashcomp>
+                                              </Authenticate>}/>
           </Route>
-          
         <Route path='mess-vendor' element={<Authenticate position={[]}><Hashcomp><Outlet/></Hashcomp></Authenticate>}>
               <Route path='home' element={<Authenticate position={[]}>
                                             <Hashcomp>
@@ -162,6 +192,17 @@ function App() {
                                               <CanteenVendorHomePage/>
                                             </Hashcomp>
                                           </Authenticate>}/>
+              <Route path='orders' element={<Authenticate position={[]}>
+                                            <Hashcomp>
+                                              <VendorOrderPage/>
+                                            </Hashcomp>
+                                          </Authenticate>}/>
+              <Route path='post-announcement' element={<Authenticate  position={[]}>
+                      <Hashcomp>
+                        <PostAnnouncementPage position={''}/>
+                      </Hashcomp>
+                    </Authenticate>}/>
+
               <Route path='change-pin' element={<Authenticate  position={[]}>
                                                   <Hashcomp>
                                                     <ChangePinPage position={''}/>

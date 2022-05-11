@@ -22,7 +22,7 @@ const Hashcomp = (props) =>  {
             }
         ).then(
             (result) => {
-                if (result.result=='success') {
+                if (result.result==='success') {
                     setCheck('success')
                     console.log(result.position)
                     setPosition(result.position)
@@ -44,9 +44,9 @@ const Hashcomp = (props) =>  {
         }
     }, [])
     const antIcon = <LoadingOutlined style={{ fontSize: 200 }} spin />;
-    if (check=='wait' || position=='wait') {
+    if (check==='wait' || position==='wait') {
         return <center style={{margin:'0' ,left: '50%', position: 'absolute',top: '50%', transform: 'translate(-50%, -50%)'}}><Spin indicator={antIcon} /></center>
-    }else if (check=='success') {
+    }else if (check==='success') {
         if (props.position.length<1 || props.position.includes(position)) {
             return React.cloneElement(props.children, {position: position, username:username});
         }

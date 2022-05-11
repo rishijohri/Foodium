@@ -6,7 +6,6 @@ import '../assets/main.css';
 const { Title } = Typography;
 const MenuCard = (props) => {
 
-
     return (
         <Card style={{width:props.width}}>
             <Row gutter={[props.hg, props.vg]} justify="space-between">

@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router'
-import {Tabs, Typography, Layout,notification, Drawer,  Button, Modal,Image} from 'antd';
-import { CloseOutlined  } from '@ant-design/icons';
+import {Tabs, Layout,notification} from 'antd';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 import VendorMenu from '../components/vendorMenu';
-const { Content, Footer } = Layout;
-const { Title } = Typography;
+const { Content} = Layout;
 const { TabPane } = Tabs;
 const MasterMenuPage = (props) => {
     const [data, setData] = useState([])

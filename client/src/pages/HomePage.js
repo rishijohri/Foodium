@@ -1,7 +1,6 @@
 import NavBar from '../components/NavBar'
-import { Layout, Card, Col, Row, Typography, Button } from 'antd';
-import React, { useState } from 'react';
-import { useNavigate} from 'react-router';
+import { Layout, Card, Col, Row, Typography} from 'antd';
+import React, { } from 'react';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 import Slider from '../components/Slider'
@@ -13,12 +12,11 @@ const { Title } = Typography;
 
 function importAll(r) {
     let img = {};
-    r.keys().map((item, index) => { img[item.replace('./', '')] = r(item); });
+    r.keys().map((item, _index) => { img[item.replace('./', '')] = r(item); });
     return img;
   }
 const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 const HomePage = (props) => {
-    const navigate = useNavigate()
     const [hg, vg, span] = isMobile ? [1, 10, 18] : [12, 6, 10];
     console.log(props.position)
     if (props.position==='Student') {

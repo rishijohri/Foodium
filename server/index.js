@@ -11,6 +11,7 @@ const cors = require("cors");
 const User = require('./models/user');
 const { signinHandler, signupHandler, signoutHandler, failHandler} = require('./signHandler.js')
 const {authenticateHandler, hashHandler, hashcompHandler} = require("./authenticateHandler.js")
+const { fetchAnnouncementHandler} = require('./announcementHandler')
 const port = 3001 || process.env.PORT
 const corsOptions = {
     origin: '*',
@@ -67,12 +68,12 @@ app.get('/signout', signoutHandler)
 app.get('/fail', hashHandler, failHandler)
 app.get('/authenticate', authenticateHandler)
 app.get('/hashcomp', hashcompHandler)
-
-const router = require('./mess/messroute')
+app.get('/fetchannouncement', fetchAnnouncementHandler)
+const messrouter = require('./mess/messroute')
 const messvendorrouter = require('./messvendor/messvendorroute')
 const canteenrouter = require('./canteen/canteenroute')
 const canteenvendorrouter = require('./canteenvendor/canteenvendorroute')
-app.use('/mess', router) 
+app.use('/mess', messrouter) 
 app.use('/messvendor', messvendorrouter)
 app.use('/canteen', canteenrouter)
 app.use('/canteenvendor', canteenvendorrouter)

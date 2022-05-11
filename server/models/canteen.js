@@ -5,7 +5,7 @@ var CanteenSchema = mongoose.Schema({
     username: String,
     phone: String, 
     email: String,
-    items: [CanteenItem]
+    menu: [CanteenItem]
 })
 
 module.exports = mongoose.model("Canteen", CanteenSchema)

@@ -21,7 +21,7 @@ const Authenticate = (props) =>  {
             }
         ).then(
             (result) => {
-                if (result.result=='success') {
+                if (result.result==='success') {
                     setCheck('success')
                     console.log(result.position)
                     setPosition(result.position)

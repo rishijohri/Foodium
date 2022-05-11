@@ -1,6 +1,6 @@
 import React,{ useState} from 'react';
 import { Row,Col,  Card, Rate, Image, Typography, Button, Input } from 'antd';
-import { PlusCircleOutlined} from '@ant-design/icons';
+import { PlusCircleOutlined, MinusCircleOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.min.css';
 import {isMobile} from 'react-device-detect';
 import '../assets/main.css';
@@ -23,17 +23,17 @@ const CMenuCard = (props) => {
         width='50vw'
     }
     const onChange = (v) => {
-        setVal(v)
-        props.onChange(v, props.name)
+        setVal(parseInt(v.target.value))
+        props.onChange(parseInt(v.target.value), props.title)
     }
     const onIncrement = ()=> {
-        props.onChange(val+1, props.name)
-        setVal(val+1)  
+        props.onChange(parseInt(val+1), props.title)
+        setVal(parseInt(val+1))  
     }
     const onDecrement = () => {
         if (val>=1) {
-            props.onChange(val-1, props.name)
-            setVal(val-1)
+            props.onChange(parseInt(val-1), props.title)
+            setVal(parseInt(val-1))
         }
 
     }
@@ -48,14 +48,16 @@ const CMenuCard = (props) => {
                     Rating: <Rate disabled defaultValue={props.rate} /><br/>
                     Price : {props.price} <br/>
                     <Input 
-                        type='number' 
+                        type='number'
+                        min="0" 
+                        step="1" 
                         placeholder="Quantity"
                         defaultValue={0}
                         onChange={onChange}
                         value={val}
                         />
                     <Button onClick={onIncrement}><PlusCircleOutlined /></Button>
-                    <Button onClick={onDecrement}>Something</Button>
+                    <Button onClick={onDecrement}><MinusCircleOutlined /></Button>
                 </Col>
                 <Col span={props.spani}>
                     <Image src={props.img} width={iwidth} height={iheight} style={{ objectFit: "cover" }}/>
