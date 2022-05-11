@@ -51,7 +51,10 @@ var NavBar = (props) => {
       <Menu.Item key='2' onClick={()=>{navigate("/mess/payment-history ")}}>        
         <h3>Payment History </h3>            
       </Menu.Item>
-      <Menu.Item key='3'>        
+      <Menu.Item key='3' onClick={()=>{navigate("/canteen/payment-history ")}}>        
+        <h3>Canteen History </h3>            
+      </Menu.Item>
+      <Menu.Item key='4'>        
         <h3>Change Password</h3>            
       </Menu.Item>
     </Menu>

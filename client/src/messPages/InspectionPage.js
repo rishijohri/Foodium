@@ -175,7 +175,7 @@ const InspectionPage = (props) => {
                             },
                         ]}
                     >
-                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Normal" />
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Description" />
                     </Form.Item>
                     <Form.Item
                         name="quality"

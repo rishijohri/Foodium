@@ -1,6 +1,6 @@
 import { Layout, notification } from 'antd';
 import React, { useState, useEffect } from 'react';
-import VMenuCard from '../components/vmenuCard';
+import VMenuCard from '../components/VMenuCard';
 import {isMobile} from 'react-device-detect';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';

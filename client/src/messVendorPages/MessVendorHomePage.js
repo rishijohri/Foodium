@@ -2,25 +2,24 @@ import { Avatar,Layout,Card,Col, Typography,Row} from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import { faCashRegister,faBullhorn,faUtensils,faFilePen,faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faCashRegister,faBookOpenReader,faBullhorn,faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import NavBar from '../components/NavBar'
 const { Content } = Layout;
 
 const { Title } = Typography;
 
-const MessHome=(props)=>{
+const MessVendorHomePage=(props)=>{
     var compstor = [
-        {ic: faCashRegister, name: 'Canteen Payment', link: '/canteen/canteen-pay', id: 111},
-        {ic: faBullhorn, name: 'Announcements', link: "/canteen/announcement", id: 211},     
-        {ic: faUpload, name: 'Inspection', link: '/canteen/inspection', id: 311},
-        {ic: faUtensils, name: 'Master Menu', link: '/canteen/canteen-master', id: 411},
-        {ic: faFilePen, name: 'Feedback', link: '/canteen/feedback', id: 511},
+        {ic: faCashRegister, name: 'Change Pin', link: '/mess-vendor/change-pin', id: 111},
+        {ic: faMoneyBill, name: 'Change Price', link: "/mess-vendor/change-price", id: 211},     
+        {ic: faBookOpenReader, name: 'Change Menu', link: '/mess-vendor/change-menu', id: 311},
+        {ic: faBullhorn, name: 'Announcement', link: '/mess-vendor/post-announcement', id: 511},
     ]
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
 
     return <>
         <Layout  style={{overflowX: 'hidden',height:'100vh', width:'100vw'}}>
-            <NavBar username={props.username}/>
+        <NavBar username={props.username}/>
             <Content >
                 <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify='center' style={{ marginTop:{mg}}}>
@@ -44,5 +43,5 @@ const MessHome=(props)=>{
         </Layout>
     </>   
 }
-export default MessHome;
+export default MessVendorHomePage;
 

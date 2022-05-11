@@ -1,19 +1,21 @@
-import React, { useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import { Form, Input, Button, Layout, Typography, notification, Image} from 'antd';
-import { UserOutlined} from '@ant-design/icons';
+import { UserOutlined, AccountBookOutlined} from '@ant-design/icons';
 import FileBase64 from 'react-file-base64';
 import NavBar from '../components/NavBar'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const {Content } = Layout;
-const { Title} = Typography;
+const { Title } = Typography;
 
 const AddMenuPage = (props) => {
     const [item, setItem] = useState({ image: '' });
-    const formRef = useRef();
+    console.log(props.username)
+    console.log(props.time)
+    console.log(props.day)
     const onFinish = (values) => {
         console.log(values)
-        fetch("/mess/uploadimage", {
+        fetch("/canteenvendor/addmenuitem", {
             method:'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -21,13 +23,11 @@ const AddMenuPage = (props) => {
             },
             body:JSON.stringify({
                 name: values.food_name,
-                health: 0,
-                quality: 0,
+                rating: 0,
                 vendor: props.username,
                 desc: values.desc,
                 image: item.image,
-                time: props.time,
-                day: props.day
+                price: values.price
             })
        }).then(
            (res) => {
@@ -51,12 +51,12 @@ const AddMenuPage = (props) => {
         });
         }
         setItem({ image: '' });
-        const event = new Event('build');
+        const event = new Event('ct');
         window.dispatchEvent(event)
         formRef.current.resetFields()
     })
     }
-    
+    const formRef = useRef();
 
     return (
         <Layout>
@@ -85,6 +85,21 @@ const AddMenuPage = (props) => {
                         ]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Description" />
+                    </Form.Item>
+                    <Form.Item
+                        name="price"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Enter Price',
+                            },
+                        ]}
+                    >
+                    <Input prefix={<AccountBookOutlined className="site-form-item-icon" />}
+                                        type='number' 
+                                        placeholder="Price"
+                                        defaultValue={0}
+                                        />
                     </Form.Item>
                     <Form.Item
                     name='file'

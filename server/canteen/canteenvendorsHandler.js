@@ -1,7 +1,7 @@
 const Canteen = require('../models/canteen')
 
 function canteenvendorsHandler(_req, res) {
-    console.log('entered canteenvendors')
+    console.log('entered canteen vendors')
     Canteen.find({}, (err, items) => {
         if (!err && items) {
             res.json({
@@ -13,4 +13,11 @@ function canteenvendorsHandler(_req, res) {
             res.status(500).send('An error occurred', err);
         }
     });
+}
+
+
+
+module.exports =  {
+    canteenvendorsHandler,
+    
 }

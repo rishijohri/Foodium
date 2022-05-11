@@ -23,6 +23,7 @@
     "favicon": "^0.0.2",
     "jsonwebtoken": "^8.5.1",
     "otp-generator": "^4.0.0",
+    "randomstring": "^1.2.2",
     "react": "^17.0.2",
     "react-card-flip": "^1.1.5",
     "react-code-input": "^3.10.1",
@@ -36,6 +37,7 @@
     "react-scripts": "5.0.0",
     "simple-crypt": "^3.0.7",
     "string-encode-decode": "^1.0.7",
+    "string-generator-js": "^2.0.2",
     "w-react-pin-input": "^1.0.3",
     "web-vitals": "^2.1.4"
   },

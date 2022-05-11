@@ -44,12 +44,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
-app.get('/entry', (req, res)=> {
+app.get('/entry', (_req, res)=> {
     console.log('entered entry page')
     const pos = ['Student',
     'Faculty',
     'Mess Vendor',
-    'Canteen Owner',
+    'Canteen Vendor',
     'Mess Inspection Team Member',
     'Canteen Inspection Team Member',
     'Admin',
@@ -69,7 +69,10 @@ app.get('/authenticate', authenticateHandler)
 app.get('/hashcomp', hashcompHandler)
 
 const router = require('./mess/messroute')
-const messvendorrouter = require('./messvendor/messvendorroute.js')
-
+const messvendorrouter = require('./messvendor/messvendorroute')
+const canteenrouter = require('./canteen/canteenroute')
+const canteenvendorrouter = require('./canteenvendor/canteenvendorroute')
 app.use('/mess', router) 
 app.use('/messvendor', messvendorrouter)
+app.use('/canteen', canteenrouter)
+app.use('/canteenvendor', canteenvendorrouter)

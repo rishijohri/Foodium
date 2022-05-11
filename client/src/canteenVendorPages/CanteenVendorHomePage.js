@@ -2,18 +2,16 @@ import { Avatar,Layout,Card,Col, Typography,Row} from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import { faCashRegister,faBookOpenReader,faAdd,faFilePen,faMoneyBill } from "@fortawesome/free-solid-svg-icons";
+import { faCashRegister,faBookOpenReader,faBullhorn,faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import NavBar from '../components/NavBar'
 const { Content } = Layout;
 
 const { Title } = Typography;
 
-const VendorHomePage=(props)=>{
-    var compstor = [
-        {ic: faCashRegister, name: 'Change Pin', link: '/mess-vendor/change-pin', id: 111},
-        {ic: faMoneyBill, name: 'Change Price', link: "/mess-vendor/change-price", id: 211},     
-        {ic: faBookOpenReader, name: 'Change Menu', link: '/mess-vendor/change-menu', id: 311},
-        {ic: faFilePen, name: 'Announcement', link: '/mess-vendor/announcement', id: 511},
+const CanteenVendorHomePage=(props)=>{
+    var compstor = [   
+        {ic: faBookOpenReader, name: 'Change Menu', link: '/canteen-vendor/change-menu', id: 311},
+        {ic: faBullhorn, name: 'Announcement', link: '/canteen-vendor/announcement', id: 511},
     ]
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
 
@@ -43,5 +41,5 @@ const VendorHomePage=(props)=>{
         </Layout>
     </>   
 }
-export default VendorHomePage;
+export default CanteenVendorHomePage;
 

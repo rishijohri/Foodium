@@ -1,33 +1,24 @@
-import React, { useState, useRef} from 'react';
-import { Form, Input, Button, Layout, Typography, notification, Image} from 'antd';
+import React, { useRef } from 'react';
+import { Form, Input, Button, Layout, Typography, notification} from 'antd';
 import { UserOutlined} from '@ant-design/icons';
-import FileBase64 from 'react-file-base64';
 import NavBar from '../components/NavBar'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const {Content } = Layout;
 const { Title} = Typography;
 
-const AddMenuPage = (props) => {
-    const [item, setItem] = useState({ image: '' });
-    const formRef = useRef();
+const PostAnnouncementPage = (props) => {
     const onFinish = (values) => {
         console.log(values)
-        fetch("/mess/uploadimage", {
+        fetch("/messvendor/postannouncement", {
             method:'POST',
             headers: {
                 "Content-Type": "application/json",
                 'hashing': window.localStorage.getItem('hash')
             },
             body:JSON.stringify({
-                name: values.food_name,
-                health: 0,
-                quality: 0,
-                vendor: props.username,
-                desc: values.desc,
-                image: item.image,
-                time: props.time,
-                day: props.day
+                title: values.title,
+                description: values.description
             })
        }).then(
            (res) => {
@@ -50,66 +41,53 @@ const AddMenuPage = (props) => {
                 'unable to upload :(',
         });
         }
-        setItem({ image: '' });
-        const event = new Event('build');
-        window.dispatchEvent(event)
-        formRef.current.resetFields()
     })
+    formRef.current.resetFields()
     }
-    
-
+    const formRef = useRef();
     return (
         <Layout>
             <NavBar username={props.username}/>
             <Content style={{padding:'0vh 5vh'}}>
-                <Title level={2}>Menu for {props.time}</Title>
-                <Form onFinish={onFinish} ref={formRef}>
+                <Title level={2}>Post Announcement</Title>
+                <Form
+                    ref={formRef}
+                    onFinish={onFinish}
+                    
+                >
                     <Form.Item
-                        name="food_name"
+                        name="title"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input the name of food item!',
+                                message: 'Title',
                             },
                         ]}
                     >
-                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="item name" />
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Title" />
                     </Form.Item>
+
                     <Form.Item
-                        name="desc"
+                        name="description"
                         rules={[
                             {
                                 required: true,
-                                message: 'Enter food description',
+                                message: 'Description',
                             },
-                        ]}
+                    ]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Description" />
                     </Form.Item>
-                    <Form.Item
-                    name='file'
-                    rules={[
-                        {
-                            message:'Please Upload'
-                        }
-                    ]}
-                    >
-                    <FileBase64
-                    type="file"
-                    multiple={false}
-                    onDone={({ base64 }) => setItem({ ...item, image: base64 })}
-                    />
-                    </Form.Item>
+
                     <Form.Item>
                         <Button type='primary' htmlType="submit" className="login-form-button">
-                            Upload
+                            Post
                         </Button>
                     </Form.Item>
                 </Form>
-                <Image src={item.image}/>
             </Content>
         </Layout>
     );
 };
 
-export default AddMenuPage
+export default PostAnnouncementPage

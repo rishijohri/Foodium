@@ -1,4 +1,4 @@
-import { Tabs, Layout, Typography, notification } from 'antd';
+import { Tabs, Layout, notification } from 'antd';
 import React, { useState ,useEffect} from 'react';
 import LiveMenu from '../components/LiveMenu';
 import NavBar from '../components/NavBar'
@@ -6,7 +6,6 @@ import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const { TabPane } = Tabs;
 const { Content } = Layout;
-const { Title } = Typography;
 const LiveMenuPage=(props)=>{
   const [data, setData] = useState([]);
   const getData = () => {

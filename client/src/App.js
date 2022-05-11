@@ -19,21 +19,26 @@ import SuccessPage from "./messPages/SuccessPage";
 import MessHome from "./messPages/MessHome";
 import LiveReviewPage from "./messPages/LiveReviewPage";
 import PaymentHistoryPage from "./messPages/PaymentHistoryPage";
+import MasterMenuPage from "./messPages/MasterMenuPage";
+import DisplayAnnouncementPage from "./messPages/DisplayAnnouncementPage"
 
-import VendorHomePage from "./messVendorPages/VendorHomePage";
+import CanteenPaymentHistoryPage from "./canteenPages/CanteenPaymentHistoryPage";
+
+import MessVendorHomePage from './messVendorPages/MessVendorHomePage'
 import ChangePinPage from './messVendorPages/ChangePinPage';
 import ChangePricePage from './messVendorPages/ChangePricePage';
 import ChangeMenuPage from "./messVendorPages/ChangeMenuPage";
+import PostAnnouncementPage from "./messVendorPages/postAnnouncementPage";
 
-import CanteenHomePage from "./canteenPages/canteenHomePage";
-var bcrypt = require('bcryptjs');
-
+import CanteenHomePage from "./canteenPages/CanteenHomePage";
+import CanteenMenuPage from "./canteenPages/CanteenMenuPage";
+import CanteenVendorHomePage from "./canteenVendorPages/CanteenVendorHomePage";
+import ChangeCanteenMenuPage from "./canteenVendorPages/CanteenChangeMenuPage";
+let generator = require('string-generator-js');
 const customHistory = createBrowserHistory();
 function App() {
-  let hash = '000000'
   function gettoken() {
-    var salt = bcrypt.genSaltSync(10);
-    hash = bcrypt.hashSync("B4c0/\/", salt);
+    const hash = generator.generate()
     window.localStorage.setItem('hash', hash)
   }
   useEffect(()=> {
@@ -58,8 +63,11 @@ function App() {
           <Hashcomp>
             <MessPayPage/>
           </Hashcomp>
-        
-        
+        </Authenticate>}/>
+        <Route path='mess-master' element={<Authenticate  position={[]}>
+          <Hashcomp>
+            <MasterMenuPage/>
+          </Hashcomp>
         </Authenticate>}/>
         <Route path='live-menu' element={<Authenticate  position={[]}>
                                             <Hashcomp>
@@ -81,6 +89,12 @@ function App() {
                   <PaymentHistoryPage/>
                 </Hashcomp>
               </Authenticate>} />
+
+        <Route path='display-announcement' element={<Authenticate  position={[]}>
+                                            <Hashcomp>
+                                              <DisplayAnnouncementPage/>
+                                            </Hashcomp>
+                                          </Authenticate>}/>
         
         <Route path='success' element={<Authenticate  position={[]}>
                                           <Hashcomp>
@@ -98,13 +112,24 @@ function App() {
           <Route path='home' element={<Authenticate position={[]}>
                 <Hashcomp>
                   <CanteenHomePage/>
-                </Hashcomp>
+                </Hashcomp>   
               </Authenticate>}/>
+          <Route path='payment-history' element={<Authenticate position={[]}>
+            <Hashcomp>
+              <CanteenPaymentHistoryPage/>
+            </Hashcomp>
+          </Authenticate>} />
+          <Route path='menu' element={<Authenticate position={[]}>
+            <Hashcomp>
+              <CanteenMenuPage/>
+            </Hashcomp>
+          </Authenticate>} />
           </Route>
+          
         <Route path='mess-vendor' element={<Authenticate position={[]}><Hashcomp><Outlet/></Hashcomp></Authenticate>}>
               <Route path='home' element={<Authenticate position={[]}>
                                             <Hashcomp>
-                                              <VendorHomePage/>
+                                              <MessVendorHomePage/>
                                             </Hashcomp>
                                           </Authenticate>}/>
               <Route path='change-pin' element={<Authenticate  position={[]}>
@@ -120,6 +145,36 @@ function App() {
               <Route path='change-menu' element={<Authenticate  position={[]}>
                                                   <Hashcomp>
                                                     <ChangeMenuPage position={''}/>
+                                                  </Hashcomp>
+                                                </Authenticate>}/>
+              <Route path='post-announcement' element={<Authenticate  position={[]}>
+                                                  <Hashcomp>
+                                                    <PostAnnouncementPage position={''}/>
+                                                  </Hashcomp>
+                                                </Authenticate>}/>
+              <Route path="*" element={<main style={{ padding: "1rem" }}>
+                                          <p>There's nothing here in Mess Vendors!</p>
+                                        </main>}/>
+        </Route>
+        <Route path='canteen-vendor' >
+              <Route path='home' element={<Authenticate position={[]}>
+                                            <Hashcomp>
+                                              <CanteenVendorHomePage/>
+                                            </Hashcomp>
+                                          </Authenticate>}/>
+              <Route path='change-pin' element={<Authenticate  position={[]}>
+                                                  <Hashcomp>
+                                                    <ChangePinPage position={''}/>
+                                                  </Hashcomp>
+                                                </Authenticate>}/>
+              <Route path='change-price' element={<Authenticate  position={[]}>
+                                                  <Hashcomp>
+                                                    <ChangePricePage position={''}/>
+                                                  </Hashcomp>
+                                                </Authenticate>}/>
+              <Route path='change-menu' element={<Authenticate  position={[]}>
+                                                  <Hashcomp>
+                                                    <ChangeCanteenMenuPage position={''}/>
                                                   </Hashcomp>
                                                 </Authenticate>}/>
               <Route path="*" element={<main style={{ padding: "1rem" }}>

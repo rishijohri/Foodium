@@ -7,15 +7,18 @@ const { livemenuHandler, uploadimageHandler, updateimageHandler } = require("./l
 const {authenticateHandler, hashHandler, hashcompHandler} = require("../authenticateHandler")
 const {historyHandler,payEatHandler}=require("./paymentHandler")
 const feedbackHandler = require("./feedbackHandler")
+const {fetchAnnouncementHandler} = require('../messvendor/announcementHandler')
 
 router.post('/payeat',hashHandler, payEatHandler)
 router.post('/feedback',hashHandler, feedbackHandler)
 router.post('/updateimage',hashHandler, updateimageHandler)
 router.post('/uploadimage',hashHandler, uploadimageHandler)
+
 router.get('/livereview/:param1',hashHandler, livereviewHandler)
 router.get('/messvendors',hashHandler, messvendorsHandler)
 router.get('/confirmmess/:param1', hashHandler, confirmmessHandler)
 router.get('/livemenu/:vendor/:day/:time',hashHandler, livemenuHandler)
 router.get('/historyhandler',hashHandler, historyHandler)
 router.get('/getmenu/:vendor/:day/:time', hashHandler, messitemsHandler)
+router.get('/fetchannouncement', fetchAnnouncementHandler)
 module.exports = router

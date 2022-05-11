@@ -1,7 +1,6 @@
-import React,{ useState } from 'react';
+import React,{ } from 'react';
 import { Row,Col,  Card, Rate, Image, Typography } from 'antd';
-import { UserOutlined, MenuOutlined, CloseOutlined,} from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const { Title } = Typography;

@@ -2,7 +2,7 @@ import { Avatar,Layout,Card,Col, Typography,Row} from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import { faCashRegister,faBookOpenReader,faComment,faFilePen,faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faCashRegister,faBookOpenReader,faUtensils,faFilePen,faUpload, faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import NavBar from '../components/NavBar'
 const { Content } = Layout;
 
@@ -13,8 +13,9 @@ const MessHome=(props)=>{
         {ic: faCashRegister, name: 'Mess Payment', link: '/mess/mess-pay', id: 111},
         {ic: faBookOpenReader, name: 'Live Menu Page', link: "/mess/live-menu", id: 211},     
         {ic: faUpload, name: 'Inspection', link: '/mess/inspection', id: 311},
-        {ic: faComment, name: 'Comment', link: '#', id: 411},
+        {ic: faUtensils, name: 'Master Menu', link: '/mess/mess-master', id: 411},
         {ic: faFilePen, name: 'Feedback', link: '/mess/feedback', id: 511},
+        {ic: faBullhorn, name: 'Announcement', link: '/mess/display-announcement', id: 611}
     ]
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
 

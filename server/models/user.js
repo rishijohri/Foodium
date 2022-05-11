@@ -1,5 +1,5 @@
 const HistoryItem = require('./historyItem.js').schema
-
+const CanteenOrder=require('./canteenOrder.js').schema
 var mongoose=  require("mongoose")
 var passportLocalMongoose = require("passport-local-mongoose")
 
@@ -11,7 +11,8 @@ var UserSchema = mongoose.Schema({
     position: String,
     balance: Number,
     jwt: String,
-    payments: [HistoryItem]
+    payments: [HistoryItem],
+    canteenPayments:[CanteenOrder]
 })
 
 UserSchema.plugin(passportLocalMongoose);

@@ -94,7 +94,7 @@ const signupHandler = (req, res) => {
                         pin: 1000
                     })
                     break;
-                case 'Canteen Owner':
+                case 'Canteen Vendor':
                     Canteen.create({
                         vendor: req.body.username,
                         username: req.body.username,
