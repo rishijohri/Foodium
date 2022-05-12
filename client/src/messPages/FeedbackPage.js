@@ -74,7 +74,7 @@ const FeedbackPage = (props) => {
     };
     return (
         <Layout className='layout'>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content style={{ padding: '0 5%', margin:' 2%'}}>
                 <Title level={2}>Feedback</Title>
                 <Form

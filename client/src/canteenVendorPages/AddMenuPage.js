@@ -60,7 +60,7 @@ const AddMenuPage = (props) => {
 
     return (
         <Layout>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content style={{padding:'0vh 5vh'}}>
                 <Title level={2}>Menu for {props.time}</Title>
                 <Form onFinish={onFinish} ref={formRef}>

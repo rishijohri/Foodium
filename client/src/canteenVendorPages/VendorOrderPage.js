@@ -44,7 +44,7 @@ const VendorOrderPage = (props) => {
     }
     return (
         <Layout>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content>
                 <center>
                 <Button disabled={dis} onClick={onRefresh}>Refresh</Button>

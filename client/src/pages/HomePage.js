@@ -22,7 +22,7 @@ const HomePage = (props) => {
     if (props.position==='Student') {
         return <>
         <Layout style={{ overflow:'hidden', hidden:'100vh', width:'100vw'}} >
-        <NavBar username={props.username}/>
+        <NavBar username={props.username} balance={props.balance}/>
         <Content >
         <Row gutter={[hg, vg]} justify={'center'}>
             <Col span={span} >
@@ -46,7 +46,7 @@ const HomePage = (props) => {
     } else if (props.position==='Mess Vendor') {
     return (
             <Layout style={{ overflow:'hidden', hidden:'100vh', width:'100vw'}} >
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content >
                 <div className="site -card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>
@@ -65,7 +65,7 @@ const HomePage = (props) => {
     } else if (props.position==='Canteen Vendor') {
         return (
             <Layout style={{ overflow:'hidden', hidden:'100vh', width:'100vw'}} >
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content >
                 <div className="site -card-wrapper">
                     <Row gutter={[hg, vg]} justify={'center'}>

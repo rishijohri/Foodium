@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router'
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 
-var NavBar = (props) => {
+const DropdownMenu = (props) => {
   const navigate = useNavigate()
   const logOut=()=>{
       fetch('/signout',{
@@ -44,13 +44,16 @@ var NavBar = (props) => {
       <Menu.Item disabled={true} key='0'>        
         <h3>{props.username}</h3>            
       </Menu.Item>
+      {/* <Menu.Item disabled={true} key='0'>        
+        <h3>Balnce: {props.balance}</h3>            
+      </Menu.Item> */}
       <Menu.Item key='1' onClick={logOut}>        
           <h3>Logout</h3>     
       </Menu.Item>
       <Menu.Item key='2' onClick={()=>{navigate("/mess/payment-history ")}}>        
         <h3>Payment History </h3>            
       </Menu.Item>
-      <Menu.Item key='3' onClick={()=>{navigate("/canteen/payment-history ")}}>        
+      <Menu.Item key='3' onClick={()=>{navigate("/canteen/orders")}}>        
         <h3>Canteen History </h3>            
       </Menu.Item>
       <Menu.Item key='4'>        
@@ -58,11 +61,14 @@ var NavBar = (props) => {
       </Menu.Item>
     </Menu>
   );
-  const DropdownMenu = () => (
-    <Dropdown key="more"  overlay={menu} placement="bottomRight">
-      <Button type="text" icon={<UserOutlined style={{ fontSize: 20 }} />} />
-    </Dropdown>
-  );
+  return (
+  <Dropdown key="more"  overlay={menu} placement="bottomRight">
+    <Button type="text" icon={<UserOutlined style={{ fontSize: 20 }} />} />
+  </Dropdown>
+)};
+
+
+var NavBar = (props) => {
     return (
       <div>
       <PageHeader
@@ -71,7 +77,7 @@ var NavBar = (props) => {
                 title={<Link to='/home'><h3>Foodium</h3></Link>}
                 backIcon = {<ArrowLeftOutlined  style={{fontSize:'10h', paddingBottom:'1.4vh' }}/>}
                 extra={[
-                  <DropdownMenu key="more" />
+                  <DropdownMenu key="more" username={props.username} balance={props.balance}/>
                 ]}
             />
         

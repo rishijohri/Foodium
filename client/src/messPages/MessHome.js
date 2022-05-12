@@ -21,7 +21,7 @@ const MessHome=(props)=>{
 
     return <>
         <Layout  style={{overflowX: 'hidden',height:'100vh', width:'100vw'}}>
-            <NavBar username={props.username}/>
+        <NavBar username={props.username} balance={props.balance}/>
             <Content >
                 <div className="site-card-wrapper">
                     <Row gutter={[hg, vg]} justify='center' style={{ marginTop:{mg}}}>

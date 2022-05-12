@@ -17,7 +17,7 @@ const SuccessPage = (props) => {
     console.log(props.date)
     return(
         <Layout style={{height:'100vh', width:'100vw', overflow:'hidden'}}>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content>
                 <center>
                 <Title>Success</Title>

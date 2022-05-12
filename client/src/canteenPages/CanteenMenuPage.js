@@ -102,7 +102,7 @@ const CanteenMenuPage = (props) => {
     }
     return (
         <Layout>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content>
                 {data.map((item) =>{
                     return <CMenuCard 
@@ -145,7 +145,7 @@ const CanteenMenuPage = (props) => {
                         <List.Item key={item.id} >
                         <List.Item.Meta
                             title={<center>{item.name}</center>}
-                            description={<center>`price - ${item.price} | Qt - ${item.qt}`</center>}
+                            description={<center>Price - Rs.{item.price} | Qt - {item.qt}</center>}
                         />
                         </List.Item>
                         </>

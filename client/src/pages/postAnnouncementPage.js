@@ -47,7 +47,7 @@ const PostAnnouncementPage = (props) => {
     const formRef = useRef();
     return (
         <Layout>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content style={{padding:'0vh 5vh'}}>
                 <Title level={2}>Post Announcement</Title>
                 <Form

@@ -43,7 +43,7 @@ useEffect(()=> {
     
     return (
         <Layout>
-          <NavBar username={props.username}/>
+          <NavBar username={props.username} balance={props.balance}/>
           <Content>
           <Tabs tabPosition={'top'} animated={{inkbar:false, tabPane:true}} centered={true}>
             {data.map((item,index)=>{

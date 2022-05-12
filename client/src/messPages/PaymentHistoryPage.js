@@ -47,7 +47,7 @@ const PaymentHistoryPage=(props)=>{
     return(
         <div>  
             <Layout>    
-            <NavBar username={props.username}/>     
+            <NavBar username={props.username} balance={props.balance}/> 
                 <Content style={{padding:'2vh 10vh 2vh 10vh'}}>
                     <Table dataSource={payments} columns={columns} />
                 </Content>

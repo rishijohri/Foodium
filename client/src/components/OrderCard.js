@@ -37,7 +37,7 @@ const OrderCard = (props) => {
                     <List.Item key={item.id} >
                     <List.Item.Meta
                         title={<center>{item.name}</center>}
-                        description={<center>`price - ${item.price} | Qt - ${item.qt}`</center>}
+                        description={<center>`price - Rs.{item.price} | Qt - {item.qt}`</center>}
                     />
                     </List.Item>
                     </>

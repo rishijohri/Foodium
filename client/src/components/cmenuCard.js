@@ -46,7 +46,7 @@ const CMenuCard = (props) => {
                     <Title level={props.level}>{props.title}</Title>
                     <p>{props.content}</p>
                     Rating: <Rate disabled defaultValue={props.rate} /><br/>
-                    Price : {props.price} <br/>
+                    Price : Rs.{props.price} <br/>
                     <Input 
                         type='number'
                         min="0" 
@@ -82,7 +82,7 @@ const CMenuCard = (props) => {
                         value={val}
                         /><br/>
                     <Button onClick={onIncrement}><PlusCircleOutlined /></Button>
-                    <Button onClick={onDecrement}></Button>
+                    <Button onClick={onDecrement}><MinusCircleOutlined /></Button>
                 </Col>
                 <Col span={props.spani}>
                     <Image src={props.img} width={iwidth} height={iheight} style={{ objectFit: "cover" }}/>

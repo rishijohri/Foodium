@@ -6,6 +6,7 @@ const Hashcomp = (props) =>  {
     var [check, setCheck] = useState('wait')
     var [position, setPosition] = useState("wait")
     var [username, setUsername] = useState('')
+    var [balance, setBalance] = useState(0)
     const getauth = () => {
         fetch('/hashcomp', {
             method: 'GET',
@@ -27,6 +28,7 @@ const Hashcomp = (props) =>  {
                     console.log(result.position)
                     setPosition(result.position)
                     setUsername(result.username)
+                    setBalance(result.balance)
                 } else {
                     setPosition('error')
                     setCheck('error')
@@ -48,7 +50,7 @@ const Hashcomp = (props) =>  {
         return <center style={{margin:'0' ,left: '50%', position: 'absolute',top: '50%', transform: 'translate(-50%, -50%)'}}><Spin indicator={antIcon} /></center>
     }else if (check==='success') {
         if (props.position.length<1 || props.position.includes(position)) {
-            return React.cloneElement(props.children, {position: position, username:username});
+            return React.cloneElement(props.children, {position: position, username:username, balance: balance});
         }
         return <Navigate to={props.failPosRedirect} replace={true} />
     } else {

@@ -95,7 +95,7 @@ const CanteenPayPage=(props)=>{
 
     return (
         <Layout style={{height:'100vh', width:'100vw'}}>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
                 <Content>
                     <div style={{height:'50vh', 
                     width:'80vw', 

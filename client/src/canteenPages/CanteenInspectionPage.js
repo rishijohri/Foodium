@@ -115,7 +115,7 @@ const CanteenInspectionPage = (props) => {
 
     return (
         <Layout>
-            <NavBar username={props.username}/>
+            <NavBar username={props.username} balance={props.balance}/>
             <Content style={{padding:'0vh 5vh'}}>
                 <Title level={2}>Inspection Report</Title>
                 <Form

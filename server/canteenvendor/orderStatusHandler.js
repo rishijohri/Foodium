@@ -9,6 +9,10 @@ const orderStatusHandler = async (req, res)=> {
         return
     }
     order.orderStatus =req.body.response
+    if (req.body.response==='reject') {
+        
+    }
+
     order.save()
     res.json({
         result: 'success'

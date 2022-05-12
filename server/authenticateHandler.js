@@ -69,6 +69,7 @@ const hashcompHandler = (req, res, next) => {
                     result: "success",
                     username: req.user.username,
                     position: req.user.position,
+                    balance: req.user.balance,
                     src: "hashcomp" 
                 })
                 next()
