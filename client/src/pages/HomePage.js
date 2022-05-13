@@ -19,7 +19,7 @@ const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$
 const HomePage = (props) => {
     const [hg, vg, span] = isMobile ? [1, 10, 18] : [12, 6, 10];
     console.log(props.position)
-    if (props.position==='Student') {
+    if (props.position==='Student' || props.position==='Canteen Inspector' || props.position==='Mess Inspector') {
         return <>
         <Layout style={{ overflow:'hidden', hidden:'100vh', width:'100vw'}} >
         <NavBar username={props.username} balance={props.balance}/>

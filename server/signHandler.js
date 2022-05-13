@@ -44,11 +44,11 @@ const signinHandler = (req, res) => {
             console.log('unable to find')
             return
         } 
-        console.log(req.headers.hashing)
+        console.log('jwt ', req.headers.hashing)
         user.jwt = req.headers.hashing
         user.save()
         
-        console.log(user)
+        // console.log(user)
         res.json({
             result: "success"
         })

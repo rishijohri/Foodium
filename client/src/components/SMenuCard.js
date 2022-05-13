@@ -4,28 +4,7 @@ import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 const { Title } = Typography;
 
-const VMenuCard = (props) => {
-    const handleDelete = () =>{
-        fetch('/mess/deleteitem', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                'hashing': window.localStorage.getItem('hash')
-            },
-            body: JSON.stringify({
-                _id: props.id
-            })
-        }).then(res=>{
-            if (!res.ok)
-                return {}
-            return res.json()
-        }).then((res)=> {
-            if (res.result==='success')
-                console.log('SUCCESSFUL DELETION')
-            const event = new Event('mv');
-            window.dispatchEvent(event)
-        })
-    }
+const SMenuCard = (props) => {
     return (
         <Card style={{width:props.width}}>
             <Row gutter={[props.hg, props.vg]} justify="space-between">
@@ -34,7 +13,6 @@ const VMenuCard = (props) => {
                     <p>{props.content}</p>
                     Health: <Rate disabled defaultValue={props.rateh} /><br/>
                     Quality: <Rate disabled defaultValue={props.rateq} /><br/>
-                    <Button onClick={handleDelete}>Delete Item</Button>
                 </Col>
                 <Col span={props.spani}>
                     <Image src={props.img} width={props.iwidth} height={props.iheight} style={{ objectFit: "cover" }}/>
@@ -44,7 +22,7 @@ const VMenuCard = (props) => {
     );
 }
 
-VMenuCard.defaultProps = {
+SMenuCard.defaultProps = {
     iwidth: "150px",
     iheight: "150px",
     width: "100vw",
@@ -62,4 +40,4 @@ VMenuCard.defaultProps = {
 
 }
 
-export default VMenuCard
+export default SMenuCard

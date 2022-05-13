@@ -112,10 +112,9 @@ const OrderCardVendor = (props) => {
     if (isCenter) {
         return (
             <center>
-        <Card style={{width:width}}>
-        <Title level={5}>total: {props.payment} || Status: {props.status}</Title>
-        <Title level={5}>date: {props.item.createdAt}</Title>
+        <Card style={{width:width}} title={'Total: '+props.payment}>
         <Title level={5}>PIN: {props.item.pin}</Title>
+        <Card type="inner" title={'Status: '+props.status} extra={'DATE: '+props.date}>    
         <List
             dataSource={finorder}
             renderItem={item => {
@@ -124,7 +123,7 @@ const OrderCardVendor = (props) => {
                     <List.Item key={item.id} >
                     <List.Item.Meta
                         title={<center>{item.name}</center>}
-                        description={<center>`price - Rs{item.price} | Qt - {item.qt}`</center>}
+                        description={<center>`price - Rs.{item.price} | Qt - {item.qt}`</center>}
                     />
                     </List.Item>
                     </>
@@ -132,6 +131,7 @@ const OrderCardVendor = (props) => {
                     return <></>
                 }}
             />
+            </Card>
             <Button onClick={onAccept}>Accept Order</Button>
             <Button onClick={onReject}>Reject Order</Button>
             <Button onClick={onReady}>Order Ready</Button>
@@ -140,26 +140,26 @@ const OrderCardVendor = (props) => {
         </center>
     );
     } else {
-        return (<Card style={{width:width}}>
-            <Title level={5}>total: {props.payment} || Status: {props.status}</Title>
-            <Title level={5}>date: {props.item.createdAt}</Title>
-            <Title level={5}>PIN: {props.item.pin}</Title>
-            <List
-                dataSource={finorder}
-                renderItem={item => {
-                    if (item.qt>0)
-                        return <>
-                        <List.Item key={item.id} >
-                        <List.Item.Meta
-                            title={<center>{item.name}</center>}
-                            description={<center>`price - ${item.price} | Qt - ${item.qt}`</center>}
-                        />
-                        </List.Item>
-                        </>
-                    else
-                        return <></>
-                    }}
-                />
+        return (<Card style={{width:width}} title={'Total: '+props.payment}>
+        <Title level={5}>PIN: {props.item.pin}</Title>
+        <Card type="inner" title={'Status: '+props.status} extra={'DATE: '+props.date}>    
+        <List
+            dataSource={finorder}
+            renderItem={item => {
+                if (item.qt>0)
+                    return <>
+                    <List.Item key={item.id} >
+                    <List.Item.Meta
+                        title={<center>{item.name}</center>}
+                        description={<center>`price - Rs.{item.price} | Qt - {item.qt}`</center>}
+                    />
+                    </List.Item>
+                    </>
+                else
+                    return <></>
+                }}
+            />
+            </Card>
                 <Button onClick={onAccept}>Accept Order</Button>
                 <Button onClick={onReject}>Reject Order</Button>
                 <Button onClick={onReady}>Order Ready</Button>

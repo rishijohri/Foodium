@@ -1,14 +1,14 @@
 import { notification } from 'antd';
 import React, { useState, useEffect } from 'react';
-import VMenuCard from '../components/VMenuCard';
+import SMenuCard from '../components/SMenuCard';
 import {isMobile} from 'react-device-detect';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
 
-const VendorMenu = (props) => {
+const StudentMenu = (props) => {
     const [data, setData] = useState([])
     const getData = () => {
-        console.log('entered getDATA VendorMenu')
+        console.log("/mess/livemenu/"+props.vendor+'/'+props.day+'/'+props.time)
         fetch("/mess/livemenu/"+props.vendor+'/'+props.day+'/'+props.time, {
             method: "GET",
             headers: {
@@ -23,7 +23,7 @@ const VendorMenu = (props) => {
         }).then(
             (res) => {
                 if (res.result==="success") {
-                    console.log(res.menuItems)
+                    console.log(res.menuItems.length)
                     setData(res.menuItems)
                 } else {
                     notification.open({
@@ -35,9 +35,9 @@ const VendorMenu = (props) => {
             }
         )
     }
+
     useEffect(()=> {
         window.addEventListener('build', getData)
-        window.addEventListener('mv', getData)
         getData()
     }, [])
     let iheight='150px';
@@ -60,8 +60,7 @@ const VendorMenu = (props) => {
                     const key = index + 1;
                     if(isCenter){
                         return (<center>
-                            <VMenuCard 
-                            id={item._id}
+                            <SMenuCard 
                             title={item.name} 
                             width={width} 
                             iheight={iheight} 
@@ -73,17 +72,17 @@ const VendorMenu = (props) => {
                             div={item.desc} 
                             img={item.image}/></center>);
                     }
-                    return (<VMenuCard title={item.name} width={width} iheight={iheight} iwidth={iwidth} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/>);
+                    return (<SMenuCard title={item.name} width={width} iheight={iheight} iwidth={iwidth} content={item.desc} key={key} rateh={item.health} rateq={item.quality} div={item.desc} img={item.image}/>);
                 })}
                 
             </div>
     );
 }
 
-VendorMenu.defaultProps = {
+StudentMenu.defaultProps = {
     vendor: "Kitchen",
     time: 'breakfast',
     day: 'mo'
 }
 
-export default VendorMenu
+export default StudentMenu

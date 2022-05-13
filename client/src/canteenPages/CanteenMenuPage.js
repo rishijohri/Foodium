@@ -145,7 +145,7 @@ const CanteenMenuPage = (props) => {
                         <List.Item key={item.id} >
                         <List.Item.Meta
                             title={<center>{item.name}</center>}
-                            description={<center>Price - Rs.{item.price} | Qt - {item.qt}</center>}
+                            description={<center>Price - Rs.{item.price} | Qt - {item.qt} | Total - Rs.{parseInt(item.price)*parseInt(item.qt)}</center>}
                         />
                         </List.Item>
                         </>

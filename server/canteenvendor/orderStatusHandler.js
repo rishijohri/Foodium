@@ -1,5 +1,5 @@
 const CanteenOrder = require('../models/canteenOrder')
-
+const User = require('../models/user')
 const orderStatusHandler = async (req, res)=> {
     let order = await CanteenOrder.findOne({_id: req.body.orderid})
     if (!order || order===null) {
@@ -10,9 +10,10 @@ const orderStatusHandler = async (req, res)=> {
     }
     order.orderStatus =req.body.response
     if (req.body.response==='reject') {
-        
+        let curr = await User.findOne({username: order.username})
+        curr.balance += order.payment
+        curr.save()
     }
-
     order.save()
     res.json({
         result: 'success'

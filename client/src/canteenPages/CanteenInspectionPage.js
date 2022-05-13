@@ -9,13 +9,15 @@ const {Content } = Layout;
 const { Title, Text } = Typography;
 
 const CanteenInspectionPage = (props) => {
-    const [item, setItem] = useState({ image: '' });
-    const [health, setHealth] = useState(0);
-    const [quality, setQuality] = useState(0);
+    const [rating, setRating] = useState(0);
+    const [id, setID] = useState(0)
     const [data, setData] = useState([{
         value: 'Label',
         label: 'Label',
     }]);
+    const handleRating = (val) => {
+        setRating(val)
+    }
     const [items, setItems] = useState([{
         value: 'Unknown',
         label: 'Unknown'
@@ -29,11 +31,9 @@ const CanteenInspectionPage = (props) => {
                 'hashing': window.localStorage.getItem('hash')
             },
             body:JSON.stringify({
-                name: values.food_name,
-                rating: quality,
+                _id: values.food_name,
+                rating: rating,
                 vendor: values.vendor[0],
-                desc: values.desc,
-                image: item.image
             })
        }).then(
            (res) => {
@@ -75,7 +75,7 @@ const CanteenInspectionPage = (props) => {
             (res) => {
                 if (res.result==="success") {
                     // console.log(res.vendors)
-                    setData(res.vendors)
+                    setData(res.vendors.map(e=> {return {value: e, label: e}}))
                 } else {
                     notification.open({
                         message: 'Failed',
@@ -87,7 +87,7 @@ const CanteenInspectionPage = (props) => {
         )
     }
     const getItems = async (vendor) => {
-        let res = await fetch('/mess/getmenu/'+vendor+'/'+day+'/'+h, {
+        let res = await fetch('/canteen/getmenu/'+vendor, {
             method:'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -99,8 +99,8 @@ const CanteenInspectionPage = (props) => {
         }
         res = await res.json()
         if (res.result==='success') {
-            console.log(res.menuItems)
-            setItems(res.menuItems)
+            console.log(res.canteenItems)
+            setItems(res.canteenItems.map(e=> {return {value: e._id, label: e.name}}))
         }
     }
     const onValueChange = (c, _a) => {
@@ -112,7 +112,6 @@ const CanteenInspectionPage = (props) => {
     useEffect(()=> {
         getData()
     }, [])
-
     return (
         <Layout>
             <NavBar username={props.username} balance={props.balance}/>
@@ -146,17 +145,6 @@ const CanteenInspectionPage = (props) => {
                         <Cascader options={items} placeholder='food name' />
                     </Form.Item>
                     <Form.Item
-                        name="desc"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Enter food description',
-                            },
-                        ]}
-                    >
-                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Description" />
-                    </Form.Item>
-                    <Form.Item
                         name="quality"
                         rules={[
                             {
@@ -165,34 +153,8 @@ const CanteenInspectionPage = (props) => {
                         ]}
                     >
                     <Card>
-                        <Text>Quality </Text><Rate  onChange={handleQuality} value={quality} />
+                        <Text>Rating </Text><Rate  onChange={handleRating} value={rating} />
                     </Card>
-                    </Form.Item>
-                    <Form.Item
-                        name="health"
-                        rules={[
-                            {
-                                message: 'Please input your Health!',
-                            },
-                        ]}
-                    >
-                        <Card>
-                        <Text>Health </Text><Rate  onChange={handleHealth} value={health} />
-                        </Card>
-                    </Form.Item>
-                    <Form.Item
-                    name='file'
-                    rules={[
-                        {
-                            message:'Please Upload'
-                        }
-                    ]}
-                    >
-                    <FileBase64
-                    type="file"
-                    multiple={false}
-                    onDone={({ base64 }) => setItem({ ...item, image: base64 })}
-                    />
                     </Form.Item>
                     <Form.Item>
                         <Button type='primary' htmlType="submit" className="login-form-button">
@@ -200,7 +162,6 @@ const CanteenInspectionPage = (props) => {
                         </Button>
                     </Form.Item>
                 </Form>
-                <Image src={item.image}/>
             </Content>
         </Layout>
     );

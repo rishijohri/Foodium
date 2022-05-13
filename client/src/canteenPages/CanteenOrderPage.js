@@ -41,6 +41,7 @@ const CanteenOrderPage = (props) => {
             setDis(false)
         }, 5000)
     }
+    
     return (
         <Layout>
             <NavBar username={props.username} balance={props.balance}/>
@@ -49,12 +50,20 @@ const CanteenOrderPage = (props) => {
                 <Button disabled={dis} onClick={onRefresh}>Refresh</Button>
                 </center>
                 {data.map((item) =>{
+                    const dt = new Date(item.createdAt)
+                    // console.log(typeof(dt))
                     return <OrderCard 
                             payment={item.payment}
                             status={item.orderStatus}
                             order={item.order}
                             username={item.username}
                             item={item}
+                            date={dt.getDate().toString()+
+                                '/'+
+                                (dt.getMonth()+1).toString()+
+                                '/'+(dt.getYear()-100).toString()+
+                                '  '+dt.getHours().toString()+
+                                ':'+dt.getMinutes()}
                              />
                 })}
             </Content>

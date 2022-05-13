@@ -2,7 +2,7 @@ import { Avatar,Layout,Card,Col, Typography,Row} from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {isMobile} from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import { faCashRegister,faBullhorn,faUtensils,faFilePen,faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faBagShopping,faBullhorn,faUtensils,faFilePen,faUpload } from "@fortawesome/free-solid-svg-icons";
 import NavBar from '../components/NavBar'
 const { Content } = Layout;
 
@@ -10,12 +10,13 @@ const { Title } = Typography;
 
 const CanteenHomePage=(props)=>{
     var compstor = [
-        {ic: faCashRegister, name: 'Orders', link: '/canteen/orders', id: 111},
-        {ic: faBullhorn, name: 'Announcements', link: "/canteen/display-announcement", id: 211},     
-        {ic: faUpload, name: 'Inspection', link: '/canteen/inspection', id: 311},
         {ic: faUtensils, name: 'Menu', link: '/canteen/menu/choose', id: 411},
+        {ic: faBagShopping, name: 'Orders', link: '/canteen/orders', id: 111},    
         {ic: faFilePen, name: 'Feedback', link: '/mess/feedback', id: 511},
+        {ic: faBullhorn, name: 'Announcements', link: "/canteen/display-announcement", id: 211}, 
     ]
+    if (props.position=='Canteen Inspector')
+        compstor.push({ic: faUpload, name: 'Inspection', link: '/canteen/inspection', id: 311})
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
 
     return <>

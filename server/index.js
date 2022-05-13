@@ -51,8 +51,8 @@ app.get('/entry', (_req, res)=> {
     'Faculty',
     'Mess Vendor',
     'Canteen Vendor',
-    'Mess Inspection Team Member',
-    'Canteen Inspection Team Member',
+    'Mess Inspector',
+    'Canteen Inspector',
     'Admin',
     'Guest']
     const positions = pos.map((item)=> {return {value: item, label: item}})

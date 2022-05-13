@@ -40,10 +40,9 @@ const CMenuCard = (props) => {
     if (isCenter) {
         return (
             <center>
-        <Card style={{width:width}}>
+        <Card style={{width:width}} title={props.title}>
             <Row gutter={[props.hg, props.vg]} justify="space-between">
                 <Col span={props.spanc}>
-                    <Title level={props.level}>{props.title}</Title>
                     <p>{props.content}</p>
                     Rating: <Rate disabled defaultValue={props.rate} /><br/>
                     Price : Rs.{props.price} <br/>
@@ -67,10 +66,9 @@ const CMenuCard = (props) => {
         </center>
     );
     } else {
-        return (<Card style={{width:width}}>
+        return (<Card style={{width:width}} title={props.title}>
             <Row gutter={[props.hg, props.vg]} justify="space-between">
                 <Col span={props.spanc}>
-                    <Title level={props.level}>{props.title}</Title>
                     <p>{props.content}</p>
                     Rating: <Rate disabled defaultValue={props.rate} /><br/>
                     Price : {props.price} <br/>

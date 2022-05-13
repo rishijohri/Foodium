@@ -39,7 +39,7 @@ const MessPayPage=(props)=>{
             notification.open({
                 message: 'success',
                 description:
-                    'Payment Complete complete :) to ' + res.data + "   "+res.date,
+                    'Payment Completed Succesfully to ' + res.data + "   "+res.date,
             });
             return navigate("/mess/success", {replace:true, state:{date: res.date}})
         } else {

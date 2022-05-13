@@ -66,8 +66,17 @@ const updateimageHandler = (req, res) => {
         }
     });
 }
+const deleteItemHandler =async (req, res) => {
+    console.log("entered delete menu item")
+    console.log(req.body)
+    await MenuItem.deleteOne({_id: req.body._id})
+    res.json({
+        result:'success'
+    })
+}
 module.exports =  {
     livemenuHandler,
     uploadimageHandler,
-    updateimageHandler
+    updateimageHandler,
+    deleteItemHandler
 }

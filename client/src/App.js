@@ -35,6 +35,7 @@ import CanteenMenuPage from "./canteenPages/CanteenMenuPage";
 import CanteenMenuChoice from "./canteenPages/CanteenMenuChoice";
 import CanteenPayPage from "./canteenPages/CanteenPayPage";
 import CanteenOrderPage from './canteenPages/CanteenOrderPage';
+import CanteenInspectionPage from "./canteenPages/CanteenInspectionPage";
 
 import CanteenVendorHomePage from "./canteenVendorPages/CanteenVendorHomePage";
 import ChangeCanteenMenuPage from "./canteenVendorPages/CanteenChangeMenuPage";
@@ -84,7 +85,7 @@ function App() {
               <LiveReviewPage/>
             </Hashcomp>
           </Authenticate>} />
-        <Route path='inspection' element={<Authenticate  position={['Mess Inspection Team Member', 'Student']}>
+        <Route path='inspection' element={<Authenticate  position={['Mess Inspector', 'Student']}>
                                             <Hashcomp>
                                               <InspectionPage/>
                                             </Hashcomp>
@@ -139,20 +140,25 @@ function App() {
               <Outlet/>
             </Hashcomp>
           </Authenticate>} >
-          <Route path='choose' element={<Authenticate position={[]}>
-              <Hashcomp>
-              <CanteenMenuChoice/>
-              </Hashcomp>
-            </Authenticate>} />
-            <Route path=':canteenname' element={<Authenticate position={[]}>
-              <Hashcomp>
-                <CanteenMenuPage/>
-              </Hashcomp>
-            </Authenticate>} />
+                      <Route path='choose' element={<Authenticate position={[]}>
+                          <Hashcomp>
+                          <CanteenMenuChoice/>
+                          </Hashcomp>
+                        </Authenticate>} />
+                        <Route path=':canteenname' element={<Authenticate position={[]}>
+                          <Hashcomp>
+                            <CanteenMenuPage/>
+                          </Hashcomp>
+                        </Authenticate>} />
             </Route>
           <Route path='canteen-pay' element={<Authenticate position={[]}>
                                                 <Hashcomp>
                                                   <CanteenPayPage/>
+                                                </Hashcomp>
+                                              </Authenticate>}/>
+          <Route path='inspection' element={<Authenticate position={['Canteen Inspector', 'Student']}>
+                                                <Hashcomp>
+                                                  <CanteenInspectionPage/>
                                                 </Hashcomp>
                                               </Authenticate>}/>
           </Route>

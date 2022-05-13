@@ -42,22 +42,24 @@ const DropdownMenu = (props) => {
   const menu = (
     <Menu>
       <Menu.Item disabled={true} key='0'>        
-        <h3>{props.username}</h3>            
+        <h3 style = {{
+          backgroundColor: 'yellow'
+        }}>{props.username.toUpperCase()}</h3>            
       </Menu.Item>
       {/* <Menu.Item disabled={true} key='0'>        
         <h3>Balnce: {props.balance}</h3>            
       </Menu.Item> */}
-      <Menu.Item key='1' onClick={logOut}>        
-          <h3>Logout</h3>     
-      </Menu.Item>
       <Menu.Item key='2' onClick={()=>{navigate("/mess/payment-history ")}}>        
-        <h3>Payment History </h3>            
+        <h3>Mess Payment History </h3>            
       </Menu.Item>
       <Menu.Item key='3' onClick={()=>{navigate("/canteen/orders")}}>        
-        <h3>Canteen History </h3>            
+        <h3>Canteen Payment History </h3>            
       </Menu.Item>
       <Menu.Item key='4'>        
         <h3>Change Password</h3>            
+      </Menu.Item>
+      <Menu.Item key='1' onClick={logOut}>        
+          <h3>Logout</h3>     
       </Menu.Item>
     </Menu>
   );

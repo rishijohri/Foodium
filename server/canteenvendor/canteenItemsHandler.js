@@ -55,8 +55,27 @@ const canteenitemsModify = async (req, res) => {
         result: 'success'
     })
 }
+
+const canteenRatingModify = async (req, res) => {
+    console.log('entered canteen item modify')
+    const vendor=req.body.vendor
+    let shop = await Canteen.findOne({vendor:vendor})
+    if (!shop) {
+        console.log('unable to find canteen')
+        res.json({
+            result: 'fail',
+        })
+        return
+    }
+    shop.menu.id(req.body._id).rating = req.body.rating
+    shop.save()
+    res.json({
+        result: 'success'
+    })
+}
 module.exports =  {
     canteenitemsFetch,
     canteenitemsDelete,
-    canteenitemsModify
+    canteenitemsModify,
+    canteenRatingModify
 }

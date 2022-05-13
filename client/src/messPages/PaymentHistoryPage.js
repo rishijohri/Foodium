@@ -1,9 +1,11 @@
 import React, { useState ,useEffect} from 'react';
-import {Table, notification,Layout} from 'antd';
+import {Table, notification,Layout, Typography} from 'antd';
 import NavBar from '../components/NavBar';
 const { Content } = Layout;
+const {Title} = Typography
 const PaymentHistoryPage=(props)=>{
     const [payments, setPayments] = useState([]);
+    const [balance, setBalance] = useState(0)
     const getPaymentsHistory=()=>{
         fetch('/mess/historyhandler',{
             method:'GET',
@@ -20,7 +22,7 @@ const PaymentHistoryPage=(props)=>{
             if(res.result==="success"){
                 console.log(res.payments)
                 setPayments(res.payments)
-                
+                setBalance(res.balance)
             }
             else {
                 notification.open({
@@ -41,14 +43,15 @@ const PaymentHistoryPage=(props)=>{
             { title: 'Date',dataIndex: 'date',key: 'date'},
             { title: 'Time',dataIndex: 'time', key: 'time'},
             {title:'Payment',dataIndex:'payment',key:'payment'},
-            {title:'Balance',dataIndex:'balance',key:'balance'},
+            // {title:'Balance',dataIndex:'balance',key:'balance'},
             {title:'Vendor',dataIndex:'vendor',key:'vendor'}
         ];
     return(
         <div>  
             <Layout>    
             <NavBar username={props.username} balance={props.balance}/> 
-                <Content style={{padding:'2vh 10vh 2vh 10vh'}}>
+                <Content >
+                    <center><Title level={3}>Balance is Rs {balance}</Title></center>
                     <Table dataSource={payments} columns={columns} />
                 </Content>
             </Layout>

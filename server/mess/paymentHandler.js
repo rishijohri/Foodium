@@ -29,7 +29,8 @@ const historyHandler = (req, res) => {
                     res.json({                        
                         result: "success",
                         payments: all_payments,
-                        src: "payment history"
+                        src: "payment history",
+                        balance: currUser.balance
                     })
 
                 } else {

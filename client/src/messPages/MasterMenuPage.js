@@ -3,7 +3,7 @@ import {Tabs, Layout,notification} from 'antd';
 import NavBar from '../components/NavBar';
 import 'antd/dist/antd.min.css';
 import '../assets/main.css';
-import VendorMenu from '../components/vendorMenu';
+import StudentMenu from '../components/studentMenu';
 const { Content} = Layout;
 const { TabPane } = Tabs;
 const MasterMenuPage = (props) => {
@@ -56,13 +56,13 @@ const MasterMenuPage = (props) => {
                                 <TabPane tab={d} key={ind}>
                                 <Tabs tabPosition={'top'} animated={{inkbar:false, tabPane:true}} centered={true}>
                                     <TabPane tab='breakfast' key={0}> 
-                                        <VendorMenu vendor={dt.value} time='breakfast' day={d}/>
+                                        <StudentMenu vendor={dt.value} time='breakfast' day={d}/>
                                     </TabPane>
                                     <TabPane tab='lunch' key={1}>
-                                        <VendorMenu vendor={dt.value} time='lunch' day={d}/>
+                                        <StudentMenu vendor={dt.value} time='lunch' day={d}/>
                                     </TabPane>
                                     <TabPane tab='dinner' key={2}>  
-                                        <VendorMenu vendor={dt.value} time='dinner' day={d}/>
+                                        <StudentMenu vendor={dt.value} time='dinner' day={d}/>
                                     </TabPane>
                                 </Tabs>
                                 </TabPane>

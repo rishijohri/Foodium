@@ -11,14 +11,14 @@ const { Title } = Typography;
 const MessHome=(props)=>{
     var compstor = [
         {ic: faCashRegister, name: 'Mess Payment', link: '/mess/mess-pay', id: 111},
-        {ic: faBookOpenReader, name: 'Live Menu Page', link: "/mess/live-menu", id: 211},     
-        {ic: faUpload, name: 'Inspection', link: '/mess/inspection', id: 311},
+        {ic: faBookOpenReader, name: 'Live Menu', link: "/mess/live-menu", id: 211},     
         {ic: faUtensils, name: 'Master Menu', link: '/mess/mess-master', id: 411},
         {ic: faFilePen, name: 'Feedback', link: '/mess/feedback', id: 511},
-        {ic: faBullhorn, name: 'Announcement', link: '/mess/display-announcement', id: 611}
+        {ic: faBullhorn, name: 'Announcements', link: '/mess/display-announcement', id: 611}
     ]
     const [hg, vg, span,size, mg] = isMobile ? [4, 0, 12, 150, -5] : [10, 15, 7,200, -5];
-
+    if (props.position==='Mess Inspector')
+        compstor.push({ic: faUpload, name: 'Inspection', link: '/mess/inspection', id: 311})
     return <>
         <Layout  style={{overflowX: 'hidden',height:'100vh', width:'100vw'}}>
         <NavBar username={props.username} balance={props.balance}/>
